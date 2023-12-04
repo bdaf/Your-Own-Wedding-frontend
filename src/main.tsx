@@ -6,11 +6,13 @@ import "./index.css";
 import AllSEOffers from "./pages/AllSEOffers.tsx";
 import NewSEOffers from "./pages/NewSEOffers.tsx";
 import Favourites from "./pages/Favourites.tsx";
+import ErrorPage from "./ErrorPage.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <AllSEOffers />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/se-offers",
