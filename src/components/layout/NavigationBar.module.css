@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&family=Cutive+Mono&display=swap');
 .header {
     width: 100%;
     height: 5rem;
@@ -7,10 +8,11 @@
     background-color: rgb(30, 179, 248);
     padding: 0 10%;
 }
+
 .logo {
     font-size: 2rem;
     color: white;
-    font-weight: bold;
+    font-family: 'Cutive Mono', monospace;
   }
 
   .header ul {
