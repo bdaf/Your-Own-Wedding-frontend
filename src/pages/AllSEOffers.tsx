@@ -1,3 +1,4 @@
+import Filterbar from "../components/layout/Filterbar";
 import SEOfferList from "../components/offers/SEOfferList";
 
 function AllSEOffers() {
@@ -134,8 +135,9 @@ function AllSEOffers() {
 
   return (
     <>
-      <h1>AllSEOffers page</h1>
+      <Filterbar />
       <div>
+        <h1>AllSEOffers page</h1>
         <SEOfferList offers={data} />
       </div>
     </>
