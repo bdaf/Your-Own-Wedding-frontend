@@ -8,7 +8,9 @@ function App() {
     <>
       <NavigationBar />
       <div className="main-container">
-        <Outlet />
+        <div>
+          <Outlet />
+        </div>
       </div>
     </>
   );

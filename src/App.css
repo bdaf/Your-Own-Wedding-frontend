@@ -3,10 +3,12 @@
 }
 
 .main-container {
-    margin: 3rem auto;
+margin: 3rem auto;
   width: 90%;
   display: flex;
   justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
 }
 
 .tile {

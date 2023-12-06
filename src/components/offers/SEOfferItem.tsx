@@ -1,3 +1,5 @@
+import styles from "./SEOfferItem.module.css";
+
 interface Props {
   id: BigInteger;
   image: string;
@@ -8,16 +10,16 @@ interface Props {
 
 function SEOfferItem({ id, image, title, description, address }: Props) {
   return (
-    <li>
-      <div>
+    <li className={styles.item}>
+      <div className={styles.image}>
         <img src={image} alt="PHOTO" />
       </div>
-      <div>
+      <div className={styles.content}>
         <h3>{title}</h3>
         <address>{address}</address>
         <p>{description}</p>
       </div>
-      <div>
+      <div className={styles.actions}>
         <button>To Favourites</button>
       </div>
     </li>
