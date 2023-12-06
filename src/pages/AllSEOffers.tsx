@@ -134,13 +134,15 @@ function AllSEOffers() {
   ];
 
   return (
-    <>
-      <Filterbar />
-      <div>
-        <h1>AllSEOffers page</h1>
-        <SEOfferList offers={data} />
+    <div>
+      <h1>AllSEOffers page</h1>
+      <div className="main-container">
+        <Filterbar />
+        <div>
+          <SEOfferList offers={data} />
+        </div>
       </div>
-    </>
+    </div>
   );
 }
 
