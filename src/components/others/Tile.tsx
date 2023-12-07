@@ -1,7 +1,8 @@
-import Button from "./Button";
 import { useState } from "react";
-import Modal from "./Modal";
-import Backdrop from "./Backdrop";
+import Modal from "./not-independent-components/Modal";
+import Backdrop from "./not-independent-components/Backdrop";
+
+import styles from "./Tile.module.css";
 
 interface Props {
   title: string;
@@ -24,9 +25,9 @@ function Tile({ title, children }: Props) {
       <div className="tile">
         <h1>{title}</h1>
         {children}
-        <div className="actions">
-          <button className="btn" onClick={deleteHandler}>
-            Close
+        <div className="right">
+          <button className={styles.btn} onClick={deleteHandler}>
+            Delete
           </button>
           {modalIsOpen && (
             <Modal onCancel={closeModal} onConfirm={closeModal} />

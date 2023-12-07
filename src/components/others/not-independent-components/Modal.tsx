@@ -7,7 +7,7 @@ function Modal({ onCancel, onConfirm }: Props) {
   return (
     <div className="modal">
       <p>Are you sure?</p>
-      <div className="buttons-container">
+      <div className="center">
         <button className="btn btn--alt" onClick={onCancel}>
           Cancel
         </button>

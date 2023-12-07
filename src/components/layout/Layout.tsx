@@ -1,17 +1,16 @@
 import NavigationBar from "./NavigationBar";
 
-import styles from "./Layout.module.css";
+import styles from "./Layout.css";
+import { Outlet } from "react-router-dom";
 
-interface Props {
-  children: any;
-}
-
-function Layout({ children }: Props) {
+function Layout() {
   return (
-    <div>
+    <>
       <NavigationBar />
-      <main>{children}</main>
-    </div>
+      <main>
+        <Outlet />
+      </main>
+    </>
   );
 }
 

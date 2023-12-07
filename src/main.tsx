@@ -6,14 +6,14 @@ import AllSEOffers from "./pages/AllSEOffers.tsx";
 import NewSEOffers from "./pages/NewSEOffers.tsx";
 import Favourites from "./pages/Favourites.tsx";
 import ErrorPage from "./ErrorPage.tsx";
-import App from "./App.tsx";
 
 import "./index.css";
+import Layout from "./components/layout/Layout.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <Layout />,
     errorElement: <ErrorPage />,
     children: [
       {
