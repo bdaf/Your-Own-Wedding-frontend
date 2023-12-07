@@ -1,5 +1,6 @@
 import Filterbar from "../components/layout/Filterbar";
 import SEOfferList from "../components/offers/SEOfferList";
+import SearchBar from "../components/others/SearchBar";
 
 function AllSEOffers() {
   const data = [
@@ -139,6 +140,7 @@ function AllSEOffers() {
       <div className="main-container">
         <Filterbar />
         <div>
+          <SearchBar />
           <SEOfferList offers={data} />
         </div>
       </div>
