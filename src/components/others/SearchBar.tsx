@@ -10,8 +10,6 @@ function SearchBar() {
           id="search"
           type="search"
           placeholder="Search..."
-          autoFocus
-          required
         />
         <button className={styles.button} type="submit">
           Find

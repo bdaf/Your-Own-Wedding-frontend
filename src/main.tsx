@@ -17,6 +17,10 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
+        path: "/",
+        element: <h1>Siema</h1>,
+      },
+      {
         path: "se-offers",
         element: <AllSEOffers />,
       },

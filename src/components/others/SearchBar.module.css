@@ -6,7 +6,7 @@
   --color-brand: #1eb3f8;
   --font-fam: "Lato", sans-serif;
   --height: 4rem;
-  --btn-width: 12rem;
+  --btn-width: 8rem;
   --bez: cubic-bezier(0, 0, 0.43, 1.49);
 }
 
@@ -17,7 +17,7 @@
 
 .form {
   position: relative;
-  width: 100%;
+  width: 90%;
   margin: 0 2rem;
   background: var(--color-brand);
   border-radius: var(--rad);
@@ -28,7 +28,7 @@
   font-family: var(--font-fam);
   border: 0;
   color: var(--color-dark);
-  font-size: 1.8rem;
+  font-size: 1.5rem;
 }
 .input[type="search"] {
   outline: 0;
