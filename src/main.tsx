@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import AllSEOffers from "./pages/AllSEOffers.tsx";
+import SEOfferDetails from "./pages/SEOfferDetails.tsx";
 import NewSEOffers from "./pages/NewSEOffers.tsx";
 import Favourites from "./pages/Favourites.tsx";
 import ErrorPage from "./ErrorPage.tsx";
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "se-offers",
         element: <AllSEOffers />,
+      },
+      {
+        path: "se-offers/:id",
+        element: <SEOfferDetails />,
       },
       {
         path: "se-offers/new",
