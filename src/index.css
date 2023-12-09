@@ -32,18 +32,26 @@ a:hover {
   margin: 0rem auto;
   display: flex;
   justify-content: center;
-  align-content: center;
-  font-family: sans-serif;
+  flex-flow: row wrap;
+  width: 100%;
 }
 
+.main-font {
+  font-family: sans-serif;
+}
 .center {
   display: flex;
   justify-content: center;
 }
 
-.right {
+.content-right {
   display: flex;
   justify-content: flex-end;
+}
+
+.content-left {
+  display: flex;
+  justify-content: flex-start;
 }
 
 .modal {

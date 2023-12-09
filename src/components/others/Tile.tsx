@@ -25,7 +25,7 @@ function Tile({ title, children }: Props) {
       <div className="tile">
         <h1>{title}</h1>
         {children}
-        <div className="right">
+        <div className="content-right">
           <button className={styles.btn} onClick={deleteHandler}>
             Delete
           </button>

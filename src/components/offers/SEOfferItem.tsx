@@ -2,8 +2,8 @@ import Card from "../ui/Card";
 import styles from "./SEOfferItem.module.css";
 
 interface Props {
-  id: BigInteger;
-  image: string;
+  id: number;
+  image?: string;
   title: string;
   description: string;
   address: string;
@@ -11,7 +11,7 @@ interface Props {
 
 function SEOfferItem({ id, image, title, description, address }: Props) {
   return (
-    <li className={styles.item}>
+    <li className={styles.item} key={id}>
       <Card>
         <div className={styles.image}>
           <img src={image} alt="PHOTO" />
