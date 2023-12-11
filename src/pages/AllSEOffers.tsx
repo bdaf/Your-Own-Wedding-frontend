@@ -11,6 +11,7 @@ function AllSEOffers() {
   const [, setLoading] = useState(false);
 
   useEffect(() => {
+    console.log("Ładuję stronę");
     async function loadOffers() {
       setLoading(true);
       try {
@@ -30,11 +31,11 @@ function AllSEOffers() {
     }
     loadOffers();
   }, []);
-
+  console.log(offers);
   return (
     <div>
-      <h1>AllSEOffers page</h1>
-      <div className="content-left main-font">
+      <div className="title">All SEOffers</div>
+      <div className="content-left">
         <Filterbar />
         <div className="main-content">
           <SearchBar />

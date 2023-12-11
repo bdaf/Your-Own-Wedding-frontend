@@ -8,25 +8,27 @@ function NewSEOfferForm() {
   }
 
   return (
-    <Card>
-      <form className={styles.form} onSubmit={submitHandler}>
-        <div className={styles.control}>
-          <label htmlFor="title">Title</label>
-          <input id="title" type="text" required></input>
-        </div>
-        <div className={styles.control}>
-          <label htmlFor="address">Address</label>
-          <input id="address" type="text" required></input>
-        </div>
-        <div className={styles.control}>
-          <label htmlFor="description">Description</label>
-          <textarea id="description" required></textarea>
-        </div>
-        <div className={styles.actions}>
-          <button>Create</button>
-        </div>
-      </form>
-    </Card>
+    <div className={styles.container}>
+      <Card>
+        <form className={styles.form} onSubmit={submitHandler}>
+          <div className={styles.control}>
+            <label htmlFor="title">Title</label>
+            <input id="title" type="text" required></input>
+          </div>
+          <div className={styles.control}>
+            <label htmlFor="address">Address</label>
+            <input id="address" type="text" required></input>
+          </div>
+          <div className={styles.control}>
+            <label htmlFor="description">Description</label>
+            <textarea rows={15} id="description" required></textarea>
+          </div>
+          <div className={styles.actions}>
+            <button className="btn">Create</button>
+          </div>
+        </form>
+      </Card>
+    </div>
   );
 }
 

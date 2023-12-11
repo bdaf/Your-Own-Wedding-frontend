@@ -1,12 +1,13 @@
 import NewSEOfferForm from "../components/offers/NewSEOfferForm";
 
-function NewSEOffers() {
+function NewSEOffer() {
+  console.log("Ładuje");
   return (
     <div className="width-80-center">
-      <div className="text-center title-text">NewSEOffers page</div>
+      <div className="title">Create SEOffer</div>
       <NewSEOfferForm />
     </div>
   );
 }
 
-export default NewSEOffers;
+export default NewSEOffer;

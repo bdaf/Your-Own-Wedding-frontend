@@ -4,12 +4,13 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import AllSEOffers from "./pages/AllSEOffers.tsx";
 import SEOfferDetails from "./pages/SEOfferDetails.tsx";
-import NewSEOffers from "./pages/NewSEOffers.tsx";
+import NewSEOffer from "./pages/NewSEOffer.tsx";
 import Favourites from "./pages/Favourites.tsx";
 import ErrorPage from "./ErrorPage.tsx";
 
 import "./index.css";
 import Layout from "./components/layout/Layout.tsx";
+import Home from "./pages/Home.tsx";
 
 const router = createBrowserRouter([
   {
@@ -19,7 +20,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <h1>Siema</h1>,
+        element: <Home />,
       },
       {
         path: "se-offers",
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
       },
       {
         path: "se-offers/new",
-        element: <NewSEOffers />,
+        element: <NewSEOffer />,
       },
       {
         path: "se-offers/favourites",
