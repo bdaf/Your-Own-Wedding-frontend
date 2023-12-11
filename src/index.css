@@ -28,6 +28,26 @@ a:hover {
   width: 100%;
 }
 
+main {
+  display: flex;
+  justify-content: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.title-text {
+  margin: 2rem;
+}
+
+.width-80-center {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 80%;
+}
+
 .main-content {
   margin: 0rem auto;
   display: flex;
