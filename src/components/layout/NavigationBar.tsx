@@ -12,7 +12,19 @@ function NavigationBar() {
             <Link to={"/"}>Home</Link>
           </li>
           <li>
-            <Link to={"/se-offers"}>Offers</Link>
+            <div className={styles.dropdown}>
+              <Link className={styles.dropdown} to={"/se-offers"}>
+                Offers
+              </Link>
+              <div className={styles.dropdown_content}>
+                <Link className={styles.link} to={"/se-offers"}>
+                  All offers
+                </Link>
+                <Link className={styles.link} to={"/se-offers/new"}>
+                  New offer
+                </Link>
+              </div>
+            </div>
           </li>
           <li>
             <Link to={"/se-offers/favourites"}>Favourites</Link>
