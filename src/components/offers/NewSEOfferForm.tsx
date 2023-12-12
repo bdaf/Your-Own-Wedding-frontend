@@ -34,8 +34,7 @@ function NewSEOfferForm() {
 
     if (response.ok) {
       const offer = await response.json();
-      console.log(offer);
-      navigate(`${API_URL}/offers/${offer.id}`);
+      navigate(`/se-offers/${offer.id}}`);
     } else {
       console.log("Error occured. Status: ", response.status);
     }
