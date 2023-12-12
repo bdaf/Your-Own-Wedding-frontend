@@ -7,7 +7,7 @@ function Layout() {
   return (
     <>
       <NavigationBar />
-      <main>
+      <main className="width-80-center">
         <Outlet />
       </main>
     </>

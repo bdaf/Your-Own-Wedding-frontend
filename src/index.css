@@ -26,6 +26,9 @@ a:hover {
 
 #root {
   width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 main {
@@ -49,9 +52,12 @@ main {
 .width-80-center {
   display: flex;
   justify-content: center;
-  text-align: center;
   flex-direction: column;
   width: 80%;
+}
+
+.text-center {
+  text-align: center;
 }
 
 .center {

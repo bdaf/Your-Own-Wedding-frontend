@@ -44,7 +44,7 @@ function SEOfferDetails() {
     }
 
     return (
-      <div className="width-80-center">
+      <div className="text-center">
         <div>
           <div className="title">SEOffer details</div>
           {offer.id}
