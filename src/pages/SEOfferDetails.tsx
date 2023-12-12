@@ -32,14 +32,14 @@ function SEOfferDetails() {
       }
     }
     loadOffer();
-  }, [offer]);
+  }, []);
 
-  if (loading) return <h1>Loading...</h1>;
-  if (error) return <h1>{error}</h1>;
+  if (loading) return <div className="title">Loading...</div>;
+  if (error) return <h1 className="title">{error}</h1>;
   if (offer) {
     return (
       <div>
-        <h2>SEOfferDetails</h2>
+        <div className="title">SEOffer details</div>
         {offer.id}
         {offer.title}
         {offer.description}

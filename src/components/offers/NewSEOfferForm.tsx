@@ -1,4 +1,4 @@
-import { FormEvent, RefObject, createRef, useRef, useState } from "react";
+import { FormEvent, RefObject, useRef, useState } from "react";
 import Card from "../ui/Card";
 
 import styles from "./NewSEOfferForm.module.css";

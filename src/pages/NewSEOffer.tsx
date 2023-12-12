@@ -1,5 +1,4 @@
 import NewSEOfferForm from "../components/offers/NewSEOfferForm";
-import { API_URL } from "../constants";
 
 function NewSEOffer() {
   return (
