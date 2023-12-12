@@ -7,8 +7,8 @@ import { useEffect, useState } from "react";
 
 function AllSEOffers() {
   const [offers, setOffers] = useState([]);
-  const [, setError] = useState("");
-  const [, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadOffers() {
@@ -22,14 +22,17 @@ function AllSEOffers() {
           throw response;
         }
       } catch (e) {
-        setError("An error occurred..");
-        console.log("An error occurred: ", e, " dd ", "Sad");
+        setError("Error has occured, try again later.");
+        console.log("An error occurred: ", e);
       } finally {
         setLoading(false);
       }
     }
     loadOffers();
   }, []);
+
+  if (loading) return <div className="title">Loading...</div>;
+  if (error) return <div className="title">{error}</div>;
   return (
     <div>
       <div className="title">All SEOffers</div>
