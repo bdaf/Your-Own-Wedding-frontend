@@ -30,6 +30,10 @@
 }
 
 .actions button {
+  margin: 0 1rem;
+}
+
+.actions .button_fav {
   font: inherit;
   cursor: pointer;
   color: #77002e;
@@ -39,7 +43,21 @@
   border-radius: 4px;
 }
 
-.actions button:hover,
-.actions button:active {
+.actions .button_detail {
+  font: inherit;
+  cursor: pointer;
+  color: rgb(30, 179, 248);
+  border: 1px solid rgb(30, 179, 248);
+  background-color: transparent;
+  padding: 0.5rem 1.5rem;
+  border-radius: 4px;
+}
+.actions .button_fav:hover,
+.actions .button_fav:active {
   background-color: #ffe2ed;
+}
+
+.actions .button_detail:hover,
+.actions .button_detail:active {
+  background-color: #c0e7f0;
 }

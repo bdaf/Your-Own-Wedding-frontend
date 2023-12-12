@@ -22,7 +22,8 @@ function SEOfferItem({ id, image, title, description, address }: Props) {
           <p>{description}</p>
         </div>
         <div className={styles.actions}>
-          <button>To Favourites</button>
+          <button className={styles.button_detail}>Details</button>
+          <button className={styles.button_fav}>To Favourites</button>
         </div>
       </Card>
     </li>
