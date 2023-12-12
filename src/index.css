@@ -34,13 +34,6 @@ main {
   font-family: sans-serif;
 }
 
-.width-80-center {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  width: 80%;
-}
-
 .main-content {
   margin: 0rem auto;
   display: flex;
@@ -53,11 +46,12 @@ main {
   font-family: sans-serif;
 }
 
-.title {
-  font-weight: 100;
+.width-80-center {
+  display: flex;
+  justify-content: center;
   text-align: center;
-  margin: 2rem;
-  font-size: 2rem;
+  flex-direction: column;
+  width: 80%;
 }
 
 .center {
@@ -73,6 +67,13 @@ main {
 .content-left {
   display: flex;
   justify-content: flex-start;
+}
+
+.title {
+  font-weight: 100;
+  text-align: center;
+  margin: 2rem;
+  font-size: 2rem;
 }
 
 .modal {

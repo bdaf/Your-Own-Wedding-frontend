@@ -1,6 +1,7 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { API_URL } from "../constants";
 import { useEffect, useState } from "react";
+import styles from "./pages.module.css";
 
 interface Offer {
   id?: number;
@@ -11,6 +12,7 @@ interface Offer {
 }
 
 function SEOfferDetails() {
+  const navigate = useNavigate();
   const [offer, setOffer] = useState<Offer>({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -37,14 +39,28 @@ function SEOfferDetails() {
   if (loading) return <div className="title">Loading...</div>;
   if (error) return <h1 className="title">{error}</h1>;
   if (offer) {
+    function backToSEOffersPageHandler(): void {
+      navigate("/se-offers");
+    }
+
     return (
-      <div>
-        <div className="title">SEOffer details</div>
-        {offer.id}
-        {offer.title}
-        {offer.description}
-        {offer.address}
-        {offer.created_at}
+      <div className="width-80-center">
+        <div>
+          <div className="title">SEOffer details</div>
+          {offer.id}
+          {offer.title}
+          {offer.description}
+          {offer.address}
+          {offer.created_at}
+        </div>
+        <div>
+          <button
+            className={`btn-light ${styles.btn_light}`}
+            onClick={backToSEOffersPageHandler}
+          >
+            Back to SE Offers
+          </button>
+        </div>
       </div>
     );
   }
