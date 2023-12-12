@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import Card from "../ui/Card";
 import styles from "./SEOfferItem.module.css";
 
@@ -10,6 +11,11 @@ interface Props {
 }
 
 function SEOfferItem({ id, image, title, description, address }: Props) {
+  const navigate = useNavigate();
+  function detailsButtonHandler(): void {
+    navigate(id.toString());
+  }
+
   return (
     <li className={styles.item} key={id}>
       <Card>
@@ -22,7 +28,12 @@ function SEOfferItem({ id, image, title, description, address }: Props) {
           <p>{description}</p>
         </div>
         <div className={styles.actions}>
-          <button className={styles.button_detail}>Details</button>
+          <button
+            className={styles.button_detail}
+            onClick={detailsButtonHandler}
+          >
+            Details
+          </button>
           <button className={styles.button_fav}>To Favourites</button>
         </div>
       </Card>
