@@ -36,9 +36,11 @@ function AllSEOffers() {
   return (
     <div>
       <div className="title">All SEOffers</div>
-      <div className="content-left">
-        <Filterbar />
-        <div className="main-content">
+      <div className="content-left flex-wrap-2">
+        <div className="flex-shrink-low">
+          <Filterbar />
+        </div>
+        <div className="main-content flex-shrink-high">
           <SearchBar />
           <SEOfferList offers={offers} />
         </div>

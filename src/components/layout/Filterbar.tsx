@@ -5,7 +5,7 @@ function Filterbar() {
     <>
       <div className={styles.filter}>
         <h2>Filter offers</h2>
-        <div>
+        {/* <div>
           <form role="search">
             <input
               className={styles.search}
@@ -13,7 +13,7 @@ function Filterbar() {
               type="search"
             />
           </form>
-        </div>
+        </div> */}
         <nav>
           <ul>
             <li>

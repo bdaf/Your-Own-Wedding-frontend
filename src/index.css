@@ -75,6 +75,14 @@ main {
   justify-content: flex-start;
 }
 
+.flex-shrink-low {
+  flex-shrink: 1;
+}
+
+.flex-shrink-high {
+  flex-shrink: 5000;
+}
+
 .title {
   font-weight: 100;
   text-align: center;
