@@ -3,7 +3,7 @@ import Card from "../ui/Card";
 
 import styles from "./NewSEOfferForm.module.css";
 import { useNavigate } from "react-router-dom";
-import { API_URL } from "../../constants";
+import { API_URL, SE_OFFERS } from "../../constants";
 
 function NewSEOfferForm() {
   const navigate = useNavigate();
@@ -42,11 +42,8 @@ function NewSEOfferForm() {
         return response;
       })
       .then(async (returnedResponse) => {
-        // Your response to manipulate
-        console.log(returnedResponse);
         const offer = await returnedResponse.json();
-        console.log(offer);
-        navigate(`/se-offers/${offer.id}}`);
+        navigate(`/${SE_OFFERS}/${offer.id}`);
       })
       .catch((error) => {
         setError("Error occurred during creating offer.");

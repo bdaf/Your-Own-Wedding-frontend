@@ -1,6 +1,7 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import styles from "./NavigationBar.module.css";
+import { SE_OFFERS } from "../../constants";
 
 function NavigationBar() {
   return (
@@ -13,21 +14,21 @@ function NavigationBar() {
           </li>
           <li>
             <div className={styles.dropdown}>
-              <Link className={styles.dropdown} to={"/se-offers"}>
+              <Link className={styles.dropdown} to={`/${SE_OFFERS}`}>
                 Offers
               </Link>
               <div className={styles.dropdown_content}>
-                <Link className={styles.link} to={"/se-offers"}>
+                <Link className={styles.link} to={`/${SE_OFFERS}`}>
                   All offers
                 </Link>
-                <Link className={styles.link} to={"/se-offers/new"}>
+                <Link className={styles.link} to={`/${SE_OFFERS}/new`}>
                   New offer
                 </Link>
               </div>
             </div>
           </li>
           <li>
-            <Link to={"/se-offers/favourites"}>Favourites</Link>
+            <Link to={`/${SE_OFFERS}/favourites`}>Favourites</Link>
           </li>
         </ul>
       </nav>

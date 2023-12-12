@@ -11,6 +11,7 @@ import ErrorPage from "./ErrorPage.tsx";
 import "./index.css";
 import Layout from "./components/layout/Layout.tsx";
 import Home from "./pages/Home.tsx";
+import { SE_OFFERS } from "./constants.ts";
 
 const router = createBrowserRouter([
   {
@@ -23,19 +24,19 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "se-offers",
+        path: SE_OFFERS,
         element: <AllSEOffers />,
       },
       {
-        path: "se-offers/:id",
+        path: `${SE_OFFERS}/:id`,
         element: <SEOfferDetails />,
       },
       {
-        path: "se-offers/new",
+        path: `${SE_OFFERS}/new`,
         element: <NewSEOffer />,
       },
       {
-        path: "se-offers/favourites",
+        path: `${SE_OFFERS}/favourites`,
         element: <Favourites />,
       },
     ],

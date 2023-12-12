@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { API_URL } from "../constants";
+import { API_URL, SE_OFFERS } from "../constants";
 import { useEffect, useState } from "react";
 import styles from "./pages.module.css";
 
@@ -40,7 +40,7 @@ function SEOfferDetails() {
   if (error) return <h1 className="title">{error}</h1>;
   if (offer) {
     function backToSEOffersPageHandler(): void {
-      navigate("/se-offers");
+      navigate(`/${SE_OFFERS}`);
     }
 
     return (
