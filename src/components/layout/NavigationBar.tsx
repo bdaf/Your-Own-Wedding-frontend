@@ -3,10 +3,15 @@ import { Link } from "react-router-dom";
 import styles from "./NavigationBar.module.css";
 import { SE_OFFERS } from "../../constants";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChurch } from "@fortawesome/free-solid-svg-icons";
+
 function NavigationBar() {
   return (
     <header className={styles.header}>
-      <div className={styles.logo}>Your Own Wedding</div>
+      <div className={styles.logo}>
+        <FontAwesomeIcon icon={faChurch} />" Your Own Wedding"
+      </div>
       <nav>
         <ul>
           <li>
