@@ -2,6 +2,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import { API_OFFERS, API_URL, SE_OFFERS } from "../constants";
 import { useEffect, useState } from "react";
 import styles from "./pages.module.css";
+import {
+  deleteOfferById,
+  getOfferById,
+} from "../components/services/offerService";
 
 interface Offer {
   id?: number;
@@ -16,19 +20,18 @@ function SEOfferDetails() {
   const [offer, setOffer] = useState<Offer>({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const id = useParams().id;
+  const id = useParams().id!;
 
   useEffect(() => {
     async function loadOffer() {
       try {
-        const response = await fetch(`${API_URL}/offers/${id}`);
-        if (response.ok) {
-          const json = await response.json();
-          setOffer(json);
-        } else throw response;
+        const data = await getOfferById(id);
+        setOffer(data);
       } catch (e) {
-        setError("Error occurred...");
-        console.log("Error occurred...", e);
+        setError(
+          "Error occurred during loading offer. Please try again later."
+        );
+        console.log("Error occurred during loading offer.", e);
       } finally {
         setLoading(false);
       }
@@ -36,24 +39,23 @@ function SEOfferDetails() {
     loadOffer();
   }, []);
 
+  function deleteOfferHandler(): void {
+    try {
+      deleteOfferById(id);
+      navigate(`/${SE_OFFERS}`);
+    } catch (e) {
+      setError("Error occurred during deleting offer. Please try again later.");
+      console.log("Error occurred during deleting offer.", e);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   if (loading) return <div className="title">Loading...</div>;
   if (error) return <h1 className="title">{error}</h1>;
   if (offer) {
     function backToSEOffersPageHandler(): void {
       navigate(`/${SE_OFFERS}`);
-    }
-
-    function deleteOfferHandler(): void {
-      fetch(`${API_URL}/${API_OFFERS}/${id}`, {
-        method: "delete",
-      })
-        .then(() => {
-          console.log("offer deleted");
-          navigate(`/${SE_OFFERS}`);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
     }
 
     return (

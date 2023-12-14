@@ -1,9 +1,8 @@
 import Filterbar from "../components/layout/Filterbar";
 import SEOfferList from "../components/offers/SEOfferList";
 import SearchBar from "../components/others/SearchBar";
+import { getAllOffers } from "../components/services/offerService";
 import WindowSizeContext from "../components/store/window-size-context";
-
-import { API_URL } from "../constants";
 import { useContext, useEffect, useState } from "react";
 
 const widthOfFiilterBarChange = 500;
@@ -18,13 +17,8 @@ function AllSEOffers() {
     async function loadOffers() {
       setLoading(true);
       try {
-        const response = await fetch(`${API_URL}/offers`);
-        if (response.ok) {
-          const json = await response.json();
-          setOffers(json);
-        } else {
-          throw response;
-        }
+        const data = await getAllOffers();
+        setOffers(data);
       } catch (e) {
         setError("Error has occured, try again later.");
         console.log("An error occurred: ", e);
