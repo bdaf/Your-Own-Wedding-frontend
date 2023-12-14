@@ -1,11 +1,15 @@
 import Filterbar from "../components/layout/Filterbar";
 import SEOfferList from "../components/offers/SEOfferList";
 import SearchBar from "../components/others/SearchBar";
+import WindowSizeContext from "../components/store/window-size-context";
 
 import { API_URL } from "../constants";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+
+const widthOfFiilterBarChange = 500;
 
 function AllSEOffers() {
+  const windowSizeCtx = useContext(WindowSizeContext);
   const [offers, setOffers] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
@@ -36,9 +40,16 @@ function AllSEOffers() {
   return (
     <div>
       <div className="title">All SEOffers</div>
+      {windowSizeCtx.isWindowLessWiderThan(widthOfFiilterBarChange) && (
+        <div className="center">
+          <Filterbar />
+        </div>
+      )}
       <div className="content-left flex-wrap-2">
         <div className="flex-shrink-low">
-          <Filterbar />
+          {windowSizeCtx.isWindowMoreWiderThan(widthOfFiilterBarChange - 1) && (
+            <Filterbar />
+          )}
         </div>
         <div className="main-content flex-shrink-high">
           <SearchBar />
