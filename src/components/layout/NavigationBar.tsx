@@ -5,31 +5,21 @@ import { SE_OFFERS } from "../../constants";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChurch } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState } from "react";
+import { useContext } from "react";
+import WindowSizeContext from "../store/window-size-context";
 
 function NavigationBar() {
-  const [windowSize, setWindowSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
-  });
-
-  useEffect(() => {
-    const handleWindowResize = () => {
-      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
-    };
-    window.addEventListener("resize", handleWindowResize);
-    return () => {
-      window.removeEventListener("resize", handleWindowResize);
-    };
-  }, []);
+  const windowSizeCtx = useContext(WindowSizeContext);
 
   return (
     <header className={styles.header}>
       <Link to={"/"}>
         <div className={styles.logo}>
           <FontAwesomeIcon icon={faChurch} />
-          {windowSize.width > 550 &&
-            (windowSize.width < 1000 ? " YOW!" : " Your Own Wedding")}
+          {windowSizeCtx.isWindowMoreWiderThan(550) &&
+            (windowSizeCtx.isWindowLessWiderThan(1000)
+              ? " YOW!"
+              : " Your Own Wedding")}
         </div>
       </Link>
       <nav>
