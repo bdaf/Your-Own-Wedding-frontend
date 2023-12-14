@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { API_URL, SE_OFFERS } from "../constants";
+import { API_OFFERS, API_URL, SE_OFFERS } from "../constants";
 import { useEffect, useState } from "react";
 import styles from "./pages.module.css";
 
@@ -43,6 +43,19 @@ function SEOfferDetails() {
       navigate(`/${SE_OFFERS}`);
     }
 
+    function deleteOfferHandler(): void {
+      fetch(`${API_URL}/${API_OFFERS}/${id}`, {
+        method: "delete",
+      })
+        .then(() => {
+          console.log("offer deleted");
+          navigate(`/${SE_OFFERS}`);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+
     return (
       <div className="text-center">
         <div>
@@ -54,6 +67,9 @@ function SEOfferDetails() {
           {offer.created_at}
         </div>
         <div>
+          <button className={`btn-red`} onClick={deleteOfferHandler}>
+            Delete
+          </button>
           <button
             className={`btn-light ${styles.btn_light}`}
             onClick={backToSEOffersPageHandler}

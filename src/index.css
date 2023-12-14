@@ -174,3 +174,19 @@ main {
 .btn-light:active {
   background-color: #c0e7f0;
 }
+
+.btn-red {
+  font: inherit;
+  cursor: pointer;
+  color: rgb(204, 0, 0);
+  border: 1px solid rgb(204, 0, 0);
+  background-color: transparent;
+  padding: 0.5rem 1.5rem;
+  margin: 1rem;
+  border-radius: 4px;
+}
+
+.btn-red:hover,
+.btn-red:active {
+  background-color: rgb(255, 145, 145);
+}
