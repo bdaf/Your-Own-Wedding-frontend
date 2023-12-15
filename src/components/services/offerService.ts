@@ -1,20 +1,15 @@
 import { API_OFFERS, API_URL } from "../../constants";
+import { handleResponseWithPotentialErrors } from "../errors/errorHandler";
 
 
 async function getAllOffers() {
     const response = await fetch(`${API_URL}/${API_OFFERS}`);
-    if(!response.ok){
-        throw new Error(`Code: ${response.status}. Message: ${response.statusText}`);
-    }
-    return response.json();
+    return handleResponseWithPotentialErrors(response);
 }
 
 async function getOfferById(id :string) {
     const response = await fetch(`${API_URL}/${API_OFFERS}/${id}`);
-    if(!response.ok){
-        throw new Error(`Code: ${response.status}. Message: ${response.statusText}`);
-    }
-    return response.json();
+    return handleResponseWithPotentialErrors(response);
 }
 
 async function createOffer(offer:any) {
@@ -25,10 +20,7 @@ async function createOffer(offer:any) {
             "Content-Type":"application/json"
         }
     })
-    if(!response.ok) {
-        throw new Error(`Code: ${response.status}, message: ${response.statusText}`);
-    }
-    return response.json();
+    return handleResponseWithPotentialErrors(response);
 }
 
 async function deleteOfferById(id : string) {
@@ -36,9 +28,8 @@ async function deleteOfferById(id : string) {
     if(!response.ok){
         throw new Error(`Code: ${response.status}. Message: ${response.statusText}`);
     }
-    // status 204 means No Content
-    if(response.status === 204) return null;
-    return response.json();
+    // TODO - Remember to manually set a returning json because by dafault it is just status 204 which means no content
+    return handleResponseWithPotentialErrors(response);
 }
 
 export {getAllOffers, getOfferById, createOffer, deleteOfferById}

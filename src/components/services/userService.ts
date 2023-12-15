@@ -1,4 +1,5 @@
 import { API_LOGIN, API_REGISTER, API_URL } from "../../constants";
+import { handleResponseWithPotentialErrors } from "../errors/errorHandler";
 import { UserLogin, UserRegister } from "../models/User";
 
 const userHeaders = { 
@@ -12,12 +13,7 @@ async function register(user_to_register :UserRegister) {
         method: "POST",
         headers: userHeaders
     })
-
-    if(!response.ok) {
-        throw new Error(`Code: ${response.status}, message: ${response.statusText}`)
-    }
-
-    return response.json();
+    return handleResponseWithPotentialErrors(response);
 }
 
 async function login(user_to_login :UserLogin) {
@@ -26,24 +22,14 @@ async function login(user_to_login :UserLogin) {
         method: "POST",
         headers: userHeaders
     })
-
-    if(!response.ok) {
-        throw new Error(`Code: ${response.status}, message: ${response.statusText}`)
-    }
-
-    return response.json();
+    return handleResponseWithPotentialErrors(response);
 }
 
 async function logged_in() {
     const response = await fetch(`${API_URL}/${API_REGISTER}`, {
         headers: userHeaders
     })
-
-    if(!response.ok) {
-        throw new Error(`Code: ${response.status}, message: ${response.statusText}`)
-    }
-
-    return response.json();
+    return handleResponseWithPotentialErrors(response);
 }
 
 async function logout() {
@@ -51,10 +37,5 @@ async function logout() {
         method: "delete",
         headers: userHeaders 
     })
-
-    if(!response.ok) {
-        throw new Error(`Code: ${response.status}, message: ${response.statusText}`)
-    }
-
-    return response.json();
+    return handleResponseWithPotentialErrors(response);
 }
