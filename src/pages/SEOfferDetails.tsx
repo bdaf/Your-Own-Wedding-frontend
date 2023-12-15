@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { API_OFFERS, API_URL, SE_OFFERS } from "../constants";
+import { SE_OFFERS } from "../constants";
 import { useEffect, useState } from "react";
 import styles from "./pages.module.css";
 import {

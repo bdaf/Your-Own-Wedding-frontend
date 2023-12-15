@@ -3,7 +3,8 @@ import Card from "../ui/Card";
 
 import styles from "./NewSEOfferForm.module.css";
 import { useNavigate } from "react-router-dom";
-import { API_URL, SE_OFFERS } from "../../constants";
+import { createOffer } from "../services/offerService";
+import { SE_OFFERS } from "../../constants";
 
 function NewSEOfferForm() {
   const navigate = useNavigate();
@@ -29,29 +30,15 @@ function NewSEOfferForm() {
       address: enteredAddress,
       description: enteredDescription,
     };
-
-    fetch(`${API_URL}/offers`, {
-      method: "POST",
-      body: JSON.stringify(offer),
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((response) => {
-        if (response.status >= 400 && response.status < 600) {
-          throw new Error("Bad response from server");
-        }
-        return response;
-      })
-      .then(async (returnedResponse) => {
-        const offer = await returnedResponse.json();
-        navigate(`/${SE_OFFERS}/${offer.id}`);
-      })
-      .catch((error) => {
-        setError("Error occurred during creating offer.");
-        console.log("Error occured: ", error);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    try {
+      const responseOffer = await createOffer(offer);
+      navigate(`${SE_OFFERS}/${responseOffer.id}`);
+    } catch (e) {
+      setError("Error occurred during creating offer.");
+      console.log("Error occured: ", error);
+    } finally {
+      setLoading(false);
+    }
   }
 
   if (loading) return <div className="title">Loading...</div>;
