@@ -8,6 +8,17 @@ type User = {
     celebration_date?: Date
 }
 
+type UserRegister = {
+    email :string,
+    password: string,
+    password_confirmation: string
+}
+
+type UserLogin = {
+    email :string,
+    password: string
+}
+
 type RegisterAndLoginResponse = {
     logged_in :boolean,
     user? :User
@@ -17,4 +28,4 @@ type LogoutResponse = {
     logged_out :boolean
 }
 
-export type { User, RegisterAndLoginResponse, LogoutResponse };
+export type { User, UserRegister, UserLogin, RegisterAndLoginResponse, LogoutResponse };
