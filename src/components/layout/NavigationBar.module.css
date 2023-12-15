@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&family=Cutive+Mono&display=swap");
+.header {
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(30, 179, 248);
+  padding: 0 10%;
+}
+
+.logo {
+  font-size: 1.5rem;
+  color: white;
+  font-family: "Cutive Mono", monospace;
+}
+
+.header ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: baseline;
+}
+
+.header li {
+  margin-left: 3rem;
+}
+
+.header a {
+  text-decoration: none;
+  font-size: 1rem;
+  color: #b8e8fc;
+}
+
+.header a:hover,
+.header a:active,
+.header a.active {
+  color: white;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown_content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.dropdown_content .link {
+  color: black;
+  /* padding: 12px 16px; */
+  padding: 12px 32px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown:hover .dropdown_content {
+  display: block;
+}
+
+.dropdown:hover .dropdown_content .link:hover {
+  color: white;
+  background-color: #000;
+}

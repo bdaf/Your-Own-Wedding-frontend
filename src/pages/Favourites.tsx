@@ -1,5 +1,6 @@
 function Favourites() {
-  return <div>Favourites page</div>;
+  console.log("Ładuje");
+  return <div className="title">Favourites SEOffers</div>;
 }
 
 export default Favourites;
