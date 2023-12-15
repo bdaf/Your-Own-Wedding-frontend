@@ -13,6 +13,8 @@ import Layout from "./components/layout/Layout.tsx";
 import Home from "./pages/Home.tsx";
 import { SE_OFFERS } from "./constants.ts";
 import { WindowSizeContextProvider } from "./components/store/window-size-context.tsx";
+import RegisterPage from "./pages/RegisterPage.tsx";
+import LoginPage from "./pages/LoginPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +41,14 @@ const router = createBrowserRouter([
       {
         path: `${SE_OFFERS}/favourites`,
         element: <Favourites />,
+      },
+      {
+        path: `/register`,
+        element: <RegisterPage />,
+      },
+      {
+        path: `/login`,
+        element: <LoginPage />,
       },
     ],
   },

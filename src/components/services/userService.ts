@@ -1,28 +1,18 @@
 import { API_LOGIN, API_REGISTER, API_URL } from "../../constants";
 import { handleResponseWithPotentialErrors } from "../errors/errorHandler";
 import { UserLogin, UserRegister } from "../models/User";
+import axios from 'axios';
 
-const userHeaders = { 
-    "Content/Type" : "application/json", 
-    "useCredentials" : "true"
-}
-
-async function register(user_to_register :UserRegister) {
-    const response =  await fetch(`${API_URL}/${API_REGISTER}`, {
-        body: JSON.stringify(user_to_register),
-        method: "POST",
-        headers: userHeaders
-    })
-    return handleResponseWithPotentialErrors(response);
+function register(user_to_register :UserRegister) {
+    return axios.post(`${API_URL}/${API_REGISTER}`, {
+        user: { ...user_to_register }
+    }, { withCredentials: true })
 }
 
 async function login(user_to_login :UserLogin) {
-    const response = await fetch(`${API_URL}/${API_LOGIN}`, {
-        body: JSON.stringify(user_to_login),
-        method: "POST",
-        headers: userHeaders
-    })
-    return handleResponseWithPotentialErrors(response);
+    return axios.post(`${API_URL}/${API_LOGIN}`, {
+        user: { ...user_to_login }
+    }, { withCredentials: true })
 }
 
 async function logged_in() {
@@ -39,3 +29,5 @@ async function logout() {
     })
     return handleResponseWithPotentialErrors(response);
 }
+
+export {register, login, logged_in, logout}
