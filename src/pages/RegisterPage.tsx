@@ -3,7 +3,7 @@ import RegisterForm from "../components/authentication/RegisterForm";
 function RegisterPage() {
   return (
     <>
-      <div className="title">RegisterPage</div>
+      <div className="title">Register</div>
       <RegisterForm />
     </>
   );

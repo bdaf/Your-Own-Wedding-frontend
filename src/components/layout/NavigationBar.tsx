@@ -1,14 +1,13 @@
 import { Link } from "react-router-dom";
 
 import styles from "./NavigationBar.module.css";
-import { SE_OFFERS } from "../../constants";
+import { PAGE_LOGIN, PAGE_REGISTER, SE_OFFERS } from "../../constants";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChurch } from "@fortawesome/free-solid-svg-icons";
 import { useContext } from "react";
 import WindowSizeContext from "../store/window-size-context";
 import AuthenticationContext from "../store/authentication-context";
-import { User } from "../models/User";
 
 function NavigationBar() {
   const windowSizeCtx = useContext(WindowSizeContext);
@@ -65,10 +64,10 @@ function NavigationBar() {
                   </>
                 ) : (
                   <>
-                    <Link className={styles.link} to={`/register`}>
+                    <Link className={styles.link} to={`/${PAGE_REGISTER}`}>
                       Register
                     </Link>
-                    <Link className={styles.link} to={`/login`}>
+                    <Link className={styles.link} to={`/${PAGE_LOGIN}`}>
                       Log in
                     </Link>
                   </>

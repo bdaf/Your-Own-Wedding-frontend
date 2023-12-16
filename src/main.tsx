@@ -11,7 +11,7 @@ import ErrorPage from "./ErrorPage.tsx";
 import "./index.css";
 import Layout from "./components/layout/Layout.tsx";
 import Home from "./pages/Home.tsx";
-import { SE_OFFERS } from "./constants.ts";
+import { PAGE_LOGIN, PAGE_REGISTER, SE_OFFERS } from "./constants.ts";
 import { WindowSizeContextProvider } from "./components/store/window-size-context.tsx";
 import RegisterPage from "./pages/RegisterPage.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
@@ -44,11 +44,11 @@ const router = createBrowserRouter([
         element: <Favourites />,
       },
       {
-        path: `/register`,
+        path: `/${PAGE_REGISTER}`,
         element: <RegisterPage />,
       },
       {
-        path: `/login`,
+        path: `/${PAGE_LOGIN}`,
         element: <LoginPage />,
       },
     ],

@@ -1,7 +1,7 @@
 import { FormEvent, RefObject, useRef, useState } from "react";
 import Card from "../ui/Card";
 
-import styles from "./RegisterForm.module.css";
+import styles from "../css/Form.module.css";
 import { useNavigate } from "react-router-dom";
 import { User, UserRegister } from "../models/User";
 import { register } from "../services/userService";

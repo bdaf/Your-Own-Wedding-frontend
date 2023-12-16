@@ -1,7 +1,7 @@
 import { FormEvent, RefObject, useRef, useState } from "react";
 import Card from "../ui/Card";
 
-import styles from "./NewSEOfferForm.module.css";
+import styles from "../css/Form.module.css";
 import { useNavigate } from "react-router-dom";
 import { createOffer } from "../services/offerService";
 import { SE_OFFERS } from "../../constants";
