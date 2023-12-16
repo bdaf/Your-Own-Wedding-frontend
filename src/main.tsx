@@ -11,8 +11,11 @@ import ErrorPage from "./ErrorPage.tsx";
 import "./index.css";
 import Layout from "./components/layout/Layout.tsx";
 import Home from "./pages/Home.tsx";
-import { SE_OFFERS } from "./constants.ts";
-import { WindowSizeContextProvider } from "./components/store/window-size-context.tsx";
+import { PAGE_LOGIN, PAGE_REGISTER, SE_OFFERS } from "./constants.ts";
+import { WindowSizeContextProvider } from "./store/window-size-context.tsx";
+import RegisterPage from "./pages/RegisterPage.tsx";
+import LoginPage from "./pages/LoginPage.tsx";
+import { AuthenticationContextProvider } from "./store/authentication-context.tsx";
 
 const router = createBrowserRouter([
   {
@@ -40,14 +43,24 @@ const router = createBrowserRouter([
         path: `${SE_OFFERS}/favourites`,
         element: <Favourites />,
       },
+      {
+        path: `/${PAGE_REGISTER}`,
+        element: <RegisterPage />,
+      },
+      {
+        path: `/${PAGE_LOGIN}`,
+        element: <LoginPage />,
+      },
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <WindowSizeContextProvider>
-    <React.StrictMode>
-      <RouterProvider router={router} />
-    </React.StrictMode>
-  </WindowSizeContextProvider>
+  <AuthenticationContextProvider>
+    <WindowSizeContextProvider>
+      <React.StrictMode>
+        <RouterProvider router={router} />
+      </React.StrictMode>
+    </WindowSizeContextProvider>
+  </AuthenticationContextProvider>
 );

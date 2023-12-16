@@ -1,15 +1,21 @@
 import { Link } from "react-router-dom";
 
 import styles from "./NavigationBar.module.css";
-import { SE_OFFERS } from "../../constants";
+import { PAGE_LOGIN, PAGE_REGISTER, SE_OFFERS } from "../../constants";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChurch } from "@fortawesome/free-solid-svg-icons";
 import { useContext } from "react";
-import WindowSizeContext from "../store/window-size-context";
+import WindowSizeContext from "../../store/window-size-context";
+import AuthenticationContext from "../../store/authentication-context";
 
 function NavigationBar() {
   const windowSizeCtx = useContext(WindowSizeContext);
+  const authCtx = useContext(AuthenticationContext);
+
+  function logoutHandler(): void {
+    authCtx.logout();
+  }
 
   return (
     <header className={styles.header}>
@@ -44,6 +50,34 @@ function NavigationBar() {
           </li>
           <li>
             <Link to={`/${SE_OFFERS}/favourites`}>Favourites</Link>
+          </li>
+          <li>
+            <div className={styles.dropdown}>
+              <Link className={styles.dropdown} to={`/${SE_OFFERS}`}>
+                User
+              </Link>
+              <div className={styles.dropdown_content}>
+                {authCtx.isLoggedIn ? (
+                  <>
+                    <Link className={styles.link} to={`/`}>
+                      Settings
+                    </Link>
+                    <span className={styles.link} onClick={logoutHandler}>
+                      Log out
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <Link className={styles.link} to={`/${PAGE_REGISTER}`}>
+                      Register
+                    </Link>
+                    <Link className={styles.link} to={`/${PAGE_LOGIN}`}>
+                      Log in
+                    </Link>
+                  </>
+                )}
+              </div>
+            </div>
           </li>
         </ul>
       </nav>
