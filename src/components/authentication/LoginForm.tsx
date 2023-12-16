@@ -34,6 +34,7 @@ function LoginForm() {
       .then((response) => {
         console.log("Login response: ", response);
         authCtx.updateAuthentication();
+        navigate(`/`);
       })
       .catch((error) => {
         setError("Error occurred during creating session.");
