@@ -15,6 +15,7 @@ import { SE_OFFERS } from "./constants.ts";
 import { WindowSizeContextProvider } from "./components/store/window-size-context.tsx";
 import RegisterPage from "./pages/RegisterPage.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
+import { AuthenticationContextProvider } from "./components/store/authentication-context.tsx";
 
 const router = createBrowserRouter([
   {
@@ -55,9 +56,11 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <WindowSizeContextProvider>
-    <React.StrictMode>
-      <RouterProvider router={router} />
-    </React.StrictMode>
-  </WindowSizeContextProvider>
+  <AuthenticationContextProvider>
+    <WindowSizeContextProvider>
+      <React.StrictMode>
+        <RouterProvider router={router} />
+      </React.StrictMode>
+    </WindowSizeContextProvider>
+  </AuthenticationContextProvider>
 );

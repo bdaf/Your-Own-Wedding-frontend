@@ -19,7 +19,7 @@ type UserLogin = {
     password: string
 }
 
-type RegisterAndLoginResponse = {
+type Authentication = {
     logged_in :boolean,
     user? :User
 }
@@ -28,4 +28,4 @@ type LogoutResponse = {
     logged_out :boolean
 }
 
-export type { User, UserRegister, UserLogin, RegisterAndLoginResponse, LogoutResponse };
+export type { User, UserRegister, UserLogin, Authentication, LogoutResponse };
