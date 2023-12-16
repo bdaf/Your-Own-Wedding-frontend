@@ -1,13 +1,15 @@
-import { FormEvent, RefObject, useRef, useState } from "react";
+import { FormEvent, RefObject, useContext, useRef, useState } from "react";
 import Card from "../ui/Card";
 
-import styles from "../css/Form.module.css";
+import styles from "../../css/Form.module.css";
 import { useNavigate } from "react-router-dom";
-import { User, UserLogin } from "../models/User";
-import { login } from "../services/userService";
+import { UserLogin } from "../../models/User";
+import { login } from "../../services/userService";
+import AuthenticationContext from "../../store/authentication-context";
 
 function LoginForm() {
   const navigate = useNavigate();
+  const authCtx = useContext(AuthenticationContext);
   const emailInputRef: RefObject<HTMLInputElement> = useRef(null);
   const passwordInputRef: RefObject<HTMLInputElement> = useRef(null);
 
@@ -31,8 +33,7 @@ function LoginForm() {
     login(userToLogin)
       .then((response) => {
         console.log("Login response: ", response);
-        const loggedUser: User = response.data.user;
-        console.log(loggedUser);
+        authCtx.updateAuthentication();
       })
       .catch((error) => {
         setError("Error occurred during creating session.");

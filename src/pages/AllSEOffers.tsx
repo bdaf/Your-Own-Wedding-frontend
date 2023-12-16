@@ -1,8 +1,8 @@
 import Filterbar from "../components/layout/Filterbar";
 import SEOfferList from "../components/offers/SEOfferList";
 import SearchBar from "../components/others/SearchBar";
-import { getAllOffers } from "../components/services/offerService";
-import WindowSizeContext from "../components/store/window-size-context";
+import { getAllOffers } from "../services/offerService";
+import WindowSizeContext from "../store/window-size-context";
 import { useContext, useEffect, useState } from "react";
 
 const widthOfFiilterBarChange = 500;

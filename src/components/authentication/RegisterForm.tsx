@@ -1,13 +1,15 @@
-import { FormEvent, RefObject, useRef, useState } from "react";
+import { FormEvent, RefObject, useContext, useRef, useState } from "react";
 import Card from "../ui/Card";
 
-import styles from "../css/Form.module.css";
+import styles from "../../css/Form.module.css";
 import { useNavigate } from "react-router-dom";
-import { User, UserRegister } from "../models/User";
-import { register } from "../services/userService";
+import { UserRegister } from "../../models/User";
+import { register } from "../../services/userService";
+import AuthenticationContext from "../../store/authentication-context";
 
 function RegisterForm() {
   const navigate = useNavigate();
+  const authCtx = useContext(AuthenticationContext);
   const emailInputRef: RefObject<HTMLInputElement> = useRef(null);
   const passwordInputRef: RefObject<HTMLInputElement> = useRef(null);
   const passwordConfirmationInputRef: RefObject<HTMLInputElement> =
@@ -36,8 +38,7 @@ function RegisterForm() {
     register(userToRegister)
       .then((response) => {
         console.log("Registration response: ", response);
-        const registeredUser: User = response.data.user;
-        console.log(registeredUser);
+        authCtx.updateAuthentication();
       })
       .catch((error) => {
         setError("Error occurred during creating user.");

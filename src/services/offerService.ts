@@ -1,4 +1,4 @@
-import { API_OFFERS, API_URL } from "../../constants";
+import { API_OFFERS, API_URL } from "../constants";
 import { handleResponseWithPotentialErrors } from "../errors/errorHandler";
 
 

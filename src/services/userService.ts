@@ -1,4 +1,4 @@
-import { API_LOGGED_IN, API_LOGIN, API_LOGOUT, API_REGISTER, API_URL } from "../../constants";
+import { API_LOGGED_IN, API_LOGIN, API_LOGOUT, API_REGISTER, API_URL } from "../constants";
 import { UserLogin, UserRegister } from "../models/User";
 import axios from 'axios';
 

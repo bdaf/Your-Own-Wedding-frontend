@@ -2,10 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { SE_OFFERS } from "../constants";
 import { useEffect, useState } from "react";
 import styles from "./pages.module.css";
-import {
-  deleteOfferById,
-  getOfferById,
-} from "../components/services/offerService";
+import { deleteOfferById, getOfferById } from "../services/offerService";
 
 interface Offer {
   id?: number;

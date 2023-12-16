@@ -6,8 +6,8 @@ import { PAGE_LOGIN, PAGE_REGISTER, SE_OFFERS } from "../../constants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChurch } from "@fortawesome/free-solid-svg-icons";
 import { useContext } from "react";
-import WindowSizeContext from "../store/window-size-context";
-import AuthenticationContext from "../store/authentication-context";
+import WindowSizeContext from "../../store/window-size-context";
+import AuthenticationContext from "../../store/authentication-context";
 
 function NavigationBar() {
   const windowSizeCtx = useContext(WindowSizeContext);
