@@ -7,9 +7,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChurch } from "@fortawesome/free-solid-svg-icons";
 import { useContext } from "react";
 import WindowSizeContext from "../store/window-size-context";
+import AuthenticationContext from "../store/authentication-context";
+import { User } from "../models/User";
 
 function NavigationBar() {
   const windowSizeCtx = useContext(WindowSizeContext);
+  const authCtx = useContext(AuthenticationContext);
 
   return (
     <header className={styles.header}>
@@ -44,6 +47,34 @@ function NavigationBar() {
           </li>
           <li>
             <Link to={`/${SE_OFFERS}/favourites`}>Favourites</Link>
+          </li>
+          <li>
+            <div className={styles.dropdown}>
+              <Link className={styles.dropdown} to={`/${SE_OFFERS}`}>
+                User
+              </Link>
+              <div className={styles.dropdown_content}>
+                {authCtx.isLoggedIn ? (
+                  <>
+                    <Link className={styles.link} to={`/`}>
+                      Settings
+                    </Link>
+                    <Link className={styles.link} to={`/`}>
+                      Log out
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Link className={styles.link} to={`/register`}>
+                      Register
+                    </Link>
+                    <Link className={styles.link} to={`/login`}>
+                      Log in
+                    </Link>
+                  </>
+                )}
+              </div>
+            </div>
           </li>
         </ul>
       </nav>

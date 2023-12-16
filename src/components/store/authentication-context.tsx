@@ -16,6 +16,11 @@ const defaultEmptyUser: User = {
   role: "",
 };
 
+const emptyAuthentication: Authentication = {
+  user: defaultEmptyUser,
+  isLoggedIn: false,
+};
+
 const AuthenticationContext = createContext({
   isLoggedIn: false,
   getCurrentUser: (): User => {
@@ -30,34 +35,31 @@ const AuthenticationContext = createContext({
   isAdmin: (): boolean => {
     return false;
   },
+  updateAuthentication: (): void => {},
 });
 
 export function AuthenticationContextProvider({ children }: Props) {
-  const [authentication, setAuthentication] = useState<Authentication>({
-    user: defaultEmptyUser,
-    isLoggedIn: false,
-  });
+  const [authentication, setAuthentication] =
+    useState<Authentication>(emptyAuthentication);
+
+  function checkAndSetIfLoggedIn() {
+    logged_in()
+      .then((response) => {
+        console.log("Login response (checkAndSetIfLoggedIn): ", response);
+        const isLoggedInResponse: Authentication = response.data;
+        console.log(isLoggedInResponse);
+        setAuthentication({
+          user: isLoggedInResponse.user,
+          isLoggedIn: isLoggedInResponse.isLoggedIn,
+        });
+      })
+      .catch((error) => {
+        console.log("Error while checking if currently logged in: ", error);
+        setAuthentication(emptyAuthentication);
+      });
+  }
 
   useEffect(() => {
-    function checkAndSetIfLoggedIn() {
-      logged_in()
-        .then((response) => {
-          console.log("Login response (checkAndSetIfLoggedIn): ", response);
-          const isLoggedInResponse: Authentication = response.data;
-          console.log(isLoggedInResponse);
-          setAuthentication({
-            user: isLoggedInResponse.user,
-            isLoggedIn: isLoggedInResponse.isLoggedIn,
-          });
-        })
-        .catch((error) => {
-          console.log("Error while checking if currently logged in: ", error);
-          setAuthentication({
-            user: defaultEmptyUser,
-            isLoggedIn: false,
-          });
-        });
-    }
     checkAndSetIfLoggedIn();
   }, []);
 
@@ -73,6 +75,9 @@ export function AuthenticationContextProvider({ children }: Props) {
   function isAdminHandler(): boolean {
     return authentication.user.role === "admin";
   }
+  function updateAuthenticationHandler(): void {
+    checkAndSetIfLoggedIn();
+  }
 
   const context = {
     isLoggedIn: authentication.isLoggedIn,
@@ -80,6 +85,7 @@ export function AuthenticationContextProvider({ children }: Props) {
     isAdmin: isAdminHandler,
     isSupportForEntertainment: isSupportForEntertainmentHandler,
     isCommonUser: isCommonUserHandler,
+    updateAuthentication: updateAuthenticationHandler,
   };
 
   return (
