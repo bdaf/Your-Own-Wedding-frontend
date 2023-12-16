@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { logged_in } from "../services/userService";
+import { logged_in, logout } from "../services/userService";
 import { User, AuthenticationResponse } from "../models/User";
 
 interface Props {
@@ -36,6 +36,7 @@ const AuthenticationContext = createContext({
     return false;
   },
   updateAuthentication: (): void => {},
+  logout: (): void => {},
 });
 
 export function AuthenticationContextProvider({ children }: Props) {
@@ -78,6 +79,16 @@ export function AuthenticationContextProvider({ children }: Props) {
   function updateAuthenticationHandler(): void {
     checkAndSetIfLoggedIn();
   }
+  function logoutHandler(): void {
+    logout()
+      .then((response) => {
+        console.log("Session has been cleaned.", response);
+        checkAndSetIfLoggedIn();
+      })
+      .catch((error) => {
+        console.log("Error during logout - cleaning session: ", error);
+      });
+  }
 
   const context = {
     isLoggedIn: authentication.isLoggedIn,
@@ -86,6 +97,7 @@ export function AuthenticationContextProvider({ children }: Props) {
     isSupportForEntertainment: isSupportForEntertainmentHandler,
     isCommonUser: isCommonUserHandler,
     updateAuthentication: updateAuthenticationHandler,
+    logout: logoutHandler,
   };
 
   return (

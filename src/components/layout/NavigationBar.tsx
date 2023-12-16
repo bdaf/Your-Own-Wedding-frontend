@@ -13,6 +13,10 @@ function NavigationBar() {
   const windowSizeCtx = useContext(WindowSizeContext);
   const authCtx = useContext(AuthenticationContext);
 
+  function logoutHandler(): void {
+    authCtx.logout();
+  }
+
   return (
     <header className={styles.header}>
       <Link to={"/"}>
@@ -58,9 +62,9 @@ function NavigationBar() {
                     <Link className={styles.link} to={`/`}>
                       Settings
                     </Link>
-                    <Link className={styles.link} to={`/`}>
+                    <span className={styles.link} onClick={logoutHandler}>
                       Log out
-                    </Link>
+                    </span>
                   </>
                 ) : (
                   <>
