@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { logged_in } from "../services/userService";
-import { User } from "../models/User";
+import { User, AuthenticationResponse } from "../models/User";
 
 interface Props {
   children: any;
@@ -46,11 +46,11 @@ export function AuthenticationContextProvider({ children }: Props) {
     logged_in()
       .then((response) => {
         console.log("Login response (checkAndSetIfLoggedIn): ", response);
-        const isLoggedInResponse: Authentication = response.data;
+        const isLoggedInResponse: AuthenticationResponse = response.data;
         console.log(isLoggedInResponse);
         setAuthentication({
-          user: isLoggedInResponse.user,
-          isLoggedIn: isLoggedInResponse.isLoggedIn,
+          user: isLoggedInResponse.user || defaultEmptyUser,
+          isLoggedIn: isLoggedInResponse.logged_in,
         });
       })
       .catch((error) => {
