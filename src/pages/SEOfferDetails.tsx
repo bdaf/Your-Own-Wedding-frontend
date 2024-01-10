@@ -60,6 +60,9 @@ function SEOfferDetails() {
       <div className="text-center">
         <div>
           <div className="title">SEOffer details</div>
+          {offer.images?.map((image) => {
+            return <img src={image} alt="PHOTO" width={"500px"} />;
+          })}
           <ul>
             <li>{offer.id}</li>
             <li>{offer.title}</li>
@@ -68,9 +71,6 @@ function SEOfferDetails() {
             <li>{offer.created_at}</li>
           </ul>
         </div>
-        {offer.images?.map((image) => {
-          return <img src={image} alt="PHOTO" />;
-        })}
         <div>
           <button className={`btn-red`} onClick={deleteOfferHandler}>
             Delete

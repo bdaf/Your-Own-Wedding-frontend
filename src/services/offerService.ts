@@ -1,5 +1,6 @@
 import { API_OFFERS, API_URL } from "../constants";
 import { handleResponseWithPotentialErrors } from "../errors/errorHandler";
+import axios from 'axios';
 
 
 async function getAllOffers() {
@@ -23,6 +24,10 @@ async function createOffer(offer:any) {
     return handleResponseWithPotentialErrors(response);
 }
 
+function createAxiosOffer(formData: any) {
+    return axios.post(`${API_URL}/${API_OFFERS}`, formData, { withCredentials: true })
+}
+
 function createOfferWithFormData(formData: any) {
     console.log(formData)
     return fetch(`${API_URL}/${API_OFFERS}`, {
@@ -41,4 +46,4 @@ async function deleteOfferById(id : string) {
     return handleResponseWithPotentialErrors(response);
 }
 
-export {getAllOffers, getOfferById, createOffer, createOfferWithFormData, deleteOfferById}
+export {getAllOffers, getOfferById, createOffer, createOfferWithFormData, createAxiosOffer, deleteOfferById}

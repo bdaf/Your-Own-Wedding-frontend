@@ -4,6 +4,7 @@ import Card from "../ui/Card";
 import styles from "../../css/Form.module.css";
 import { useNavigate } from "react-router-dom";
 import {
+  createAxiosOffer,
   createOffer,
   createOfferWithFormData,
 } from "../../services/offerService";
@@ -50,9 +51,9 @@ function NewSEOfferForm() {
       images: uploadedImages,
     };
     try {
-      createOfferWithFormData(formData)
-        .then((data) => {
-          console.log(data);
+      createAxiosOffer(formData)
+        .then((response) => {
+          console.log(response.data);
         })
         .catch((err) => {
           console.log(err);
