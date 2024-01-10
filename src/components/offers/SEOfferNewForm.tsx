@@ -1,15 +1,13 @@
-import { FormEvent, RefObject, useContext, useRef, useState } from "react";
+import { FormEvent, RefObject, useRef, useState } from "react";
 import Card from "../ui/Card";
 
 import styles from "../../css/Form.module.css";
 import { useNavigate } from "react-router-dom";
 import { createOffer } from "../../services/offerService";
 import { SE_OFFERS } from "../../constants";
-import AuthenticationContext from "../../store/authentication-context";
 
 function NewSEOfferForm() {
   const navigate = useNavigate();
-  const authCtx = useContext(AuthenticationContext);
   const imagesInputRef: RefObject<HTMLInputElement> = useRef(null);
   const titleInputRef: RefObject<HTMLInputElement> = useRef(null);
   const addressInputRef: RefObject<HTMLInputElement> = useRef(null);

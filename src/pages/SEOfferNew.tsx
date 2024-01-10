@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import NewSEOfferForm from "../components/offers/NewSEOfferForm";
+import NewSEOfferForm from "../components/offers/SEOfferNewForm";
 import AuthenticationContext from "../store/authentication-context";
 import { SE_OFFERS } from "../constants";
 import { useNavigate } from "react-router-dom";

@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { SE_OFFERS } from "../constants";
 import { useEffect, useState } from "react";
-import styles from "./pages.module.css";
+import styles from "../css/pages.module.css";
 import { deleteOfferById, getOfferById } from "../services/offerService";
 
 interface Offer {
