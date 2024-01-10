@@ -1,13 +1,19 @@
-import { FormEvent, RefObject, useRef, useState } from "react";
+import { FormEvent, RefObject, useContext, useRef, useState } from "react";
 import Card from "../ui/Card";
 
 import styles from "../../css/Form.module.css";
 import { useNavigate } from "react-router-dom";
-import { createOffer } from "../../services/offerService";
+import {
+  createOffer,
+  createOfferWithFormData,
+} from "../../services/offerService";
 import { SE_OFFERS } from "../../constants";
+import AuthenticationContext from "../../store/authentication-context";
 
 function NewSEOfferForm() {
   const navigate = useNavigate();
+  const authCtx = useContext(AuthenticationContext);
+  const imagesInputRef: RefObject<HTMLInputElement> = useRef(null);
   const titleInputRef: RefObject<HTMLInputElement> = useRef(null);
   const addressInputRef: RefObject<HTMLInputElement> = useRef(null);
   const descriptionInputRef: RefObject<HTMLTextAreaElement> = useRef(null);
@@ -21,18 +27,37 @@ function NewSEOfferForm() {
     event.preventDefault();
     setLoading(true);
 
-    const enteredTitle = titleInputRef.current?.value;
-    const enteredAddress = addressInputRef.current?.value;
-    const enteredDescription = descriptionInputRef.current?.value;
+    const uploadedImages = imagesInputRef.current?.files!;
+    const enteredTitle = titleInputRef.current?.value!;
+    const enteredAddress = addressInputRef.current?.value!;
+    const enteredDescription = descriptionInputRef.current?.value!;
+
+    const formData = new FormData();
+    formData.append("offer[title]", enteredTitle);
+    formData.append("offer[address]", enteredAddress);
+    formData.append("offer[description]", enteredDescription);
+    // formData.append("offer[user_id]", authCtx.getCurrentUser().id.toString());
+
+    for (let i = 0; i < uploadedImages.length; i++) {
+      formData.append("offer[images][]", uploadedImages[i]);
+      console.log(uploadedImages[i]);
+    }
 
     const offer = {
       title: enteredTitle,
       address: enteredAddress,
       description: enteredDescription,
+      images: uploadedImages,
     };
     try {
-      const responseOffer = await createOffer(offer);
-      navigate(`${SE_OFFERS}/${responseOffer.id}`);
+      createOfferWithFormData(formData)
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      // navigate(`${SE_OFFERS}/${responseOffer.id}`);
     } catch (e) {
       setError("Error occurred during creating offer.");
       console.log("Error occured: ", error);
@@ -65,6 +90,7 @@ function NewSEOfferForm() {
               ref={descriptionInputRef}
             />
           </div>
+          <input type="file" name="image" multiple ref={imagesInputRef}></input>
           <div className={styles.actions}>
             <button className="btn">Create</button>
           </div>

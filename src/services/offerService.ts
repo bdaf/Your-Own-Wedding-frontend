@@ -23,6 +23,15 @@ async function createOffer(offer:any) {
     return handleResponseWithPotentialErrors(response);
 }
 
+function createOfferWithFormData(formData: any) {
+    console.log(formData)
+    return fetch(`${API_URL}/${API_OFFERS}`, {
+        method: "post", 
+        body: formData
+    }).then((res) => res.json())
+}
+
+
 async function deleteOfferById(id : string) {
     const response = await fetch(`${API_URL}/${API_OFFERS}/${id}`, {method: "delete"});
     if(!response.ok){
@@ -32,4 +41,4 @@ async function deleteOfferById(id : string) {
     return handleResponseWithPotentialErrors(response);
 }
 
-export {getAllOffers, getOfferById, createOffer, deleteOfferById}
+export {getAllOffers, getOfferById, createOffer, createOfferWithFormData, deleteOfferById}
