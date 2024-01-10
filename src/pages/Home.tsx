@@ -7,7 +7,7 @@ function Home() {
     <div>
       <div className="title">Home page</div>
       <div className="center">
-        {authCtx.isLoggedIn &&
+        {authCtx.isLoggedIn() &&
           `Hello ${authCtx.getCurrentUser().email}, your current role is: ${
             authCtx.getCurrentUser().role
           }.`}

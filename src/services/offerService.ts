@@ -1,22 +1,22 @@
-import { API_OFFERS, API_URL } from "../constants";
+import { OFFERS, API_URL } from "../constants";
 import { handleResponseWithPotentialErrors } from "../errors/errorHandler";
 import axios from 'axios';
 
 function getAllOffers() {
-    return axios.get(`${API_URL}/${API_OFFERS}`, { withCredentials: true })
+    return axios.get(`${API_URL}/${OFFERS}`, { withCredentials: true })
 }
 
 function getOfferById(id :string) {
-    return axios.get(`${API_URL}/${API_OFFERS}/${id}`, { withCredentials: true })
+    return axios.get(`${API_URL}/${OFFERS}/${id}`, { withCredentials: true })
 }
 
 function createOffer(formData: any) {
-    return axios.post(`${API_URL}/${API_OFFERS}`, formData, { withCredentials: true })
+    return axios.post(`${API_URL}/${OFFERS}`, formData, { withCredentials: true })
 }
 
 function createOfferWithFormData(formData: any) {
     console.log(formData)
-    return fetch(`${API_URL}/${API_OFFERS}`, {
+    return fetch(`${API_URL}/${OFFERS}`, {
         method: "post", 
         body: formData
     }).then((res) => res.json())
@@ -24,7 +24,7 @@ function createOfferWithFormData(formData: any) {
 
 
 async function deleteOfferById(id : string) {
-    const response = await fetch(`${API_URL}/${API_OFFERS}/${id}`, {method: "delete"});
+    const response = await fetch(`${API_URL}/${OFFERS}/${id}`, {method: "delete"});
     if(!response.ok){
         throw new Error(`Code: ${response.status}. Message: ${response.statusText}`);
     }

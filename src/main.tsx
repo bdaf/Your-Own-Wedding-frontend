@@ -10,11 +10,14 @@ import ErrorPage from "./ErrorPage.tsx";
 import "./index.css";
 import Layout from "./components/layout/Layout.tsx";
 import Home from "./pages/Home.tsx";
-import { PAGE_LOGIN, PAGE_REGISTER, SE_OFFERS } from "./constants.ts";
+import { LOGIN, REGISTER, OFFERS, EVENTS } from "./constants.ts";
 import { WindowSizeContextProvider } from "./store/window-size-context.tsx";
 import RegisterPage from "./pages/RegisterPage.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
 import { AuthenticationContextProvider } from "./store/authentication-context.tsx";
+import EventsAll from "./pages/EventsAll.tsx";
+import EventDetails from "./pages/EventDetails.tsx";
+import EventNew from "./pages/EventNew.tsx";
 
 const router = createBrowserRouter([
   {
@@ -27,24 +30,36 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: SE_OFFERS,
-        element: <SEOffersAll />,
-      },
-      {
-        path: `${SE_OFFERS}/:id`,
-        element: <SEOfferDetails />,
-      },
-      {
-        path: `${SE_OFFERS}/new`,
-        element: <SEOfferNew />,
-      },
-      {
-        path: `/${PAGE_REGISTER}`,
+        path: `/${REGISTER}`,
         element: <RegisterPage />,
       },
       {
-        path: `/${PAGE_LOGIN}`,
+        path: `/${LOGIN}`,
         element: <LoginPage />,
+      },
+      {
+        path: OFFERS,
+        element: <SEOffersAll />,
+      },
+      {
+        path: `${OFFERS}/:id`,
+        element: <SEOfferDetails />,
+      },
+      {
+        path: `${OFFERS}/new`,
+        element: <SEOfferNew />,
+      },
+      {
+        path: EVENTS,
+        element: <EventsAll />,
+      },
+      {
+        path: `${EVENTS}/:id`,
+        element: <EventDetails />,
+      },
+      {
+        path: `${EVENTS}/new`,
+        element: <EventNew />,
       },
     ],
   },

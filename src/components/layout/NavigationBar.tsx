@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./NavigationBar.module.css";
-import { PAGE_LOGIN, PAGE_REGISTER, SE_OFFERS } from "../../constants";
+import { LOGIN, REGISTER, OFFERS, EVENTS } from "../../constants";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChurch } from "@fortawesome/free-solid-svg-icons";
@@ -12,9 +12,11 @@ import AuthenticationContext from "../../store/authentication-context";
 function NavigationBar() {
   const windowSizeCtx = useContext(WindowSizeContext);
   const authCtx = useContext(AuthenticationContext);
+  const navigate = useNavigate();
 
   function logoutHandler(): void {
     authCtx.logout();
+    navigate(`${LOGIN}`);
   }
 
   return (
@@ -35,29 +37,55 @@ function NavigationBar() {
           </li>
           <li>
             <div className={styles.dropdown}>
-              <Link className={styles.dropdown} to={`/${SE_OFFERS}`}>
+              <Link className={styles.dropdown} to={`/${OFFERS}`}>
                 Offers
               </Link>
               <div className={styles.dropdown_content}>
-                <Link className={styles.link} to={`/${SE_OFFERS}`}>
+                <Link className={styles.link} to={`/${OFFERS}`}>
                   All offers
                 </Link>
-                <Link className={styles.link} to={`/${SE_OFFERS}/new`}>
-                  New offer
-                </Link>
+                {authCtx.isSupportForEntertainment() && (
+                  <Link className={styles.link} to={`/${OFFERS}/new`}>
+                    Add offer
+                  </Link>
+                )}
               </div>
             </div>
           </li>
-          <li>
-            <Link to={`/${SE_OFFERS}/favourites`}>Favourites</Link>
-          </li>
+          {authCtx.isLoggedIn() && (
+            <li>
+              <div className={styles.dropdown}>
+                <Link className={styles.dropdown} to={`/${EVENTS}`}>
+                  Notes
+                </Link>
+                {authCtx.isClientUser() && (
+                  <div className={styles.dropdown_content}>
+                    <Link className={styles.link} to={`/${EVENTS}`}>
+                      All notes
+                    </Link>
+                  </div>
+                )}
+                {authCtx.isSupportForEntertainment() && (
+                  <div className={styles.dropdown_content}>
+                    <Link className={styles.link} to={`/${EVENTS}`}>
+                      All events
+                    </Link>
+                    <Link className={styles.link} to={`/${EVENTS}/new`}>
+                      Add event
+                    </Link>
+                  </div>
+                )}
+              </div>
+            </li>
+          )}
+
           <li>
             <div className={styles.dropdown}>
-              <Link className={styles.dropdown} to={`/${SE_OFFERS}`}>
+              <Link className={styles.dropdown} to={`/${LOGIN}`}>
                 User
               </Link>
               <div className={styles.dropdown_content}>
-                {authCtx.isLoggedIn ? (
+                {authCtx.isLoggedIn() ? (
                   <>
                     <Link className={styles.link} to={`/`}>
                       Settings
@@ -68,10 +96,10 @@ function NavigationBar() {
                   </>
                 ) : (
                   <>
-                    <Link className={styles.link} to={`/${PAGE_REGISTER}`}>
+                    <Link className={styles.link} to={`/${REGISTER}`}>
                       Register
                     </Link>
-                    <Link className={styles.link} to={`/${PAGE_LOGIN}`}>
+                    <Link className={styles.link} to={`/${LOGIN}`}>
                       Log in
                     </Link>
                   </>

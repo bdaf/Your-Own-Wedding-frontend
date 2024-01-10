@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { SE_OFFERS } from "../constants";
+import { OFFERS } from "../constants";
 import { useEffect, useState } from "react";
 import styles from "../css/pages.module.css";
 import { deleteOfferById, getOfferById } from "../services/offerService";
@@ -40,7 +40,7 @@ function SEOfferDetails() {
   function deleteOfferHandler(): void {
     try {
       deleteOfferById(id);
-      navigate(`/${SE_OFFERS}`);
+      navigate(`/${OFFERS}`);
     } catch (e) {
       setError("Error occurred during deleting offer. Please try again later.");
       console.log("Error occurred during deleting offer.", e);
@@ -53,7 +53,7 @@ function SEOfferDetails() {
   if (error) return <h1 className="title">{error}</h1>;
   if (offer) {
     function backToSEOffersPageHandler(): void {
-      navigate(`/${SE_OFFERS}`);
+      navigate(`/${OFFERS}`);
     }
 
     return (

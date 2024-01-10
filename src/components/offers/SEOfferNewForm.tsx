@@ -4,7 +4,7 @@ import Card from "../ui/Card";
 import styles from "../../css/Form.module.css";
 import { useNavigate } from "react-router-dom";
 import { createOffer } from "../../services/offerService";
-import { SE_OFFERS } from "../../constants";
+import { OFFERS } from "../../constants";
 
 function NewSEOfferForm() {
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ function NewSEOfferForm() {
       createOffer(formData)
         .then((response) => {
           console.log(response.data);
-          navigate(`/${SE_OFFERS}/${response.data.id}`);
+          navigate(`/${OFFERS}/${response.data.id}`);
         })
         .catch((err) => {
           console.log(err);

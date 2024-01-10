@@ -23,14 +23,16 @@ const emptyAuthentication: Authentication = {
 };
 
 const AuthenticationContext = createContext({
-  isLoggedIn: false,
+  isLoggedIn: (): boolean => {
+    return false;
+  },
   getCurrentUser: (): User => {
     return defaultEmptyUser;
   },
   isSupportForEntertainment: (): boolean => {
     return false;
   },
-  isCommonUser: (): boolean => {
+  isClientUser: (): boolean => {
     return false;
   },
   isAdmin: (): boolean => {
@@ -65,17 +67,20 @@ export function AuthenticationContextProvider({ children }: Props) {
     checkAndSetIfLoggedIn();
   }, []);
 
+  function isLoggedInHandler(): boolean {
+    return authentication.isLoggedIn;
+  }
   function getCurrentUserHandler(): User {
     return authentication.user ? { ...authentication.user } : defaultEmptyUser;
   }
-  function isCommonUserHandler(): boolean {
-    return authentication.user.role === "user";
+  function isClientUserHandler(): boolean {
+    return authentication.isLoggedIn && authentication.user.role === "client";
   }
   function isSupportForEntertainmentHandler(): boolean {
-    return authentication.user.role === "support";
+    return authentication.isLoggedIn && authentication.user.role === "support";
   }
   function isAdminHandler(): boolean {
-    return authentication.user.role === "admin";
+    return authentication.isLoggedIn && authentication.user.role === "admin";
   }
   function updateAuthenticationHandler(): void {
     checkAndSetIfLoggedIn();
@@ -95,11 +100,11 @@ export function AuthenticationContextProvider({ children }: Props) {
   }
 
   const context = {
-    isLoggedIn: authentication.isLoggedIn,
+    isLoggedIn: isLoggedInHandler,
     getCurrentUser: getCurrentUserHandler,
     isAdmin: isAdminHandler,
     isSupportForEntertainment: isSupportForEntertainmentHandler,
-    isCommonUser: isCommonUserHandler,
+    isClientUser: isClientUserHandler,
     updateAuthentication: updateAuthenticationHandler,
     logout: logoutHandler,
   };

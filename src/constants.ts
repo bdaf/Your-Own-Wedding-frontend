@@ -1,9 +1,9 @@
 export const API_URL = process.env.NODE_ENV === "test" ? "http://mocked-api-url" : import.meta.env.VITE_API_URL;
-export const SE_OFFERS = import.meta.env.VITE_PAGE_SE_OFFERS;
-export const PAGE_REGISTER = import.meta.env.VITE_PAGE_REGISTER;
-export const PAGE_LOGIN = import.meta.env.VITE_PAGE_LOGIN;
-export const API_OFFERS = import.meta.env.VITE_API_SE_OFFERS;
-export const API_REGISTER = import.meta.env.VITE_API_REGISTER;
-export const API_LOGIN = import.meta.env.VITE_API_LOGIN;
-export const API_LOGGED_IN = import.meta.env.VITE_API_LOGGED_IN;
-export const API_LOGOUT = import.meta.env.VITE_API_LOGOUT;
+export const REGISTER = import.meta.env.VITE_REGISTER;
+export const LOGIN = import.meta.env.VITE_LOGIN;
+export const LOGGED_IN = import.meta.env.VITE_LOGGED_IN;
+export const LOGOUT = import.meta.env.VITE_LOGOUT;
+export const OFFERS = import.meta.env.VITE_OFFERS;
+export const EVENTS = import.meta.env.VITE_EVENTS;
+export const GUESTS = import.meta.env.VITE_GUESTS;
+export const TASK_MONTHS = import.meta.env.VITE_TASK_MONTHS;
