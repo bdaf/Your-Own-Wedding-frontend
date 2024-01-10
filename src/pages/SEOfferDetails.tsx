@@ -23,8 +23,8 @@ function SEOfferDetails() {
   useEffect(() => {
     async function loadOffer() {
       try {
-        const data = await getOfferById(id);
-        setOffer(data);
+        const response = await getOfferById(id);
+        setOffer(response.data);
       } catch (e) {
         setError(
           "Error occurred during loading offer. Please try again later."

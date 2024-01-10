@@ -3,11 +3,7 @@ import Card from "../ui/Card";
 
 import styles from "../../css/Form.module.css";
 import { useNavigate } from "react-router-dom";
-import {
-  createAxiosOffer,
-  createOffer,
-  createOfferWithFormData,
-} from "../../services/offerService";
+import { createOffer } from "../../services/offerService";
 import { SE_OFFERS } from "../../constants";
 import AuthenticationContext from "../../store/authentication-context";
 
@@ -37,28 +33,21 @@ function NewSEOfferForm() {
     formData.append("offer[title]", enteredTitle);
     formData.append("offer[address]", enteredAddress);
     formData.append("offer[description]", enteredDescription);
-    // formData.append("offer[user_id]", authCtx.getCurrentUser().id.toString());
 
     for (let i = 0; i < uploadedImages.length; i++) {
       formData.append("offer[images][]", uploadedImages[i]);
       console.log(uploadedImages[i]);
     }
 
-    const offer = {
-      title: enteredTitle,
-      address: enteredAddress,
-      description: enteredDescription,
-      images: uploadedImages,
-    };
     try {
-      createAxiosOffer(formData)
+      createOffer(formData)
         .then((response) => {
           console.log(response.data);
+          navigate(`/${SE_OFFERS}/${response.data.id}`);
         })
         .catch((err) => {
           console.log(err);
         });
-      // navigate(`${SE_OFFERS}/${responseOffer.id}`);
     } catch (e) {
       setError("Error occurred during creating offer.");
       console.log("Error occured: ", error);
