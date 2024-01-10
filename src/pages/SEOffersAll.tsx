@@ -17,8 +17,10 @@ function AllSEOffers() {
     async function loadOffers() {
       setLoading(true);
       try {
-        const data = await getAllOffers();
-        setOffers(data);
+        const response = await getAllOffers();
+        console.log(response.data);
+        console.log(response);
+        setOffers(response.data);
       } catch (e) {
         setError("Error has occured, try again later.");
         console.log("An error occurred: ", e);

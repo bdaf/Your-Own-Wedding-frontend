@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { SE_OFFERS } from "../constants";
 import { useEffect, useState } from "react";
-import styles from "./pages.module.css";
+import styles from "../css/pages.module.css";
 import { deleteOfferById, getOfferById } from "../services/offerService";
 
 interface Offer {
@@ -9,6 +9,7 @@ interface Offer {
   title?: string;
   description?: string;
   address?: string;
+  images?: [];
   created_at?: any;
 }
 
@@ -22,8 +23,8 @@ function SEOfferDetails() {
   useEffect(() => {
     async function loadOffer() {
       try {
-        const data = await getOfferById(id);
-        setOffer(data);
+        const response = await getOfferById(id);
+        setOffer(response.data);
       } catch (e) {
         setError(
           "Error occurred during loading offer. Please try again later."
@@ -59,11 +60,16 @@ function SEOfferDetails() {
       <div className="text-center">
         <div>
           <div className="title">SEOffer details</div>
-          {offer.id}
-          {offer.title}
-          {offer.description}
-          {offer.address}
-          {offer.created_at}
+          {offer.images?.map((image) => {
+            return <img src={image} alt="PHOTO" width={"500px"} />;
+          })}
+          <ul>
+            <li>{offer.id}</li>
+            <li>{offer.title}</li>
+            <li>{offer.description}</li>
+            <li>{offer.address}</li>
+            <li>{offer.created_at}</li>
+          </ul>
         </div>
         <div>
           <button className={`btn-red`} onClick={deleteOfferHandler}>

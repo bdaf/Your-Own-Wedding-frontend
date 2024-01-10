@@ -1,27 +1,27 @@
 import { API_OFFERS, API_URL } from "../constants";
 import { handleResponseWithPotentialErrors } from "../errors/errorHandler";
+import axios from 'axios';
 
-
-async function getAllOffers() {
-    const response = await fetch(`${API_URL}/${API_OFFERS}`);
-    return handleResponseWithPotentialErrors(response);
+function getAllOffers() {
+    return axios.get(`${API_URL}/${API_OFFERS}`, { withCredentials: true })
 }
 
-async function getOfferById(id :string) {
-    const response = await fetch(`${API_URL}/${API_OFFERS}/${id}`);
-    return handleResponseWithPotentialErrors(response);
+function getOfferById(id :string) {
+    return axios.get(`${API_URL}/${API_OFFERS}/${id}`, { withCredentials: true })
 }
 
-async function createOffer(offer:any) {
-    const response = await fetch(`${API_URL}/${API_OFFERS}`, {
+function createOffer(formData: any) {
+    return axios.post(`${API_URL}/${API_OFFERS}`, formData, { withCredentials: true })
+}
+
+function createOfferWithFormData(formData: any) {
+    console.log(formData)
+    return fetch(`${API_URL}/${API_OFFERS}`, {
         method: "post", 
-        body: JSON.stringify(offer), 
-        headers: {
-            "Content-Type":"application/json"
-        }
-    })
-    return handleResponseWithPotentialErrors(response);
+        body: formData
+    }).then((res) => res.json())
 }
+
 
 async function deleteOfferById(id : string) {
     const response = await fetch(`${API_URL}/${API_OFFERS}/${id}`, {method: "delete"});
@@ -32,4 +32,4 @@ async function deleteOfferById(id : string) {
     return handleResponseWithPotentialErrors(response);
 }
 
-export {getAllOffers, getOfferById, createOffer, deleteOfferById}
+export {getAllOffers, getOfferById, createOffer, createOfferWithFormData, deleteOfferById}

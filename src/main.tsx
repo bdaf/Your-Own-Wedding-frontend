@@ -2,10 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-import AllSEOffers from "./pages/AllSEOffers.tsx";
+import SEOffersAll from "./pages/SEOffersAll.tsx";
 import SEOfferDetails from "./pages/SEOfferDetails.tsx";
-import NewSEOffer from "./pages/NewSEOffer.tsx";
-import Favourites from "./pages/Favourites.tsx";
+import SEOfferNew from "./pages/SEOfferNew.tsx";
 import ErrorPage from "./ErrorPage.tsx";
 
 import "./index.css";
@@ -29,7 +28,7 @@ const router = createBrowserRouter([
       },
       {
         path: SE_OFFERS,
-        element: <AllSEOffers />,
+        element: <SEOffersAll />,
       },
       {
         path: `${SE_OFFERS}/:id`,
@@ -37,11 +36,7 @@ const router = createBrowserRouter([
       },
       {
         path: `${SE_OFFERS}/new`,
-        element: <NewSEOffer />,
-      },
-      {
-        path: `${SE_OFFERS}/favourites`,
-        element: <Favourites />,
+        element: <SEOfferNew />,
       },
       {
         path: `/${PAGE_REGISTER}`,

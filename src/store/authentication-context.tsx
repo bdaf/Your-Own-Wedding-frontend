@@ -12,6 +12,7 @@ interface Authentication {
 }
 
 const defaultEmptyUser: User = {
+  id: -1,
   email: "",
   role: "",
 };
@@ -83,10 +84,13 @@ export function AuthenticationContextProvider({ children }: Props) {
     logout()
       .then((response) => {
         console.log("Session has been cleaned.", response);
-        checkAndSetIfLoggedIn();
       })
       .catch((error) => {
-        console.log("Error during logout - cleaning session: ", error);
+        console.log("Error during logout:", error);
+      })
+      .finally(() => {
+        checkAndSetIfLoggedIn();
+        console.log("Local session has been cleaned.");
       });
   }
 
