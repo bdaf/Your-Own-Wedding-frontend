@@ -25,7 +25,7 @@ function EventPage() {
       })
       .catch((e) => {
         console.log(e);
-        flashMsgCtx.handleSuccessOrErrorMessageFromResponse(e);
+        flashMsgCtx.handleError(e);
       })
       .finally(() => {});
   }, []);

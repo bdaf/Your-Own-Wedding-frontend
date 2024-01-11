@@ -9,6 +9,7 @@ function register(user_to_register :UserRegister) {
 }
 
 function login(user_to_login :UserLogin) {
+    console.log(`${API_URL}/${LOGIN}`)
     return axios.post(`${API_URL}/${LOGIN}`, {
         user: { ...user_to_login }
     }, { withCredentials: true })

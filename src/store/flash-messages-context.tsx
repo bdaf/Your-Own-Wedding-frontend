@@ -19,8 +19,11 @@ const FlashMessagesContext = createContext({
   setFlashMessage: (message: string, type?: string): void => {
     message + type;
   },
-  handleSuccessOrErrorMessageFromResponse: (res: any): void => {
+  handleSuccess: (res: any): void => {
     res;
+  },
+  handleError: (error: any): void => {
+    error;
   },
   clearFlashMessage: (): void => {},
   getFlashMessage: (): string => {
@@ -59,13 +62,28 @@ export function FlashMessagesContextProvider({ children }: Props) {
     setFlashMessage({ message: message, type: type });
   }
 
-  function handleSuccessOrErrorMessageFromResponseHandler(res: any): void {
+  function handleSuccessHandler(res: any): void {
+    console.log("SUCCESS", res);
     if (res?.data?.message) {
       setFlashMessageHandler(res.data.message, SUCCESS_FLASH_TYPE);
+    } else if (res?.message) {
+      setFlashMessageHandler(res.message, SUCCESS_FLASH_TYPE);
     }
-    // else if (res?.data?.errors) {
-    //   setFlashMessageHandler(res.data.message, ERROR_FLASH_TYPE);
-    // }
+  }
+
+  function handleErrorHandler(error: any): void {
+    console.log("ERROR", error);
+    let message;
+    if (error?.response?.data?.message) {
+      message = error.response.data.message;
+    } else if (error?.response) {
+      message = `Error occurred, status of response is ${error.response.status}.`;
+    } else if (error?.message) {
+      message = `${error.message}`;
+    } else {
+      message = "An unxpected error occurred.";
+    }
+    setFlashMessageHandler(message, ERROR_FLASH_TYPE);
   }
 
   function clearFlashMessageHandler(): void {
@@ -82,8 +100,8 @@ export function FlashMessagesContextProvider({ children }: Props) {
 
   const context = {
     setFlashMessage: setFlashMessageHandler,
-    handleSuccessOrErrorMessageFromResponse:
-      handleSuccessOrErrorMessageFromResponseHandler,
+    handleSuccess: handleSuccessHandler,
+    handleError: handleErrorHandler,
     clearFlashMessage: clearFlashMessageHandler,
     getFlashMessage: getFlashMessageHandler,
     getFlashMessageType: getFlashMessageTypeHandler,

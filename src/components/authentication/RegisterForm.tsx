@@ -6,10 +6,12 @@ import { useNavigate } from "react-router-dom";
 import { UserRegister } from "../../models/User";
 import { register } from "../../services/userService";
 import AuthenticationContext from "../../store/authentication-context";
+import FlashMessagesContext from "../../store/flash-messages-context";
 
 function RegisterForm() {
   const navigate = useNavigate();
   const authCtx = useContext(AuthenticationContext);
+  const flashMsgCtx = useContext(FlashMessagesContext);
   const emailInputRef: RefObject<HTMLInputElement> = useRef(null);
   const passwordInputRef: RefObject<HTMLInputElement> = useRef(null);
   const passwordConfirmationInputRef: RefObject<HTMLInputElement> =
@@ -41,8 +43,7 @@ function RegisterForm() {
         authCtx.updateAuthentication();
       })
       .catch((error) => {
-        setError("Error occurred during creating user.");
-        console.log("Error occured: ", error);
+        flashMsgCtx.handleError(error);
       })
       .finally(() => {
         setLoading(false);

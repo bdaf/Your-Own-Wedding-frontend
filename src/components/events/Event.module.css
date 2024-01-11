@@ -1,0 +1,35 @@
+.event {
+  display: flex;
+  justify-content: space-between;
+}
+
+.margin_auto {
+  margin: auto;
+}
+
+.note_name {
+  font-size: 1.5rem;
+  margin: 0rem;
+  padding: 1rem;
+}
+
+.note_body {
+  font-size: 1rem;
+  padding: 1rem;
+}
+
+.button_edit {
+  font: inherit;
+  cursor: pointer;
+  color: #77002e;
+  border: 1px solid #77002e;
+  background-color: transparent;
+  padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+  margin: 0rem;
+  border-radius: 4px;
+}
+
+.button_edit:hover,
+.button_edit:active {
+  background-color: #ffe2ed;
+}

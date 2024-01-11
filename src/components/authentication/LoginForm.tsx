@@ -16,7 +16,6 @@ function LoginForm() {
   const passwordInputRef: RefObject<HTMLInputElement> = useRef(null);
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
 
   async function submitHandler(
     event: FormEvent<HTMLFormElement>
@@ -40,18 +39,14 @@ function LoginForm() {
         navigate(`/`);
       })
       .catch((error) => {
-        setError("Error occurred during creating session.");
-        console.log("Error occured: ", error);
+        flashMsgCtx.handleError(error);
       })
       .finally(() => {
         setLoading(false);
       });
-
-    navigate(`/`);
   }
 
   if (loading) return <div className="title">Loading...</div>;
-  if (error) return <div className="title">{error}</div>;
 
   return (
     <div className={styles.container}>
