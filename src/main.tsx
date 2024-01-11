@@ -16,8 +16,6 @@ import RegisterPage from "./pages/RegisterPage.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
 import { AuthenticationContextProvider } from "./store/authentication-context.tsx";
 import EventsPage from "./pages/EventsPage.tsx";
-import EventDetails from "./pages/EventDetails.tsx";
-import EventNew from "./pages/EventNew.tsx";
 import { FlashMessagesContextProvider } from "./store/flash-messages-context.tsx";
 
 const router = createBrowserRouter([
@@ -53,14 +51,6 @@ const router = createBrowserRouter([
       {
         path: EVENTS,
         element: <EventsPage />,
-      },
-      {
-        path: `${EVENTS}/:id`,
-        element: <EventDetails />,
-      },
-      {
-        path: `${EVENTS}/new`,
-        element: <EventNew />,
       },
     ],
   },
