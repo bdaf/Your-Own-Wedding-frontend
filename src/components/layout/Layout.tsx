@@ -3,24 +3,34 @@ import NavigationBar from "./NavigationBar";
 import styles from "./Layout.css";
 import { Outlet } from "react-router-dom";
 import FlashMessagesContext from "../../store/flash-messages-context";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 function Layout() {
   const flashMsgCtx = useContext(FlashMessagesContext);
-  // if(flashMsgCtx.getFlashMessage){
-  //   if(flashMsgCtx.getFlashMessageType == )
+  // if(flashMsgCtx.getFlashMessage()){
+  //   if(flashMsgCtx.getFlashMessageType() == )
   // }
+
+  useEffect(() => {
+    flashMsgCtx.makeFlashMessageOlder();
+    console.log("jest");
+  }, []);
+  function closeAlertHandler(): void {
+    flashMsgCtx.setFlashMessage("", "");
+  }
+
   return (
     <>
       <NavigationBar />
       <main className="width-80-center">
-        {/* <div className="alert alert-success" role="alert">
-          This is a primary alert—check it out!
-          <div className="right">
-            sd
-            <div className="close">close</div>
-          </div>
-        </div> */}
+        {flashMsgCtx.getFlashMessage() && (
+          <>
+            <div className="alert alert-success" role="alert">
+              {flashMsgCtx.getFlashMessage()}
+            </div>
+            <div onClick={closeAlertHandler}>CLOSE</div>
+          </>
+        )}
         {/* {if(flashMsgCtx.)} */}
         <Outlet />
       </main>

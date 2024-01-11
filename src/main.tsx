@@ -18,6 +18,7 @@ import { AuthenticationContextProvider } from "./store/authentication-context.ts
 import EventsAll from "./pages/EventsAll.tsx";
 import EventDetails from "./pages/EventDetails.tsx";
 import EventNew from "./pages/EventNew.tsx";
+import { FlashMessagesContextProvider } from "./store/flash-messages-context.tsx";
 
 const router = createBrowserRouter([
   {
@@ -68,9 +69,11 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <AuthenticationContextProvider>
     <WindowSizeContextProvider>
-      <React.StrictMode>
-        <RouterProvider router={router} />
-      </React.StrictMode>
+      <FlashMessagesContextProvider>
+        <React.StrictMode>
+          <RouterProvider router={router} />
+        </React.StrictMode>
+      </FlashMessagesContextProvider>
     </WindowSizeContextProvider>
   </AuthenticationContextProvider>
 );

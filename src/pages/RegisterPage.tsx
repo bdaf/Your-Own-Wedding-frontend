@@ -8,6 +8,7 @@ function RegisterPage() {
   const authCtx = useContext(AuthenticationContext);
 
   useEffect(() => {
+    authCtx.updateAuthentication();
     if (authCtx.isLoggedIn()) {
       navigate(`/`);
     }

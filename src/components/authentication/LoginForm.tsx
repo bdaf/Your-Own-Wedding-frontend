@@ -6,10 +6,14 @@ import { useNavigate } from "react-router-dom";
 import { UserLogin } from "../../models/User";
 import { login } from "../../services/userService";
 import AuthenticationContext from "../../store/authentication-context";
+import FlashMessagesContext, {
+  SUCCESS_FLASH_TYPE,
+} from "../../store/flash-messages-context";
 
 function LoginForm() {
   const navigate = useNavigate();
   const authCtx = useContext(AuthenticationContext);
+  const flashMsgCtx = useContext(FlashMessagesContext);
   const emailInputRef: RefObject<HTMLInputElement> = useRef(null);
   const passwordInputRef: RefObject<HTMLInputElement> = useRef(null);
 
@@ -34,6 +38,10 @@ function LoginForm() {
       .then((response) => {
         console.log("Login response: ", response);
         authCtx.updateAuthentication();
+        flashMsgCtx.setFlashMessage(
+          "You have been logged in succesfully",
+          SUCCESS_FLASH_TYPE
+        );
         navigate(`/`);
       })
       .catch((error) => {

@@ -8,6 +8,7 @@ function LoginPage() {
   const authCtx = useContext(AuthenticationContext);
 
   useEffect(() => {
+    authCtx.updateAuthentication();
     if (authCtx.isLoggedIn()) {
       navigate(`/`);
     }
