@@ -19,6 +19,7 @@ function AllSEOffers() {
       try {
         const response = await getAllOffers();
         setOffers(response.data);
+        console.log(response.data);
       } catch (e) {
         setError("Error has occured, try again later.");
         console.log("An error occurred: ", e);

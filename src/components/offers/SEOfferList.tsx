@@ -26,7 +26,7 @@ function SEOfferList({ offers }: Props) {
           title={shortStringTo(20, offer.title)}
           description={shortStringTo(20, offer.description)}
           address={shortStringTo(20, offer.address)}
-          image="https://wimgix.wedding.pl/vendor_gallery/7nzJ8FrZDXWM3dgxfyt6n8jB85UrNAcMie3fJYAb.jpg?h=450&rot=0"
+          images={offer.images}
         />
       ))}
     </ul>

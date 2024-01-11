@@ -3,7 +3,8 @@
 }
 
 .image {
-  width: 100%;
+  max-width: 30rem;
+  max-height: 15rem;
   overflow: hidden;
   border-top-right-radius: 6px;
   border-top-left-radius: 6px;
@@ -11,7 +12,9 @@
 
 .image img {
   width: 100%;
-  object-fit: cover;
+  max-width: 30rem;
+  max-height: 15rem;
+  object-fit: fill;
 }
 
 .content {
