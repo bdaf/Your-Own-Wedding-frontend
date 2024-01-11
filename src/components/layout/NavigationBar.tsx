@@ -8,15 +8,19 @@ import { faChurch } from "@fortawesome/free-solid-svg-icons";
 import { useContext } from "react";
 import WindowSizeContext from "../../store/window-size-context";
 import AuthenticationContext from "../../store/authentication-context";
+import FlashMessagesContext from "../../store/flash-messages-context";
 
 function NavigationBar() {
   const windowSizeCtx = useContext(WindowSizeContext);
   const authCtx = useContext(AuthenticationContext);
+  const flashMsgCtx = useContext(FlashMessagesContext);
   const navigate = useNavigate();
 
   function logoutHandler(): void {
-    authCtx.logout();
-    navigate(`${LOGIN}`);
+    authCtx.logout().then(() => {
+      navigate(`/${LOGIN}`);
+      flashMsgCtx.setFlashMessage("You have been logged out!");
+    });
   }
 
   return (

@@ -39,7 +39,7 @@ const AuthenticationContext = createContext({
     return false;
   },
   updateAuthentication: (): void => {},
-  logout: (): void => {},
+  logout: (): any => {},
 });
 
 export function AuthenticationContextProvider({ children }: Props) {
@@ -85,8 +85,8 @@ export function AuthenticationContextProvider({ children }: Props) {
   function updateAuthenticationHandler(): void {
     checkAndSetIfLoggedIn();
   }
-  function logoutHandler(): void {
-    logout()
+  function logoutHandler() {
+    return logout()
       .then((response) => {
         console.log("Session has been cleaned.", response);
       })
@@ -94,6 +94,7 @@ export function AuthenticationContextProvider({ children }: Props) {
         console.log("Error during logout:", error);
       })
       .finally(() => {
+        setAuthentication(emptyAuthentication);
         checkAndSetIfLoggedIn();
         console.log("Local session has been cleaned.");
       });
