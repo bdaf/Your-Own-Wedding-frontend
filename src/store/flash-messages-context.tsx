@@ -19,6 +19,9 @@ const FlashMessagesContext = createContext({
   setFlashMessage: (message: string, type?: string): void => {
     message + type;
   },
+  handleSuccessOrErrorMessageFromResponse: (res: any): void => {
+    res;
+  },
   clearFlashMessage: (): void => {},
   getFlashMessage: (): string => {
     return "";
@@ -56,6 +59,15 @@ export function FlashMessagesContextProvider({ children }: Props) {
     setFlashMessage({ message: message, type: type });
   }
 
+  function handleSuccessOrErrorMessageFromResponseHandler(res: any): void {
+    if (res?.data?.message) {
+      setFlashMessageHandler(res.data.message, SUCCESS_FLASH_TYPE);
+    }
+    // else if (res?.data?.errors) {
+    //   setFlashMessageHandler(res.data.message, ERROR_FLASH_TYPE);
+    // }
+  }
+
   function clearFlashMessageHandler(): void {
     setFlashMessage(defaultFlashMessage);
   }
@@ -70,6 +82,8 @@ export function FlashMessagesContextProvider({ children }: Props) {
 
   const context = {
     setFlashMessage: setFlashMessageHandler,
+    handleSuccessOrErrorMessageFromResponse:
+      handleSuccessOrErrorMessageFromResponseHandler,
     clearFlashMessage: clearFlashMessageHandler,
     getFlashMessage: getFlashMessageHandler,
     getFlashMessageType: getFlashMessageTypeHandler,

@@ -15,7 +15,7 @@ import { WindowSizeContextProvider } from "./store/window-size-context.tsx";
 import RegisterPage from "./pages/RegisterPage.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
 import { AuthenticationContextProvider } from "./store/authentication-context.tsx";
-import EventsAll from "./pages/EventsAll.tsx";
+import EventsPage from "./pages/EventsPage.tsx";
 import EventDetails from "./pages/EventDetails.tsx";
 import EventNew from "./pages/EventNew.tsx";
 import { FlashMessagesContextProvider } from "./store/flash-messages-context.tsx";
@@ -52,7 +52,7 @@ const router = createBrowserRouter([
       },
       {
         path: EVENTS,
-        element: <EventsAll />,
+        element: <EventsPage />,
       },
       {
         path: `${EVENTS}/:id`,

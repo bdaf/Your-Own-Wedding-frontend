@@ -1,5 +1,4 @@
 import { OFFERS, API_URL } from "../constants";
-import { handleResponseWithPotentialErrors } from "../errors/errorHandler";
 import axios from 'axios';
 
 function getAllOffers() {
@@ -14,22 +13,7 @@ function createOffer(formData: any) {
     return axios.post(`${API_URL}/${OFFERS}`, formData, { withCredentials: true })
 }
 
-function createOfferWithFormData(formData: any) {
-    console.log(formData)
-    return fetch(`${API_URL}/${OFFERS}`, {
-        method: "post", 
-        body: formData
-    }).then((res) => res.json())
+function deleteOfferById(id: string) {
+    return axios.delete(`${API_URL}/${OFFERS}/${id}`, { withCredentials: true })
 }
-
-
-async function deleteOfferById(id : string) {
-    const response = await fetch(`${API_URL}/${OFFERS}/${id}`, {method: "delete"});
-    if(!response.ok){
-        throw new Error(`Code: ${response.status}. Message: ${response.statusText}`);
-    }
-    // TODO - Remember to manually set a returning json because by dafault it is just status 204 which means no content
-    return handleResponseWithPotentialErrors(response);
-}
-
-export {getAllOffers, getOfferById, createOffer, createOfferWithFormData, deleteOfferById}
+export {getAllOffers, getOfferById, createOffer, deleteOfferById}

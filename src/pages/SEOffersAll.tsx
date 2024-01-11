@@ -18,8 +18,6 @@ function AllSEOffers() {
       setLoading(true);
       try {
         const response = await getAllOffers();
-        console.log(response.data);
-        console.log(response);
         setOffers(response.data);
       } catch (e) {
         setError("Error has occured, try again later.");

@@ -4,13 +4,13 @@ import AuthenticationContext from "../store/authentication-context";
 import { EVENTS } from "../constants";
 import Card from "../components/ui/Card";
 
-function EventNew() {
+function EventPage() {
   const navigate = useNavigate();
   const authCtx = useContext(AuthenticationContext);
 
   useEffect(() => {
-    if (!authCtx.isSupportForEntertainment()) {
-      navigate(`${EVENTS}`);
+    if (!authCtx.isLoggedIn()) {
+      navigate(`/${EVENTS}`);
     }
   }, []);
   return (
@@ -20,4 +20,4 @@ function EventNew() {
   );
 }
 
-export default EventNew;
+export default EventPage;
