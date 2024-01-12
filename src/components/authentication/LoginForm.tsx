@@ -35,7 +35,7 @@ function LoginForm() {
       .then((response) => {
         console.log("Login response: ", response);
         authCtx.updateAuthentication();
-        flashMsgCtx.setFlashMessage("You have been logged in succesfully!");
+        flashMsgCtx.setFlashMessage("You have been logged in succesfully");
         navigate(`/`);
       })
       .catch((error) => {

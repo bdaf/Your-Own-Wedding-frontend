@@ -73,16 +73,20 @@ export function FlashMessagesContextProvider({ children }: Props) {
 
   function handleErrorHandler(error: any): void {
     console.log("ERROR", error);
-    let message;
-    if (error?.response?.data?.message) {
-      message = error.response.data.message;
-    } else if (error?.response) {
-      message = `Error occurred, status of response is ${error.response.status}.`;
-    } else if (error?.message) {
-      message = `${error.message}`;
-    } else {
-      message = "An unxpected error occurred.";
+    let message = "";
+    console.log(error);
+    if (error?.response?.status == 422) {
+      //str.replace(/#|_/g, '')
+      message = JSON.stringify(error.response.data)
+        .replace(/\[|\]|:|{|}|\\|"/g, " ")
+        .replace(/,/g, `|`);
+      setFlashMessageHandler(message, ERROR_FLASH_TYPE);
+      return;
+    } else if (error?.response?.status == 500) {
+      message = `It's server inner error. Please try again later.`;
     }
+
+    message = `An unxpected error occurred. ${message}`;
     setFlashMessageHandler(message, ERROR_FLASH_TYPE);
   }
 

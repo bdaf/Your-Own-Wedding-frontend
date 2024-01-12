@@ -19,7 +19,7 @@ function NavigationBar() {
   function logoutHandler(): void {
     authCtx.logout().then(() => {
       navigate(`/${LOGIN}`);
-      flashMsgCtx.setFlashMessage("You have been logged out!");
+      flashMsgCtx.setFlashMessage("You have been logged out");
     });
   }
 

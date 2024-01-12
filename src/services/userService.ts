@@ -3,25 +3,25 @@ import { UserLogin, UserRegister } from "../models/User";
 import axios from 'axios';
 
 function register(user_to_register :UserRegister) {
-    return axios.post(`${API_URL}/${REGISTER}`, {
+    return axios.post(`${API_URL}/${REGISTER}.json`, {
         user: { ...user_to_register }
     }, { withCredentials: true })
 }
 
 function login(user_to_login :UserLogin) {
     console.log(`${API_URL}/${LOGIN}`)
-    return axios.post(`${API_URL}/${LOGIN}`, {
+    return axios.post(`${API_URL}/${LOGIN}.json`, {
         user: { ...user_to_login }
     }, { withCredentials: true })
 }
 
 function logged_in() {
-    return axios.get(`${API_URL}/${LOGGED_IN}`,
+    return axios.get(`${API_URL}/${LOGGED_IN}.json`,
     { withCredentials: true })
 }
 
 function logout() {
-    return axios.delete(`${API_URL}/${LOGOUT}`,
+    return axios.delete(`${API_URL}/${LOGOUT}.json`,
     { withCredentials: true })
 }
 

@@ -41,6 +41,7 @@ function RegisterForm() {
       .then((response) => {
         console.log("Registration response: ", response);
         authCtx.updateAuthentication();
+        navigate(`/`);
       })
       .catch((error) => {
         flashMsgCtx.handleError(error);
@@ -48,8 +49,6 @@ function RegisterForm() {
       .finally(() => {
         setLoading(false);
       });
-
-    navigate(`/`);
   }
 
   if (loading) return <div className="title">Loading...</div>;
