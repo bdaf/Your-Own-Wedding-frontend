@@ -2,11 +2,11 @@ import styles from "../../css/Form.module.css";
 import { ChangeEvent, RefObject, useEffect, useRef, useState } from "react";
 import { EventModel } from "../Models";
 interface Props {
-  event: EventModel;
+  currentEvent: EventModel;
   setEvent: Function;
   onSubmitHandler: Function;
 }
-function EventNewForm({ event, setEvent, onSubmitHandler }: Props) {
+function EventNewForm({ currentEvent, onSubmitHandler }: Props) {
   const nameInputRef: RefObject<HTMLInputElement> = useRef(null);
   const dateInputRef: RefObject<HTMLInputElement> = useRef(null);
 
@@ -21,7 +21,9 @@ function EventNewForm({ event, setEvent, onSubmitHandler }: Props) {
     onSubmitHandler(eventToCreate);
   }
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log(currentEvent);
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -32,18 +34,18 @@ function EventNewForm({ event, setEvent, onSubmitHandler }: Props) {
             id="name"
             type="text"
             required
-            ref={nameInputRef}
-            defaultValue={event.name}
+            defaultValue={currentEvent.name}
           />
         </div>
         <div className={styles.control}>
           <label htmlFor="name">Date</label>
           <input
             id="name"
-            type="date"
+            type="datetime-local"
             required
-            ref={dateInputRef}
-            defaultValue={new Date().toLocaleDateString("en-CA")}
+            defaultValue={currentEvent.date?.split(".")[0]}
+            // value={new Date(currentEvent.date!).toISOString()}
+            // defaultValue={new Date().toLocaleDateString("en-CA")}
           />
         </div>
         {/* <div className={styles.control}>

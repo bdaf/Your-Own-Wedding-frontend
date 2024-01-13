@@ -9,7 +9,7 @@ function NewSEOffer() {
   const authCtx = useContext(AuthenticationContext);
 
   useEffect(() => {
-    if (!authCtx.isSupportForEntertainment()) {
+    if (!authCtx.isSupportUser()) {
       navigate(`${OFFERS}`);
     }
   }, []);

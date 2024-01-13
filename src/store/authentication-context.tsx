@@ -34,7 +34,7 @@ const AuthenticationContext = createContext({
   getCurrentUser: (): User => {
     return defaultEmptyUser;
   },
-  isSupportForEntertainment: (): boolean => {
+  isSupportUser: (): boolean => {
     return false;
   },
   isClientUser: (): boolean => {
@@ -49,10 +49,10 @@ const AuthenticationContext = createContext({
 
 export function AuthenticationContextProvider({ children }: Props) {
   const [authentication, setAuthentication] =
-    useState<Authentication>(emptyAuthentication);
+    useState<Authentication>(initAuthentication);
 
   function checkAndSetIfLoggedIn(): any {
-    logged_in()
+    return logged_in()
       .then((response) => {
         // console.log("Login response (checkAndSetIfLoggedIn): ", response);
         const isLoggedInResponse: AuthenticationResponse = response.data;
@@ -81,7 +81,7 @@ export function AuthenticationContextProvider({ children }: Props) {
   function isClientUserHandler(): boolean {
     return authentication.isLoggedIn && authentication.user.role === "client";
   }
-  function isSupportForEntertainmentHandler(): boolean {
+  function isSupportUserHandler(): boolean {
     return authentication.isLoggedIn && authentication.user.role === "support";
   }
   function isAdminHandler(): boolean {
@@ -109,7 +109,7 @@ export function AuthenticationContextProvider({ children }: Props) {
     isLoggedIn: isLoggedInHandler,
     getCurrentUser: getCurrentUserHandler,
     isAdmin: isAdminHandler,
-    isSupportForEntertainment: isSupportForEntertainmentHandler,
+    isSupportUser: isSupportUserHandler,
     isClientUser: isClientUserHandler,
     updateAuthentication: updateAuthenticationHandler,
     logout: logoutHandler,

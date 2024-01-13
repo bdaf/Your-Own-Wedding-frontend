@@ -1,4 +1,6 @@
 import { createContext, useState } from "react";
+import { NavigateFunction } from "react-router-dom";
+import { LOGIN } from "../constants";
 
 interface Props {
   children: any;
@@ -22,10 +24,11 @@ const FlashMessagesContext = createContext({
   handleSuccess: (res: any): void => {
     res;
   },
-  handleError: (error: any): void => {
+  handleError: (error: any, navigate: NavigateFunction): void => {
     error;
+    navigate;
   },
-  handleNotAuthenticated: (): void => {},
+  handleNotAuthenticatedAlert: (): void => {},
   clearFlashMessage: (): void => {},
   getFlashMessage: (): string => {
     return "";
@@ -56,13 +59,13 @@ export function FlashMessagesContextProvider({ children }: Props) {
     if (res?.data?.message) {
       setFlashMessageHandler(res.data.message, SUCCESS_FLASH_TYPE);
     } else if (res?.data) {
-      setFlashMessageHandler(res.message, SUCCESS_FLASH_TYPE);
+      setFlashMessageHandler(res.data, SUCCESS_FLASH_TYPE);
     } else if (res?.message) {
       setFlashMessageHandler(res.message, SUCCESS_FLASH_TYPE);
     }
   }
 
-  function handleErrorHandler(error: any): void {
+  function handleErrorHandler(error: any, navigate: NavigateFunction): void {
     console.log("ERROR", error);
     let message = "";
     console.log(error);
@@ -70,17 +73,19 @@ export function FlashMessagesContextProvider({ children }: Props) {
       message = JSON.stringify(error.response.data)
         .replace(/\[|\]|:|{|}|\\|"/g, " ")
         .replace(/,/g, `|`);
-      setFlashMessageHandler(message, ERROR_FLASH_TYPE);
-      return;
+    } else if (error?.response?.status == (401 || 403)) {
+      message = `You don't have access to that page`;
+      navigate(`/${LOGIN}`);
     } else if (error?.response?.status == 500) {
       message = `It's server inner error. Please try again later`;
+    } else {
+      message = `An unxpected error occurred`;
     }
 
-    message = `An unxpected error occurred. ${message}`;
     setFlashMessageHandler(message, ERROR_FLASH_TYPE);
   }
 
-  function handleNotAuthenticatedHandler(): void {
+  function handleNotAuthenticatedAlertHandler(): void {
     setFlashMessageHandler(
       "You are not authenticated to be on that site",
       WARNING_FLASH_TYPE
@@ -103,7 +108,7 @@ export function FlashMessagesContextProvider({ children }: Props) {
     setFlashMessage: setFlashMessageHandler,
     handleSuccess: handleSuccessHandler,
     handleError: handleErrorHandler,
-    handleNotAuthenticated: handleNotAuthenticatedHandler,
+    handleNotAuthenticatedAlert: handleNotAuthenticatedAlertHandler,
     clearFlashMessage: clearFlashMessageHandler,
     getFlashMessage: getFlashMessageHandler,
     getFlashMessageType: getFlashMessageTypeHandler,

@@ -48,7 +48,7 @@ function NavigationBar() {
                 <Link className={styles.link} to={`/${OFFERS}`}>
                   All offers
                 </Link>
-                {authCtx.isSupportForEntertainment() && (
+                {authCtx.isSupportUser() && (
                   <Link className={styles.link} to={`/${OFFERS}/new`}>
                     Add offer
                   </Link>
@@ -69,7 +69,7 @@ function NavigationBar() {
                     </Link>
                   </div>
                 )}
-                {authCtx.isSupportForEntertainment() && (
+                {authCtx.isSupportUser() && (
                   <div className={styles.dropdown_content}>
                     <Link className={styles.link} to={`/${EVENTS}`}>
                       All events
