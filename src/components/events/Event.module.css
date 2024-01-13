@@ -38,19 +38,3 @@
 .margin_auto {
   margin: auto;
 }
-
-.button_edit {
-  font: inherit;
-  cursor: pointer;
-  color: #77002e;
-  border: 1px solid #77002e;
-  background-color: transparent;
-  padding: 0.5rem 1.5rem 0.5rem 1.5rem;
-  margin: 0rem;
-  border-radius: 4px;
-}
-
-.button_edit:hover,
-.button_edit:active {
-  background-color: #ffe2ed;
-}

@@ -2,19 +2,25 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Card from "../components/ui/Card";
 import EventNewForm from "../components/events/EventNewForm";
-import { getAllEvents, createEvent } from "../services/eventService";
+import {
+  getAllEvents,
+  createEvent,
+  deleteEventById,
+  editEvent,
+} from "../services/eventService";
 import FlashMessagesContext, {
   SUCCESS_FLASH_TYPE,
 } from "../store/flash-messages-context";
 import EventItem from "../components/events/EventItem";
-import { EventModel } from "../components/Models";
+import { EMPTY_EVENT_MODEL, EventModel } from "../components/Models";
 
 function EventPage() {
   const navigate = useNavigate();
   const flashMsgCtx = useContext(FlashMessagesContext);
   const [loading, setLoading] = useState<boolean>(true);
   const [events, setEvents] = useState<EventModel[]>([]);
-  const [currentEvent, setCurrentEvent] = useState({});
+  const [currentEvent, setCurrentEvent] =
+    useState<EventModel>(EMPTY_EVENT_MODEL);
 
   function setCurrentEventHandler(event: EventModel): void {
     console.log(event);
@@ -26,9 +32,6 @@ function EventPage() {
     getAllEvents()
       .then((res) => {
         setEvents(res.data);
-        // if (res.data.length > 0) {
-        //   setCurrentEventHandler(res.data[0]);
-        // }
       })
       .catch((e) => {
         console.log(e);
@@ -40,7 +43,7 @@ function EventPage() {
   }, []);
 
   function createEventHandler(event: EventModel): void {
-    setLoading(true);
+    setCurrentEvent(event);
     createEvent(event)
       .then((res) => {
         const newlyCreatedEvent: EventModel = res.data;
@@ -53,9 +56,35 @@ function EventPage() {
       })
       .catch((e) => {
         flashMsgCtx.handleError(e, navigate);
+      });
+  }
+
+  function editEventHandler(event: EventModel): void {
+    setCurrentEvent(event);
+    editEvent(event)
+      .then((res) => {
+        const editedEvent: EventModel = res.data;
+        setEvents(
+          events.map((e) => (e.id == editedEvent.id ? editedEvent : e))
+        );
+        flashMsgCtx.setFlashMessage(
+          "Event has been updated",
+          SUCCESS_FLASH_TYPE
+        );
       })
-      .finally(() => {
-        setLoading(false);
+      .catch((e) => {
+        flashMsgCtx.handleError(e, navigate);
+      });
+  }
+
+  function deleteEventHandler(event: EventModel): void {
+    deleteEventById(String(event.id))
+      .then((res) => {
+        flashMsgCtx.handleSuccess(res);
+        setEvents(events.filter((e) => e.id != event.id));
+      })
+      .catch((e) => {
+        flashMsgCtx.handleError(e, navigate);
       });
   }
 
@@ -68,19 +97,37 @@ function EventPage() {
           <EventNewForm
             currentEvent={currentEvent}
             setEvent={setCurrentEventHandler}
-            onSubmitHandler={createEventHandler}
+            onCreateHandler={createEventHandler}
+            onDeleteHandler={deleteEventHandler}
+            onEditHandler={editEventHandler}
           />
         </div>
         <div className="margin-left-0 width-20 scroll" style={{ margin: 0 }}>
           <div className="width-100-center">
             {events.map((e) => (
               <div key={e.id} onClick={() => setCurrentEventHandler(e)}>
-                <EventItem event={e} />
+                <EventItem
+                  event={e}
+                  eventColor={
+                    e.id == currentEvent.id
+                      ? "rgb(74, 213, 255)"
+                      : "rgb(179, 233, 250)"
+                  }
+                  noteColor={"rgb(188, 188, 188)"}
+                />
               </div>
             ))}
           </div>
         </div>
-        <button onClick={() => setCurrentEventHandler({ name: "siema" })}>
+        <button
+          onClick={() =>
+            setCurrentEventHandler({
+              name: "siema",
+              id: 0,
+              date: "",
+            })
+          }
+        >
           Siema
         </button>
       </div>

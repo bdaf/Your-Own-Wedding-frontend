@@ -10,11 +10,14 @@ function getEventById(id :string) {
 }
 
 function createEvent(event: any) {
-    console.log("axios")
     return axios.post(`${API_URL}/${EVENTS}.json`, { event: {...event} }, { withCredentials: true })
+}
+
+function editEvent(event: any) {
+    return axios.put(`${API_URL}/${EVENTS}/${event.id}.json`, { event: {...event} }, { withCredentials: true })
 }
 
 function deleteEventById(id: string) {
     return axios.delete(`${API_URL}/${EVENTS}/${id}.json`, { withCredentials: true })
 }
-export {getMyEvents as getAllEvents, getEventById, createEvent, deleteEventById}
+export {getMyEvents as getAllEvents, getEventById, createEvent, editEvent, deleteEventById}

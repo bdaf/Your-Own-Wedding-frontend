@@ -38,9 +38,15 @@ type LogoutResponse = {
 // Event 
 
 type EventModel = {
-    id?: number,
-    name?: string,
-    date?: string
+    id: number,
+    name: string,
+    date: string
+}
+
+const EMPTY_EVENT_MODEL: EventModel = {
+    id: -1,
+    name: "",
+    date: ""
 }
 
 // Note
@@ -51,7 +57,7 @@ type NoteModel = {
     body?: string
 }
 
-export type {};
+export {EMPTY_EVENT_MODEL};
 
 export type { 
     User, UserRegister, UserLogin, AuthenticationResponse, LogoutResponse,

@@ -24,6 +24,7 @@ function SEOfferDetails() {
   const id = useParams().id!;
 
   useEffect(() => {
+    setLoading(true);
     async function loadOffer() {
       try {
         const response = await getOfferById(id);
@@ -42,17 +43,14 @@ function SEOfferDetails() {
   }, []);
 
   function deleteOfferHandler(): void {
+    setLoading(true);
     deleteOfferById(id)
       .then((res) => {
         navigate(`/${OFFERS}`);
-        flashMsgCtx.handleSuccessOrErrorMessageFromResponse(res);
+        flashMsgCtx.handleSuccess(res);
       })
       .catch((e) => {
-        flashMsgCtx.setFlashMessage(
-          "Error occurred during deleting offer.",
-          ERROR_FLASH_TYPE
-        );
-        console.log("Error occurred during deleting offer.", e);
+        flashMsgCtx.handleError(e, navigate);
       })
       .finally(() => {
         setLoading(false);

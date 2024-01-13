@@ -1,29 +1,83 @@
 import styles from "../../css/Form.module.css";
-import { ChangeEvent, RefObject, useEffect, useRef, useState } from "react";
+import {
+  ChangeEvent,
+  RefObject,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { EventModel } from "../Models";
+import FlashMessagesContext, {
+  WARNING_FLASH_TYPE,
+} from "../../store/flash-messages-context";
 interface Props {
   currentEvent: EventModel;
   setEvent: Function;
-  onSubmitHandler: Function;
+  onCreateHandler: Function;
+  onDeleteHandler: Function;
+  onEditHandler: Function;
 }
-function EventNewForm({ currentEvent, onSubmitHandler }: Props) {
+function EventNewForm({
+  currentEvent,
+  setEvent,
+  onCreateHandler,
+  onDeleteHandler,
+  onEditHandler,
+}: Props) {
+  const flashMsgCtx = useContext(FlashMessagesContext);
   const nameInputRef: RefObject<HTMLInputElement> = useRef(null);
   const dateInputRef: RefObject<HTMLInputElement> = useRef(null);
 
   function submitHandler(e: any): void {
     e.preventDefault();
-    const enteredName = nameInputRef.current!.value;
-    const enteredDate = dateInputRef.current!.value;
-    const eventToCreate: EventModel = {
-      name: enteredName,
-      date: enteredDate,
-    };
-    onSubmitHandler(eventToCreate);
   }
 
   useEffect(() => {
     console.log(currentEvent);
   }, []);
+
+  function onChangeNameHandler(e: ChangeEvent<HTMLInputElement>): void {
+    setEvent({
+      id: currentEvent.id,
+      name: e.target.value,
+      date: dateInputRef.current?.value,
+    });
+  }
+
+  function onChangeDateHandler(e: ChangeEvent<HTMLInputElement>): void {
+    setEvent({
+      id: currentEvent.id,
+      name: nameInputRef.current?.value,
+      date: e.target.value,
+    });
+  }
+
+  function createEventOnClick() {
+    onCreateHandler(currentEvent);
+  }
+  function deleteEventOnClick() {
+    if (currentEvent.id < 0) {
+      flashMsgCtx.setFlashMessage(
+        "You have to select event from list to delete it",
+        WARNING_FLASH_TYPE
+      );
+    } else {
+      onDeleteHandler(currentEvent);
+      currentEvent.id = -1;
+    }
+  }
+  function editEventOnClick() {
+    if (currentEvent.id < 0) {
+      flashMsgCtx.setFlashMessage(
+        "You have to select event from list to edit",
+        WARNING_FLASH_TYPE
+      );
+    } else {
+      onEditHandler(currentEvent);
+      currentEvent.id = -1;
+    }
+  }
 
   return (
     <div className={styles.container}>
@@ -34,7 +88,9 @@ function EventNewForm({ currentEvent, onSubmitHandler }: Props) {
             id="name"
             type="text"
             required
-            defaultValue={currentEvent.name}
+            ref={nameInputRef}
+            onChange={onChangeNameHandler}
+            value={currentEvent.name}
           />
         </div>
         <div className={styles.control}>
@@ -43,7 +99,10 @@ function EventNewForm({ currentEvent, onSubmitHandler }: Props) {
             id="name"
             type="datetime-local"
             required
-            defaultValue={currentEvent.date?.split(".")[0]}
+            ref={dateInputRef}
+            onChange={onChangeDateHandler}
+            // defaultValue={currentEvent.date}
+            value={currentEvent.date!.split(".")[0]}
             // value={new Date(currentEvent.date!).toISOString()}
             // defaultValue={new Date().toLocaleDateString("en-CA")}
           />
@@ -59,15 +118,14 @@ function EventNewForm({ currentEvent, onSubmitHandler }: Props) {
           />
         </div> */}
         <div className={styles.actions}>
-          <button className="btn">Create</button>
+          <button className="btn" onClick={createEventOnClick}>
+            Create
+          </button>
           {/* <div className={styles.margin_auto}> */}
-          <button className={styles.button_edit}>Edit</button>
-          <button
-            className={`btn-red`}
-            onClick={() => {
-              console.log("click");
-            }}
-          >
+          <button className="btn-dark-red" onClick={editEventOnClick}>
+            Edit
+          </button>
+          <button className="btn-red" onClick={deleteEventOnClick}>
             Delete
           </button>
           {/* </div> */}
