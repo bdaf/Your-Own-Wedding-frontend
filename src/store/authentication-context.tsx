@@ -22,6 +22,11 @@ const emptyAuthentication: Authentication = {
   isLoggedIn: false,
 };
 
+const initAuthentication: Authentication = {
+  user: defaultEmptyUser,
+  isLoggedIn: true,
+};
+
 const AuthenticationContext = createContext({
   isLoggedIn: (): boolean => {
     return false;
@@ -46,10 +51,10 @@ export function AuthenticationContextProvider({ children }: Props) {
   const [authentication, setAuthentication] =
     useState<Authentication>(emptyAuthentication);
 
-  function checkAndSetIfLoggedIn() {
+  function checkAndSetIfLoggedIn(): any {
     logged_in()
       .then((response) => {
-        console.log("Login response (checkAndSetIfLoggedIn): ", response);
+        // console.log("Login response (checkAndSetIfLoggedIn): ", response);
         const isLoggedInResponse: AuthenticationResponse = response.data;
         console.log(isLoggedInResponse);
         setAuthentication({

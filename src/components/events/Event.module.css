@@ -1,21 +1,42 @@
 .event {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+  padding: 1rem;
 }
 
-.margin_auto {
-  margin: auto;
+.event:hover {
+  font-size: 0.9rem;
+  padding: 1rem;
+  background-color: rgb(74, 213, 255);
+  cursor: pointer;
+}
+
+.note {
+  padding: 0.5rem 1rem;
 }
 
 .note_name {
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   margin: 0rem;
-  padding: 1rem;
+  padding: 0rem;
 }
 
 .note_body {
   font-size: 1rem;
+  padding: 0rem;
+}
+
+.note:hover {
+  font-size: 0.5rem;
   padding: 1rem;
+  background-color: grey;
+  cursor: pointer;
+}
+
+.margin_auto {
+  margin: auto;
 }
 
 .button_edit {

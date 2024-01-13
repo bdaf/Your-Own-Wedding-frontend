@@ -7,7 +7,7 @@ interface Props {
 function EventsList({ events }: Props) {
   console.log(events);
   return (
-    <div className="center">
+    <div className="width-100-center">
       {events.map((e) => (
         <EventItem event={e} key={e.id} />
       ))}

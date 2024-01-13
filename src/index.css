@@ -31,9 +31,33 @@ a:hover {
   flex-wrap: wrap;
 }
 
+.margin-left-4rem {
+  margin-left: 4rem;
+}
+
+.margin-left-0 {
+  margin-left: 0;
+}
+
 .width-100-center {
   width: 100%;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.width-20-center {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.width-80-center {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 80%;
 }
 
 main {
@@ -52,13 +76,6 @@ main {
 
 .main-font {
   font-family: sans-serif;
-}
-
-.width-80-center {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  width: 80%;
 }
 
 .text-center {
@@ -213,28 +230,6 @@ main {
   font-weight: bold;
 }
 
-/* .alert > p,
-.alert > ul {
-  margin-bottom: 0;
-}
-
-.alert > p + p {
-  margin-top: 5px;
-}
-
-.alert-dismissable,
-.alert-dismissible {
-  padding-right: 35px;
-}
-
-.alert-dismissable .close,
-.alert-dismissible .close {
-  position: relative;
-  top: -2px;
-  right: -21px;
-  color: inherit;
-} */
-
 .alert-success {
   background-color: #dff0d8;
   border-color: #d6e9c6;
@@ -276,4 +271,15 @@ main {
 }
 .alert .alert-x {
   cursor: pointer;
+}
+
+div.scroll {
+  height: 600px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align: center;
+  margin: 2rem;
+  border-style: solid;
+  border-radius: 8px;
+  border-width: 10px;
 }

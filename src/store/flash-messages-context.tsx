@@ -25,6 +25,7 @@ const FlashMessagesContext = createContext({
   handleError: (error: any): void => {
     error;
   },
+  handleNotAuthenticated: (): void => {},
   clearFlashMessage: (): void => {},
   getFlashMessage: (): string => {
     return "";
@@ -43,18 +44,6 @@ const defaultFlashMessage = {
 export function FlashMessagesContextProvider({ children }: Props) {
   const [flashMessage, setFlashMessage] = useState<Flash>(defaultFlashMessage);
 
-  //   function makeFlashMessageOlderHandler(): void {
-  //     if (flashMessage.message && flashMessage.redirects_to_reset > 0) {
-  //       setFlashMessage({
-  //         message: flashMessage.message,
-  //         type: flashMessage.type,
-  //         redirects_to_reset: flashMessage.redirects_to_reset - 1,
-  //       });
-  //     } else if (flashMessage.message) {
-  //       setFlashMessage(defaultFlashMessage);
-  //     }
-  //   }
-
   function setFlashMessageHandler(
     message: string,
     type = DEFAULT_FLASH_TYPE
@@ -66,6 +55,8 @@ export function FlashMessagesContextProvider({ children }: Props) {
     console.log("SUCCESS", res);
     if (res?.data?.message) {
       setFlashMessageHandler(res.data.message, SUCCESS_FLASH_TYPE);
+    } else if (res?.data) {
+      setFlashMessageHandler(res.message, SUCCESS_FLASH_TYPE);
     } else if (res?.message) {
       setFlashMessageHandler(res.message, SUCCESS_FLASH_TYPE);
     }
@@ -76,18 +67,24 @@ export function FlashMessagesContextProvider({ children }: Props) {
     let message = "";
     console.log(error);
     if (error?.response?.status == 422) {
-      //str.replace(/#|_/g, '')
       message = JSON.stringify(error.response.data)
         .replace(/\[|\]|:|{|}|\\|"/g, " ")
         .replace(/,/g, `|`);
       setFlashMessageHandler(message, ERROR_FLASH_TYPE);
       return;
     } else if (error?.response?.status == 500) {
-      message = `It's server inner error. Please try again later.`;
+      message = `It's server inner error. Please try again later`;
     }
 
     message = `An unxpected error occurred. ${message}`;
     setFlashMessageHandler(message, ERROR_FLASH_TYPE);
+  }
+
+  function handleNotAuthenticatedHandler(): void {
+    setFlashMessageHandler(
+      "You are not authenticated to be on that site",
+      WARNING_FLASH_TYPE
+    );
   }
 
   function clearFlashMessageHandler(): void {
@@ -106,6 +103,7 @@ export function FlashMessagesContextProvider({ children }: Props) {
     setFlashMessage: setFlashMessageHandler,
     handleSuccess: handleSuccessHandler,
     handleError: handleErrorHandler,
+    handleNotAuthenticated: handleNotAuthenticatedHandler,
     clearFlashMessage: clearFlashMessageHandler,
     getFlashMessage: getFlashMessageHandler,
     getFlashMessageType: getFlashMessageTypeHandler,

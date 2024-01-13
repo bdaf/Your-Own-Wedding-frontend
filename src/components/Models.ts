@@ -35,4 +35,24 @@ type LogoutResponse = {
     logged_out :boolean
 }
 
-export type { User, UserRegister, UserLogin, AuthenticationResponse, LogoutResponse };
+// Event 
+
+type EventModel = {
+    id?: number,
+    name?: string,
+    date?: string
+}
+
+// Note
+
+type NoteModel = {
+    id?: number,
+    name?: string,
+    body?: string
+}
+
+export type {};
+
+export type { 
+    User, UserRegister, UserLogin, AuthenticationResponse, LogoutResponse,
+    EventModel, NoteModel };
