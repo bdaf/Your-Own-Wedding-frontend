@@ -20,4 +20,4 @@ function editEvent(event: any) {
 function deleteEventById(id: string) {
     return axios.delete(`${API_URL}/${EVENTS}/${id}.json`, { withCredentials: true })
 }
-export {getMyEvents as getAllEvents, getEventById, createEvent, editEvent, deleteEventById}
+export {getMyEvents, getEventById, createEvent, editEvent, deleteEventById}

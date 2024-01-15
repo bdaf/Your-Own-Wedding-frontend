@@ -40,24 +40,44 @@ type LogoutResponse = {
 type EventModel = {
     id: number,
     name: string,
-    date: string
+    date: string,
+    notes: NoteModel[]
 }
 
 const EMPTY_EVENT_MODEL: EventModel = {
     id: -1,
     name: "",
-    date: ""
+    date: "",
+    notes: []
 }
 
 // Note
 
 type NoteModel = {
-    id?: number,
-    name?: string,
-    body?: string
+    id: number,
+    name: string,
+    body: string
+    event_id?: number,
 }
 
-export {EMPTY_EVENT_MODEL};
+const EMPTY_NOTE_MODEL: NoteModel = {
+    id: -1,
+    event_id: -1,
+    name: "",
+    body: "",
+}
+
+function isObjectEventModel(event:any):boolean {
+    return event.id && event.name && event.date && event.notes;
+}
+function isObjectNoteModel(note:any):boolean {
+    return note.id && note.name && note.body;
+}
+function isProperId(id: number):boolean {
+    return id != null && id >= 0;
+}
+
+export {EMPTY_EVENT_MODEL, EMPTY_NOTE_MODEL, isObjectEventModel, isObjectNoteModel, isProperId};
 
 export type { 
     User, UserRegister, UserLogin, AuthenticationResponse, LogoutResponse,

@@ -1,12 +1,5 @@
 import styles from "../../css/Form.module.css";
-import {
-  ChangeEvent,
-  RefObject,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { ChangeEvent, RefObject, useContext, useEffect, useRef } from "react";
 import { EventModel } from "../Models";
 import FlashMessagesContext, {
   WARNING_FLASH_TYPE,
@@ -117,20 +110,20 @@ function EventNewForm({
             onChange={handleBodyChange}
           />
         </div> */}
-        <div className={styles.actions}>
-          <button className="btn" onClick={createEventOnClick}>
-            Create
-          </button>
-          {/* <div className={styles.margin_auto}> */}
-          <button className="btn-dark-red" onClick={editEventOnClick}>
-            Edit
-          </button>
-          <button className="btn-red" onClick={deleteEventOnClick}>
-            Delete
-          </button>
-          {/* </div> */}
-        </div>
       </form>
+      <button className="btn" onClick={createEventOnClick}>
+        Create
+      </button>
+      <div className={styles.actions}>
+        {/* <div className={styles.margin_auto}> */}
+        <button className="btn-dark-red" onClick={editEventOnClick}>
+          Edit
+        </button>
+        <button className="btn-red" onClick={deleteEventOnClick}>
+          Delete
+        </button>
+        {/* </div> */}
+      </div>
     </div>
   );
 }

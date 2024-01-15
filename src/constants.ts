@@ -5,5 +5,6 @@ export const LOGGED_IN = import.meta.env.VITE_LOGGED_IN;
 export const LOGOUT = import.meta.env.VITE_LOGOUT;
 export const OFFERS = import.meta.env.VITE_OFFERS;
 export const EVENTS = import.meta.env.VITE_EVENTS;
+export const NOTES = import.meta.env.VITE_NOTES;
 export const GUESTS = import.meta.env.VITE_GUESTS;
 export const TASK_MONTHS = import.meta.env.VITE_TASK_MONTHS;

@@ -15,6 +15,17 @@
 
 .note {
   padding: 0.5rem 1rem;
+  /* border-style: solid;
+  border-radius: 8px;
+  border-width: 1px; */
+  text-align: center;
+  /* background-color: rgb(150, 111, 111); */
+}
+
+.note:hover {
+  /* padding: 1rem; */
+  background-color: rgb(150, 111, 111);
+  /* cursor: pointer; */
 }
 
 .note_name {
@@ -26,15 +37,4 @@
 .note_body {
   font-size: 1rem;
   padding: 0rem;
-}
-
-.note:hover {
-  font-size: 0.5rem;
-  padding: 1rem;
-  background-color: grey;
-  cursor: pointer;
-}
-
-.margin_auto {
-  margin: auto;
 }

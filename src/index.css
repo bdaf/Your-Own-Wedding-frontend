@@ -39,15 +39,20 @@ a:hover {
   margin-left: 0;
 }
 
-.width-100-center {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+.margin-auto {
+  margin: auto;
 }
 
-.width-20-center {
-  width: 20%;
+.margin-2rem {
+  margin: 2rem 2rem 0rem;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.width-100-center {
+  width: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -58,6 +63,17 @@ a:hover {
   justify-content: center;
   flex-direction: column;
   width: 80%;
+}
+
+.max-200-height {
+  max-height: 200px;
+}
+
+.width-20-center {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 main {
@@ -90,6 +106,11 @@ main {
 .content-right {
   display: flex;
   justify-content: flex-end;
+}
+
+.space-between {
+  display: flex;
+  justify-content: space-between;
 }
 
 .content-left {
@@ -228,6 +249,41 @@ main {
 .btn-dark-red:active {
   background-color: #ffe2ed;
 }
+
+.btn-dark-brown {
+  font: inherit;
+  cursor: pointer;
+  color: rgb(128, 68, 68);
+  border: 1px solid rgb(105, 55, 55);
+  background-color: transparent;
+  padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+  margin: 1rem;
+  border-radius: 4px;
+}
+
+.btn-dark-brown:hover,
+.btn-dark-brown:active {
+  background-color: rgb(190, 140, 140);
+  /* color: rgb(0, 0, 0); */
+}
+
+.btn-light-blue {
+  font: inherit;
+  cursor: pointer;
+  color: rgb(21, 195, 248);
+  border: 1px solid rgb(21, 195, 248);
+  background-color: transparent;
+  padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+  margin: 0rem;
+  border-radius: 4px;
+}
+
+.btn-light-blue:hover,
+.btn-light-blue:active {
+  background-color: rgb(179, 233, 250);
+  /* color: rgb(0, 0, 0); */
+}
+
 .alert {
   padding: 15px;
   margin-bottom: 0px;
@@ -289,13 +345,16 @@ main {
   cursor: pointer;
 }
 
-div.scroll {
-  height: 600px;
+.events-notes-container {
+  height: 585px;
+  margin: 2rem 0;
+  width: 200px;
+  /* border-style: solid;
+  border-radius: 8px;
+  border-width: 1px; */
+}
+
+.scroll-y {
   overflow-x: hidden;
   overflow-y: auto;
-  text-align: center;
-  margin: 2rem;
-  border-style: solid;
-  border-radius: 8px;
-  border-width: 10px;
 }

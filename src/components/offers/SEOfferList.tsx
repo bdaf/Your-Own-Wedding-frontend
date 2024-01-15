@@ -1,3 +1,4 @@
+import { shortStringTo } from "../../helper";
 import SEOfferItem from "./SEOfferItem";
 
 import styles from "./SEOfferList.module.css";
@@ -7,16 +8,6 @@ interface Props {
 }
 
 function SEOfferList({ offers }: Props) {
-  function shortStringTo(
-    characters_number: number,
-    textToBeShorted: string
-  ): string {
-    if (textToBeShorted.length > characters_number) {
-      return textToBeShorted.substring(0, characters_number) + "..";
-    }
-    return textToBeShorted;
-  }
-
   return (
     <ul className={styles.offers_container}>
       {offers.map((offer) => (
