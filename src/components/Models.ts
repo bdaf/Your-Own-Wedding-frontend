@@ -35,6 +35,26 @@ type LogoutResponse = {
     logged_out :boolean
 }
 
+// Offer
+
+interface OfferModel {
+    id: number;
+    title: string;
+    description: string;
+    address: string;
+    images: [];
+    created_at?: string;
+    updated_at?: string;
+  }
+
+  const EMPTY_OFFER_MODEL: OfferModel = {
+    id: -1,
+    title: "",
+    description: "",
+    address: "",
+    images: []
+}
+
 // Event 
 
 type EventModel = {
@@ -42,6 +62,8 @@ type EventModel = {
     name: string,
     date: string,
     notes: NoteModel[]
+    created_at?: string;
+    updated_at?: string;
 }
 
 const EMPTY_EVENT_MODEL: EventModel = {
@@ -58,6 +80,8 @@ type NoteModel = {
     name: string,
     body: string
     event_id?: number,
+    created_at?: string;
+    updated_at?: string;
 }
 
 const EMPTY_NOTE_MODEL: NoteModel = {
@@ -77,8 +101,9 @@ function isProperId(id: number):boolean {
     return id != null && id >= 0;
 }
 
-export {EMPTY_EVENT_MODEL, EMPTY_NOTE_MODEL, isObjectEventModel, isObjectNoteModel, isProperId};
+export {EMPTY_EVENT_MODEL, EMPTY_NOTE_MODEL, EMPTY_OFFER_MODEL, isObjectEventModel, isObjectNoteModel, isProperId};
 
 export type { 
     User, UserRegister, UserLogin, AuthenticationResponse, LogoutResponse,
+    OfferModel,
     EventModel, NoteModel };

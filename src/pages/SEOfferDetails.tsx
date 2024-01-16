@@ -3,23 +3,13 @@ import { OFFERS } from "../constants";
 import { useContext, useEffect, useState } from "react";
 import styles from "../css/pages.module.css";
 import { deleteOfferById, getOfferById } from "../services/offerService";
-import FlashMessagesContext, {
-  ERROR_FLASH_TYPE,
-} from "../store/flash-messages-context";
-
-interface Offer {
-  id?: number;
-  title?: string;
-  description?: string;
-  address?: string;
-  images?: [];
-  created_at?: any;
-}
+import FlashMessagesContext from "../store/flash-messages-context";
+import { EMPTY_OFFER_MODEL, OfferModel } from "../components/Models";
 
 function SEOfferDetails() {
   const navigate = useNavigate();
   const flashMsgCtx = useContext(FlashMessagesContext);
-  const [offer, setOffer] = useState<Offer>({});
+  const [offer, setOffer] = useState<OfferModel>(EMPTY_OFFER_MODEL);
   const [loading, setLoading] = useState(true);
   const id = useParams().id!;
 
@@ -30,10 +20,7 @@ function SEOfferDetails() {
         const response = await getOfferById(id);
         setOffer(response.data);
       } catch (e) {
-        flashMsgCtx.setFlashMessage(
-          "Error occurred during loading offer.",
-          ERROR_FLASH_TYPE
-        );
+        flashMsgCtx.handleError(e, navigate);
         console.log("Error occurred during loading offer.", e);
       } finally {
         setLoading(false);
