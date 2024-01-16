@@ -2,27 +2,19 @@ import styles from "./Filterbar.module.css";
 
 function Filterbar() {
   return (
-    <div className={styles.filter}>
-      <h2>Filter offers</h2>
-      {/* <div>
-          <form role="search">
-            <input
-              className={styles.search}
-              placeholder="Search"
-              type="search"
-            />
-          </form>
-        </div> */}
-      <nav>
-        <ul>
-          <li>
-            <a href={`/contacts/1`}>Your Name</a>
-          </li>
-          <li>
-            <a href={`/contacts/2`}>Your Friend</a>
-          </li>
-        </ul>
-      </nav>
+    <div className={styles.filter_container}>
+      <div className={styles.filter}>
+        <span className={styles.header}>City</span>
+        <input className={styles.search} placeholder="Search" type="search" />
+      </div>
+      <div className={styles.filter}>
+        <span className={styles.header}>Category</span>
+        <input className={styles.search} placeholder="Search" type="search" />
+      </div>
+      <div className={styles.filter}>
+        <span className={styles.header}>Prize</span>
+        <input className={styles.search} placeholder="Search" type="search" />
+      </div>
     </div>
   );
 }

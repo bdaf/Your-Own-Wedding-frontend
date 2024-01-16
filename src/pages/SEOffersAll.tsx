@@ -53,17 +53,17 @@ function AllSEOffers() {
   return (
     <div>
       <div className="title">All SEOffers</div>
-      {windowSizeCtx.isWindowLessWiderThan(widthOfFiilterBarChange) && (
-        <div className="center">
-          <Filterbar />
-        </div>
-      )}
+      {/* {windowSizeCtx.isWindowLessWiderThan(widthOfFiilterBarChange) && ( */}
+      <div className="center">
+        <Filterbar />
+      </div>
+      {/* )} */}
       <div className="content-left flex-wrap-2">
-        <div className="flex-shrink-low">
+        {/* <div className="flex-shrink-low">
           {windowSizeCtx.isWindowMoreWiderThan(widthOfFiilterBarChange - 1) && (
             <Filterbar />
           )}
-        </div>
+        </div> */}
         <div className="main-content flex-shrink-high">
           <SearchBar onChangeSearchBar={filterOffersToTheseWithString} />
           <SEOfferList offers={filteredOffers} />
