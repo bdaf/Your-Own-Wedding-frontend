@@ -60,6 +60,7 @@ function SEOfferDetails() {
           <ul>
             <li>{offer.id}</li>
             <li>{offer.title}</li>
+            <li>{offer.images}</li>
             <li>{offer.description}</li>
             <li>{offer.address}</li>
             <li>{offer.created_at}</li>

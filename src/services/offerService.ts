@@ -1,3 +1,4 @@
+import { OfferModel, offerModelcontains } from "../components/Models";
 import { OFFERS, API_URL } from "../constants";
 import axios from 'axios';
 
@@ -16,4 +17,8 @@ function createOffer(formData: any) {
 function deleteOfferById(id: string) {
     return axios.delete(`${API_URL}/${OFFERS}/${id}`, { withCredentials: true })
 }
-export {getAllOffers, getOfferById, createOffer, deleteOfferById}
+
+function getOffersFilteredByString(offers: OfferModel[], filterString: string): OfferModel[] {
+    return offers.filter(o => offerModelcontains(o, filterString))
+}
+export {getAllOffers, getOfferById, createOffer, deleteOfferById, getOffersFilteredByString}

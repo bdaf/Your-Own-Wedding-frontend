@@ -1,3 +1,11 @@
+// Every Types
+
+function isProperId(id: number):boolean {
+    return id != null && id >= 0;
+}
+
+// User
+
 type User = {
     id: number
     email :string,
@@ -55,6 +63,11 @@ interface OfferModel {
     images: []
 }
 
+function offerModelcontains(offer: OfferModel, stringToContain: string): boolean {
+    return offer.title.toLowerCase().includes(stringToContain.toLowerCase()) ||
+    offer.description.toLowerCase().includes(stringToContain.toLowerCase())
+}
+
 // Event 
 
 type EventModel = {
@@ -71,6 +84,10 @@ const EMPTY_EVENT_MODEL: EventModel = {
     name: "",
     date: "",
     notes: []
+}
+
+function isObjectEventModel(event:any):boolean {
+    return event.id && event.name && event.date && event.notes;
 }
 
 // Note
@@ -91,17 +108,11 @@ const EMPTY_NOTE_MODEL: NoteModel = {
     body: "",
 }
 
-function isObjectEventModel(event:any):boolean {
-    return event.id && event.name && event.date && event.notes;
-}
 function isObjectNoteModel(note:any):boolean {
     return note.id && note.name && note.body;
 }
-function isProperId(id: number):boolean {
-    return id != null && id >= 0;
-}
 
-export {EMPTY_EVENT_MODEL, EMPTY_NOTE_MODEL, EMPTY_OFFER_MODEL, isObjectEventModel, isObjectNoteModel, isProperId};
+export {isProperId, EMPTY_EVENT_MODEL, EMPTY_NOTE_MODEL, EMPTY_OFFER_MODEL, isObjectEventModel, isObjectNoteModel, offerModelcontains};
 
 export type { 
     User, UserRegister, UserLogin, AuthenticationResponse, LogoutResponse,
