@@ -85,8 +85,9 @@ main {
 .main-content {
   margin: 0rem auto;
   display: flex;
-  justify-content: center;
-  flex-flow: row wrap;
+  justify-content: flex-start;
+  /* align-items: flex-start; */
+  flex-flow: column wrap;
   width: 100%;
 }
 

@@ -65,7 +65,8 @@ interface OfferModel {
 
 function offerModelcontains(offer: OfferModel, stringToContain: string): boolean {
     return offer.title.toLowerCase().includes(stringToContain.toLowerCase()) ||
-    offer.description.toLowerCase().includes(stringToContain.toLowerCase())
+    offer.description.toLowerCase().includes(stringToContain.toLowerCase()) ||
+    offer.address.toLowerCase().includes(stringToContain.toLowerCase())
 }
 
 // Event 
