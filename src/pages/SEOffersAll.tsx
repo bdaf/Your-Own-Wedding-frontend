@@ -64,10 +64,7 @@ function AllSEOffers() {
             <Filterbar />
           )}
         </div>
-        <div
-          className="main-content flex-shrink-high"
-          // onClick={() => filterOffersToTheseWithString("Harum aut voluptas.")}
-        >
+        <div className="main-content flex-shrink-high">
           <SearchBar onChangeSearchBar={filterOffersToTheseWithString} />
           <SEOfferList offers={filteredOffers} />
         </div>

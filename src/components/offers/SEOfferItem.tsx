@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Card from "../ui/Card";
 import styles from "./SEOfferItem.module.css";
+import noImageFound from "../images/No Image Found.png";
 
 interface Props {
   id: number;
@@ -20,7 +21,7 @@ function SEOfferItem({ id, images, title, description, address }: Props) {
     <li className={styles.item} key={id}>
       <Card>
         <div className={styles.image}>
-          {!!images.length && <img src={images[0]} alt="PHOTO" />}
+          {<img src={!!images.length ? images[0] : noImageFound} alt="PHOTO" />}
         </div>
         <div className={styles.content}>
           <h3>{title}</h3>
