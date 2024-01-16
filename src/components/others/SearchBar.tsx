@@ -13,12 +13,19 @@ function SearchBar({ onChangeSearchBar }: Props) {
   return (
     <div className={styles.form} role="search">
       <input
-        className={styles.input}
+        className={styles.search}
         id="search"
         type="search"
         placeholder="Search..."
         onChange={onChangeHandler}
       />
+      <div className={styles.sort}>
+        <span className={styles.header}>Sort</span>
+        <select id="role" name="role" onChange={() => {}}>
+          <option value="prize_from_low">Prize: Low to High</option>
+          <option value="prize_from_high">Prize: High to Low</option>
+        </select>
+      </div>
     </div>
   );
 }

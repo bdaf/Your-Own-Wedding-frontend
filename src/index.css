@@ -185,21 +185,26 @@ main {
 }
 
 .btn--alt {
-  border-color: #1eb3f8;
-  border-style: dashed;
+  background-color: white;
+  border-style: solid;
   background-color: transparent;
   color: #1eb3f8;
+  padding: 6px 12px;
 }
 
-.btn:hover,
-.btn--alt {
+.btn--alt:hover {
+  background-color: #1eb3f8;
+  border-style: solid;
+  color: white;
+}
+
+.btn:hover {
   box-shadow: 0px 0px 10px 3px #7de2f9;
   background-color: white;
   color: #1eb3f8;
 }
 
-.btn:active,
-.btn--alt {
+.btn:active {
   background-color: aliceblue;
 }
 

@@ -68,7 +68,7 @@ function RegisterForm() {
         navigate(`/`);
       })
       .catch((error) => {
-        flashMsgCtx.handleError(error);
+        flashMsgCtx.handleError(error, navigate);
       })
       .finally(() => {
         setLoading(false);

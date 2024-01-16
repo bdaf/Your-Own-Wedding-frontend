@@ -9,7 +9,7 @@ interface Props {
 
 function SEOfferList({ offers }: Props) {
   return (
-    <ul className={styles.offers_container}>
+    <div className={styles.offers_container}>
       {offers.map((offer) => (
         <SEOfferItem
           key={offer.id}
@@ -20,7 +20,7 @@ function SEOfferList({ offers }: Props) {
           images={offer.images}
         />
       ))}
-    </ul>
+    </div>
   );
 }
 

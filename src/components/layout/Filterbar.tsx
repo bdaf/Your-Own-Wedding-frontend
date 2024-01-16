@@ -1,3 +1,4 @@
+import PrizeSlider from "../ui/PrizeSlider";
 import styles from "./Filterbar.module.css";
 
 function Filterbar() {
@@ -9,12 +10,12 @@ function Filterbar() {
       </div>
       <div className={styles.filter}>
         <span className={styles.header}>Category</span>
-        <input className={styles.search} placeholder="Search" type="search" />
+        <button className={` btn--alt ${styles.btn}`}>Service</button>
+        <button className={` btn--alt ${styles.btn}`}>Product</button>
+        <button className={` btn--alt ${styles.btn}`}>Wedding</button>
+        <button className={` btn--alt ${styles.btn}`}>Ceremony</button>
       </div>
-      <div className={styles.filter}>
-        <span className={styles.header}>Prize</span>
-        <input className={styles.search} placeholder="Search" type="search" />
-      </div>
+      <PrizeSlider />
     </div>
   );
 }
