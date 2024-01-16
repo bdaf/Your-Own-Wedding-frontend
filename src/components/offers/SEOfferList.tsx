@@ -15,8 +15,8 @@ function SEOfferList({ offers }: Props) {
         <SEOfferItem
           key={offer.id}
           id={offer.id}
-          title={shortStringTo(20, offer.title)}
-          description={shortStringTo(20, offer.description)}
+          title={shortStringTo(30, offer.title)}
+          description={shortStringTo(100, offer.description)}
           address={shortStringTo(40, offer.address)}
           images={offer.images}
           category={offer.category}

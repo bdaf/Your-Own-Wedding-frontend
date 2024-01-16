@@ -48,7 +48,9 @@ function SEOfferItem({
           <button className="btn-light" onClick={detailsButtonHandler}>
             Details
           </button>
-          <span className={styles.prize}>{`Prize ${prize} PLN`}</span>
+          <span className={styles.prize}>
+            {prize ? `Prize ${prize} PLN` : ""}
+          </span>
         </div>
       </Card>
     </li>
