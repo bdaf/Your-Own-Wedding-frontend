@@ -78,6 +78,8 @@ export function FlashMessagesContextProvider({ children }: Props) {
       navigate(`/${LOGIN}`);
     } else if (error?.response?.status == 500) {
       message = `It's server inner error. Please try again later`;
+    } else if (error.code == "ERR_NETWORK") {
+      message = `Cannot connect to the server`;
     } else {
       message = `An unxpected error occurred`;
     }

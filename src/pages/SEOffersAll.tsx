@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import Filterbar from "../components/layout/Filterbar";
 import SEOfferList from "../components/offers/SEOfferList";
 import SearchBar from "../components/others/SearchBar";
 import { getAllOffers } from "../services/offerService";
+import FlashMessagesContext from "../store/flash-messages-context";
 import WindowSizeContext from "../store/window-size-context";
 import { useContext, useEffect, useState } from "react";
 
@@ -9,6 +11,7 @@ const widthOfFiilterBarChange = 500;
 
 function AllSEOffers() {
   const windowSizeCtx = useContext(WindowSizeContext);
+  const flashMsgCtx = useContext(FlashMessagesContext);
   const [offers, setOffers] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
@@ -19,8 +22,8 @@ function AllSEOffers() {
       try {
         const response = await getAllOffers();
         setOffers(response.data);
-        console.log(response.data);
       } catch (e) {
+        flashMsgCtx.handleError(e, useNavigate);
         setError("Error has occured, try again later.");
         console.log("An error occurred: ", e);
       } finally {

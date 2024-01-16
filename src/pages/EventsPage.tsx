@@ -42,7 +42,7 @@ function EventPage() {
     useState<EventModel>(EMPTY_EVENT_MODEL);
 
   function setCurrentEventHandler(event: EventModel): void {
-    console.log("set", event);
+    console.log(currentNote);
     setCurrentEvent(event);
     if (!isProperId(currentNote.event_id!)) {
       setCurrentNote({
@@ -55,7 +55,8 @@ function EventPage() {
   }
 
   function setCurrentNoteHandler(note: NoteModel): void {
-    console.log("set", note);
+    console.log(currentNote);
+    console.log(note);
     setCurrentNote(note);
     setShowNoteInsteadOfEventForm(true);
   }
@@ -155,9 +156,6 @@ function EventPage() {
   }
 
   function editNoteHandler(note: NoteModel): void {
-    console.log("editNoteHandler");
-    console.log(note);
-
     editNote(note)
       .then((res) => {
         const editedNote: NoteModel = res.data;
@@ -179,7 +177,6 @@ function EventPage() {
   }
 
   function deleteNoteHandler(noteToDelete: NoteModel): void {
-    console.log("deleteNoteHandler");
     deleteNote(noteToDelete)
       .then((res: any) => {
         flashMsgCtx.handleSuccess(res);
