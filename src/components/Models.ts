@@ -50,18 +50,22 @@ interface OfferModel {
     title: string;
     description: string;
     address: string;
+    category: string;
+    prize: number;
     images: [];
     created_at?: string;
     updated_at?: string;
   }
 
   const EMPTY_OFFER_MODEL: OfferModel = {
-    id: -1,
-    title: "",
-    description: "",
-    address: "",
-    images: []
-}
+      id: -1,
+      title: "",
+      description: "",
+      address: "",
+      images: [],
+      category: "",
+      prize: 0
+  }
 
 function offerModelcontains(offer: OfferModel, stringToContain: string): boolean {
     return offer.title.toLowerCase().includes(stringToContain.toLowerCase()) ||

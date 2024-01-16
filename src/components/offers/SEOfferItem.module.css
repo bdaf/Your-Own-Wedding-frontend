@@ -2,7 +2,12 @@
   margin: 1rem 0.5rem 0rem;
 }
 
+.category,
+.prize {
+}
+
 .image {
+  cursor: pointer;
   max-width: 30rem;
   max-height: 20rem;
   overflow: hidden;
@@ -26,8 +31,11 @@
 }
 
 .actions {
-  padding: 0 1.5rem 1.5rem;
-  text-align: center;
+  padding: 0 1.5rem 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+  align-items: baseline;
 }
 
 .actions button {
