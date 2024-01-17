@@ -5,16 +5,18 @@ import WindowSizeContext from "../../store/window-size-context";
 import FlashMessagesContext, {
   WARNING_FLASH_TYPE,
 } from "../../store/flash-messages-context";
+import { EMPTY_FILTER_MODEL, FiltersModel } from "../Models";
 
-const MIN_VALUE = 0;
-const MAX_VALUE = 50000;
+interface Props {
+  findFilteredOffers: Function;
+}
 
-function Filterbar() {
+function Filterbar({ findFilteredOffers }: Props) {
   const windowSizeCtx = useContext(WindowSizeContext);
   const flashMsgCtx = useContext(FlashMessagesContext);
-  const [prizeFilterValue, setPrizeFilterValue] = useState<number[]>([
-    2000, 5000,
-  ]);
+  const [filters, setFilters] = useState<FiltersModel>(EMPTY_FILTER_MODEL);
+
+  const categoryOptions = ["Venue", "Music", "Camera", "Other"];
 
   function getMarginBasedOnWindowSize(): string {
     return windowSizeCtx.isWindowLessWiderThan(505) ? "0.5rem" : "0";
@@ -54,42 +56,83 @@ function Filterbar() {
   }
 
   const handleMinInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(prizeFilterValue);
-    setMessageifFromHigherThanTo(
-      Number(event.target.value),
-      prizeFilterValue[1]
-    );
-    setPrizeFilterValue([
-      event.target.value === "" ? 0 : Number(event.target.value),
-      prizeFilterValue[1],
-    ]);
-  };
-  const handleMaxInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(prizeFilterValue);
-    setMessageifFromHigherThanTo(
-      prizeFilterValue[0],
-      Number(event.target.value)
-    );
-    setPrizeFilterValue([
-      prizeFilterValue[0],
-      event.target.value === "" ? 0 : Number(event.target.value),
-    ]);
+    console.log(filters.prize);
+    setMessageifFromHigherThanTo(Number(event.target.value), filters.prize[1]);
+    setFilters({
+      ...filters,
+      prize: [
+        event.target.value === "" ? 0 : Number(event.target.value),
+        filters.prize[1],
+      ],
+    });
   };
 
-  const handleBlur = () => {};
+  const handleMaxInputChange = (event: React.ChangeEvent<any>) => {
+    console.log(filters.prize);
+    setMessageifFromHigherThanTo(filters.prize[0], Number(event.target.value));
+    setFilters({
+      ...filters,
+      prize: [
+        filters.prize[0],
+        event.target.value === "" ? 0 : Number(event.target.value),
+      ],
+    });
+  };
+
+  function selectCategoryHandler(category: string): void {
+    const lowerCaseCategory = category.toLowerCase();
+    const newCategoryFiltersArray = [...filters.categories];
+    if (newCategoryFiltersArray.includes(lowerCaseCategory)) {
+      const categoryIndex = newCategoryFiltersArray.findIndex(
+        (c) => c == lowerCaseCategory
+      );
+      newCategoryFiltersArray.splice(categoryIndex, 1);
+    } else {
+      newCategoryFiltersArray.push(lowerCaseCategory);
+    }
+    setFilters({
+      ...filters,
+      categories: newCategoryFiltersArray,
+    });
+  }
+
+  function setCityOnClickHandler(
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void {
+    console.log(filters.address);
+    setFilters({
+      ...filters,
+      address: event.target.value,
+    });
+  }
 
   return (
     <div className={styles.filter_container}>
       <div className={styles.filter}>
         <span className={styles.header}>City</span>
-        <input className={styles.search} placeholder="Search" type="search" />
+        <input
+          className={styles.search}
+          placeholder="Search"
+          type="search"
+          onChange={setCityOnClickHandler}
+        />
       </div>
       <div className={styles.filter}>
         <span className={styles.header}>Category</span>
-        <button className={` btn--alt ${styles.btn}`}>Service</button>
-        <button className={` btn--alt ${styles.btn}`}>Product</button>
-        <button className={` btn--alt ${styles.btn}`}>Wedding</button>
-        <button className={` btn--alt ${styles.btn}`}>Ceremony</button>
+        {categoryOptions.map((category, index) => (
+          <button
+            key={index}
+            type="button"
+            className={` btn--alt ${styles.btn} ${
+              filters.categories.includes(category.toLowerCase())
+                ? `active`
+                : ""
+            }`}
+            onClick={() => selectCategoryHandler(category)}
+          >
+            {category}
+          </button>
+        ))}
       </div>
       <div className={styles.filter}>
         <div
@@ -98,7 +141,7 @@ function Filterbar() {
         >
           <span className={styles.header}>Prize from</span>
           <input
-            value={prizeFilterValue[0]}
+            value={filters.prize[0]}
             className={styles.prize}
             placeholder="0"
             type="number"
@@ -111,19 +154,25 @@ function Filterbar() {
         >
           <span className={styles.header}>Prize to</span>
           <input
-            value={prizeFilterValue[1]}
+            value={filters.prize[1]}
             className={styles.prize}
             placeholder="50000"
             type="number"
-            onBlur={handleBlur}
             onChange={handleMaxInputChange}
           />
         </div>
       </div>
-      <button className={`${styles.find_button} btn`}>Find offers</button>
+      <button
+        className={`${styles.find_button} btn`}
+        onClick={() => findFilteredOffers(filters)}
+      >
+        Find offers
+      </button>
       <PrizeSlider
-        setSliderValue={setPrizeFilterValue}
-        sliderValue={prizeFilterValue}
+        setSliderValue={(value: number[]) => {
+          setFilters({ ...filters, prize: value });
+        }}
+        sliderValue={filters.prize}
       />
     </div>
   );

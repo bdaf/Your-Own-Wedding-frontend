@@ -124,12 +124,29 @@ function isObjectNoteModel(note:any):boolean {
     return note.id && note.name && note.body;
 }
 
+// Filters
+
+type FiltersModel = {
+    prize: number[],
+    categories: string[]
+    address: string,
+}
+
+const EMPTY_FILTER_MODEL: FiltersModel = {
+    prize: [2000, 5000],
+    categories: [],
+    address: "",
+}
+
 export {
     isProperId, EMPTY_EVENT_MODEL, EMPTY_NOTE_MODEL, EMPTY_OFFER_MODEL, isObjectEventModel, isObjectNoteModel,
-    offerModelTitleContains, offerModelDescriptionContains, offerModelAddressContains, offerModelCategoryConsistsOf
+    offerModelTitleContains, offerModelDescriptionContains, offerModelAddressContains, offerModelCategoryConsistsOf,
+    EMPTY_FILTER_MODEL
 };
 
 export type { 
     User, UserRegister, UserLogin, AuthenticationResponse, LogoutResponse,
     OfferModel,
-    EventModel, NoteModel };
+    EventModel, NoteModel,
+    FiltersModel 
+};

@@ -1,9 +1,9 @@
-import { OfferModel, offerModelTitleContains, offerModelDescriptionContains, offerModelAddressContains, offerModelCategoryConsistsOf } from "../components/Models";
+import { OfferModel, offerModelTitleContains, offerModelDescriptionContains, offerModelAddressContains, offerModelCategoryConsistsOf, FiltersModel, EMPTY_FILTER_MODEL } from "../components/Models";
 import { OFFERS, API_URL } from "../constants";
 import axios from 'axios';
 
-function getAllOffers() {
-    return axios.get(`${API_URL}/${OFFERS}`, { withCredentials: true })
+function getAllOffers(filters = EMPTY_FILTER_MODEL) {
+    return axios.get(`${API_URL}/${OFFERS}`, { params: { filters: filters }, withCredentials: true })
 }
 
 function getOfferById(id :string) {

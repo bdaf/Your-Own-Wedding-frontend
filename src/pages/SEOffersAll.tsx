@@ -9,7 +9,7 @@ import {
 } from "../services/offerService";
 import FlashMessagesContext from "../store/flash-messages-context";
 import { useContext, useEffect, useState } from "react";
-import { OfferModel } from "../components/Models";
+import { FiltersModel, OfferModel } from "../components/Models";
 
 function AllSEOffers() {
   const flashMsgCtx = useContext(FlashMessagesContext);
@@ -23,20 +23,25 @@ function AllSEOffers() {
     setFilteredOffers(offersToLoad);
   }
 
-  useEffect(() => {
-    async function loadOffers() {
-      setLoading(true);
-      try {
-        const response = await getAllOffers();
-        setAllOffers(response.data);
-      } catch (e) {
-        flashMsgCtx.handleError(e, useNavigate);
-        setError("Error has occured, try again later.");
-        console.log("An error occurred: ", e);
-      } finally {
-        setLoading(false);
-      }
+  async function loadOffers(filters = undefined) {
+    setLoading(true);
+    try {
+      const response = await getAllOffers(filters);
+      setAllOffers(response.data);
+    } catch (e) {
+      flashMsgCtx.handleError(e, useNavigate);
+      setError("Error has occured, try again later.");
+      console.log("An error occurred: ", e);
+    } finally {
+      setLoading(false);
     }
+  }
+
+  function findOffersHandler(filters: any) {
+    loadOffers(filters);
+  }
+
+  useEffect(() => {
     loadOffers();
   }, []);
 
@@ -53,7 +58,7 @@ function AllSEOffers() {
     <div>
       <div className="title">All SEOffers</div>
       <div className="center">
-        <Filterbar />
+        <Filterbar findFilteredOffers={loadOffers} />
       </div>
       <div className="content-left flex-wrap-2">
         <div className="main-content flex-shrink-high">
