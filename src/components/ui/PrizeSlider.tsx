@@ -40,9 +40,10 @@ const miniMarks = [
 
 export default function RangeSlider() {
   const windowSizeCtx = useContext(WindowSizeContext);
-  const [value, setValue] = React.useState<number[]>([20, 37]);
+  const [value, setValue] = React.useState<number[]>([2000, 5000]);
 
   const handleChange = (event: Event, newValue: number | number[]) => {
+    console.log(newValue);
     setValue(newValue as number[]);
   };
 

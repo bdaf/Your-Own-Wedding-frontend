@@ -24,7 +24,8 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-.filter .search {
+.filter .search,
+.filter .prize {
   margin-left: 0.4rem;
   background-color: azure;
   padding: 12px 24px;
@@ -36,8 +37,20 @@
   color: rgb(255, 255, 255);
 }
 
-.filter .search::placeholder {
+.prize {
+  width: 5rem;
+  padding: 12px 12px !important;
+}
+
+.filter .search::placeholder,
+.filter .prize::placeholder {
   color: antiquewhite;
+}
+
+.prize_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn {
