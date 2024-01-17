@@ -7,7 +7,9 @@ import {
   getOffersFilteredByTitleAndDescription,
   getOffersFilteredByAddress,
 } from "../services/offerService";
-import FlashMessagesContext from "../store/flash-messages-context";
+import FlashMessagesContext, {
+  INFO_FLASH_TYPE,
+} from "../store/flash-messages-context";
 import { useContext, useEffect, useState } from "react";
 import { FiltersModel, OfferModel } from "../components/Models";
 
@@ -28,6 +30,7 @@ function AllSEOffers() {
     try {
       const response = await getAllOffers(filters);
       setAllOffers(response.data);
+      flashMsgCtx.setFlashMessage("Offers have been loaded", INFO_FLASH_TYPE);
     } catch (e) {
       flashMsgCtx.handleError(e, useNavigate);
       setError("Error has occured, try again later.");
@@ -52,8 +55,6 @@ function AllSEOffers() {
     );
   }
 
-  if (loading) return <div className="title">Loading...</div>;
-  if (error) return <div className="title">{error}</div>;
   return (
     <div>
       <div className="title">All SEOffers</div>
@@ -63,7 +64,13 @@ function AllSEOffers() {
       <div className="content-left flex-wrap-2">
         <div className="main-content flex-shrink-high">
           <SearchBar onChangeSearchBar={filterOffersBySearchBar} />
-          <SEOfferList offers={filteredOffers} />
+          {error ? (
+            <div className="title">Loading...</div>
+          ) : loading ? (
+            <div className="title">Loading...</div>
+          ) : (
+            <SEOfferList offers={filteredOffers} />
+          )}
         </div>
       </div>
     </div>
