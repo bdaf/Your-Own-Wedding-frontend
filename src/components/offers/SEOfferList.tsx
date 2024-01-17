@@ -21,6 +21,7 @@ function SEOfferList({ offers }: Props) {
           images={offer.images}
           category={offer.category}
           prize={offer.prize}
+          created_at={offer.created_at!}
         />
       ))}
     </div>

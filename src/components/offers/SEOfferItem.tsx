@@ -12,6 +12,7 @@ interface Props {
   category: string;
   prize: number;
   address: string;
+  created_at: string;
 }
 
 function SEOfferItem({
@@ -22,6 +23,7 @@ function SEOfferItem({
   category,
   prize,
   address,
+  created_at,
 }: Props) {
   const navigate = useNavigate();
   function detailsButtonHandler(): void {
@@ -36,6 +38,9 @@ function SEOfferItem({
         </div>
         <div className={styles.content}>
           <h3>{title}</h3>
+          <span>{`Published date: ${created_at
+            .split(".")[0]
+            .replace(/T/g, ` `)}`}</span>
           <p>{description}</p>
           <div className={styles.actions}>
             <span

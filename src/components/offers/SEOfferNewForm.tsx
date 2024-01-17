@@ -1,13 +1,17 @@
-import { FormEvent, RefObject, useRef, useState } from "react";
+import { FormEvent, RefObject, useContext, useRef, useState } from "react";
 import Card from "../ui/Card";
 
 import styles from "../../css/Form.module.css";
 import { useNavigate } from "react-router-dom";
 import { createOffer } from "../../services/offerService";
 import { OFFERS } from "../../constants";
+import FlashMessagesContext, {
+  SUCCESS_FLASH_TYPE,
+} from "../../store/flash-messages-context";
 
 function NewSEOfferForm() {
   const navigate = useNavigate();
+  const flashMsgCtx = useContext(FlashMessagesContext);
   const imagesInputRef: RefObject<HTMLInputElement> = useRef(null);
   const titleInputRef: RefObject<HTMLInputElement> = useRef(null);
   const addressInputRef: RefObject<HTMLInputElement> = useRef(null);
@@ -41,6 +45,10 @@ function NewSEOfferForm() {
       createOffer(formData)
         .then((response) => {
           console.log(response.data);
+          flashMsgCtx.setFlashMessage(
+            "Offer has been created",
+            SUCCESS_FLASH_TYPE
+          );
           navigate(`/${OFFERS}/${response.data.id}`);
         })
         .catch((err) => {

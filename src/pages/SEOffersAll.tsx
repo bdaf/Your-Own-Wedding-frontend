@@ -48,10 +48,13 @@ function AllSEOffers() {
     loadOffers();
   }, []);
 
-  function filterOffersBySearchBar(filterString: string): void {
+  function filterOffersBySearchBar(
+    filterString: string,
+    sortFunction: Function
+  ): void {
     console.log(filterString);
     setFilteredOffers(
-      getOffersFilteredByTitleAndDescription(offers, filterString)
+      sortFunction(getOffersFilteredByTitleAndDescription(offers, filterString))
     );
   }
 
@@ -63,13 +66,15 @@ function AllSEOffers() {
       </div>
       <div className="content-left flex-wrap-2">
         <div className="main-content flex-shrink-high">
-          <SearchBar onChangeSearchBar={filterOffersBySearchBar} />
           {error ? (
             <div className="title">Loading...</div>
           ) : loading ? (
             <div className="title">Loading...</div>
           ) : (
-            <SEOfferList offers={filteredOffers} />
+            <>
+              <SearchBar onChangeSearchBar={filterOffersBySearchBar} />
+              <SEOfferList offers={filteredOffers} />
+            </>
           )}
         </div>
       </div>

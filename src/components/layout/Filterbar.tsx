@@ -18,6 +18,13 @@ function Filterbar({ findFilteredOffers }: Props) {
 
   const categoryOptions = ["Venue", "Music", "Camera", "Other"];
 
+  function setFiltersAndClearFlash(filters: FiltersModel) {
+    setFilters(filters);
+    if (flashMsgCtx.getFlashMessage() == "Offers have been loaded") {
+      flashMsgCtx.clearFlashMessage();
+    }
+  }
+
   function getMarginBasedOnWindowSize(): string {
     return windowSizeCtx.isWindowLessWiderThan(505) ? "0.5rem" : "0";
   }
@@ -58,7 +65,7 @@ function Filterbar({ findFilteredOffers }: Props) {
   const handleMinInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log(filters.prize);
     setMessageifFromHigherThanTo(Number(event.target.value), filters.prize[1]);
-    setFilters({
+    setFiltersAndClearFlash({
       ...filters,
       prize: [
         event.target.value === "" ? 0 : Number(event.target.value),
@@ -70,7 +77,7 @@ function Filterbar({ findFilteredOffers }: Props) {
   const handleMaxInputChange = (event: React.ChangeEvent<any>) => {
     console.log(filters.prize);
     setMessageifFromHigherThanTo(filters.prize[0], Number(event.target.value));
-    setFilters({
+    setFiltersAndClearFlash({
       ...filters,
       prize: [
         filters.prize[0],
@@ -90,7 +97,7 @@ function Filterbar({ findFilteredOffers }: Props) {
     } else {
       newCategoryFiltersArray.push(lowerCaseCategory);
     }
-    setFilters({
+    setFiltersAndClearFlash({
       ...filters,
       categories: newCategoryFiltersArray,
     });
@@ -100,7 +107,7 @@ function Filterbar({ findFilteredOffers }: Props) {
     event: React.ChangeEvent<HTMLInputElement>
   ): void {
     console.log(filters.address);
-    setFilters({
+    setFiltersAndClearFlash({
       ...filters,
       address: event.target.value,
     });
@@ -170,7 +177,7 @@ function Filterbar({ findFilteredOffers }: Props) {
       </button>
       <PrizeSlider
         setSliderValue={(value: number[]) => {
-          setFilters({ ...filters, prize: value });
+          setFiltersAndClearFlash({ ...filters, prize: value });
         }}
         sliderValue={filters.prize}
       />
