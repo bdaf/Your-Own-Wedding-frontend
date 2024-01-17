@@ -4,7 +4,8 @@ import SEOfferList from "../components/offers/SEOfferList";
 import SearchBar from "../components/others/SearchBar";
 import {
   getAllOffers,
-  getOffersFilteredByString,
+  getOffersFilteredByTitleAndDescription,
+  getOffersFilteredByAddress,
 } from "../services/offerService";
 import FlashMessagesContext from "../store/flash-messages-context";
 import { useContext, useEffect, useState } from "react";
@@ -39,9 +40,11 @@ function AllSEOffers() {
     loadOffers();
   }, []);
 
-  function filterOffersToTheseWithString(filterString: string): void {
+  function filterOffersBySearchBar(filterString: string): void {
     console.log(filterString);
-    setFilteredOffers(getOffersFilteredByString(offers, filterString));
+    setFilteredOffers(
+      getOffersFilteredByTitleAndDescription(offers, filterString)
+    );
   }
 
   if (loading) return <div className="title">Loading...</div>;
@@ -54,7 +57,7 @@ function AllSEOffers() {
       </div>
       <div className="content-left flex-wrap-2">
         <div className="main-content flex-shrink-high">
-          <SearchBar onChangeSearchBar={filterOffersToTheseWithString} />
+          <SearchBar onChangeSearchBar={filterOffersBySearchBar} />
           <SEOfferList offers={filteredOffers} />
         </div>
       </div>

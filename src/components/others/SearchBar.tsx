@@ -24,6 +24,8 @@ function SearchBar({ onChangeSearchBar }: Props) {
         <select id="role" name="role" onChange={() => {}}>
           <option value="prize_from_low">Prize: Low to High</option>
           <option value="prize_from_high">Prize: High to Low</option>
+          <option value="prize_from_high">Newest first</option>
+          <option value="prize_from_high">Oldest first</option>
         </select>
       </div>
     </div>

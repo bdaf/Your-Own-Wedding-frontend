@@ -67,10 +67,17 @@ interface OfferModel {
       prize: 0
   }
 
-function offerModelcontains(offer: OfferModel, stringToContain: string): boolean {
-    return offer.title.toLowerCase().includes(stringToContain.toLowerCase()) ||
-    offer.description.toLowerCase().includes(stringToContain.toLowerCase()) ||
-    offer.address.toLowerCase().includes(stringToContain.toLowerCase())
+function offerModelTitleContains(offer: OfferModel, stringToContain: string): boolean {
+    return offer.title.toLowerCase().includes(stringToContain.toLowerCase())
+}
+function offerModelDescriptionContains(offer: OfferModel, stringToContain: string): boolean {
+    return offer.description.toLowerCase().includes(stringToContain.toLowerCase()) 
+}
+function offerModelAddressContains(offer: OfferModel, stringToContain: string): boolean {
+    return offer.address.toLowerCase().includes(stringToContain.toLowerCase())
+}
+function offerModelCategoryConsistsOf(offer: OfferModel, stringToContain: string): boolean {
+    return stringToContain.toLowerCase().includes(offer.category.toLowerCase())
 }
 
 // Event 
@@ -117,7 +124,10 @@ function isObjectNoteModel(note:any):boolean {
     return note.id && note.name && note.body;
 }
 
-export {isProperId, EMPTY_EVENT_MODEL, EMPTY_NOTE_MODEL, EMPTY_OFFER_MODEL, isObjectEventModel, isObjectNoteModel, offerModelcontains};
+export {
+    isProperId, EMPTY_EVENT_MODEL, EMPTY_NOTE_MODEL, EMPTY_OFFER_MODEL, isObjectEventModel, isObjectNoteModel,
+    offerModelTitleContains, offerModelDescriptionContains, offerModelAddressContains, offerModelCategoryConsistsOf
+};
 
 export type { 
     User, UserRegister, UserLogin, AuthenticationResponse, LogoutResponse,

@@ -19,6 +19,7 @@ function Filterbar() {
   function getMarginBasedOnWindowSize(): string {
     return windowSizeCtx.isWindowLessWiderThan(505) ? "0.5rem" : "0";
   }
+
   function setMessageifFromHigherThanTo(from: number, to: number): void {
     if (from > to) {
       flashMsgCtx.setFlashMessage(
@@ -29,6 +30,24 @@ function Filterbar() {
       flashMsgCtx
         .getFlashMessage()
         .includes("Value 'from' cannot be higer than 'to'")
+    ) {
+      flashMsgCtx.clearFlashMessage();
+    }
+  }
+
+  function setMessageifValueOutsideLimit(
+    value: number[],
+    limit: number[]
+  ): void {
+    console.log(value);
+    console.log(limit);
+    if (value[1] > limit[1] || value[0] < limit[0]) {
+      flashMsgCtx.setFlashMessage(
+        `Value cannot be outside range ${limit[0]} to ${limit[1]}`,
+        WARNING_FLASH_TYPE
+      );
+    } else if (
+      flashMsgCtx.getFlashMessage().includes("Value cannot be outside range")
     ) {
       flashMsgCtx.clearFlashMessage();
     }
@@ -57,13 +76,7 @@ function Filterbar() {
     ]);
   };
 
-  const handleBlur = () => {
-    if (prizeFilterValue[0] < MIN_VALUE) {
-      setPrizeFilterValue([MIN_VALUE, prizeFilterValue[1]]);
-    } else if (prizeFilterValue[1] > MAX_VALUE) {
-      setPrizeFilterValue([prizeFilterValue[0], MAX_VALUE]);
-    }
-  };
+  const handleBlur = () => {};
 
   return (
     <div className={styles.filter_container}>
@@ -107,6 +120,7 @@ function Filterbar() {
           />
         </div>
       </div>
+      <button className={`${styles.find_button} btn`}>Find offers</button>
       <PrizeSlider
         setSliderValue={setPrizeFilterValue}
         sliderValue={prizeFilterValue}

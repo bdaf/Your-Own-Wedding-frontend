@@ -1,4 +1,4 @@
-import { OfferModel, offerModelcontains } from "../components/Models";
+import { OfferModel, offerModelTitleContains, offerModelDescriptionContains, offerModelAddressContains, offerModelCategoryConsistsOf } from "../components/Models";
 import { OFFERS, API_URL } from "../constants";
 import axios from 'axios';
 
@@ -18,7 +18,11 @@ function deleteOfferById(id: string) {
     return axios.delete(`${API_URL}/${OFFERS}/${id}`, { withCredentials: true })
 }
 
-function getOffersFilteredByString(offers: OfferModel[], filterString: string): OfferModel[] {
-    return offers.filter(o => offerModelcontains(o, filterString))
+function getOffersFilteredByTitleAndDescription(offers: OfferModel[], filterString: string): OfferModel[] {
+    return offers.filter(o => offerModelTitleContains(o, filterString) && offerModelDescriptionContains(o, filterString))
 }
-export {getAllOffers, getOfferById, createOffer, deleteOfferById, getOffersFilteredByString}
+
+function getOffersFilteredByAddress(offers: OfferModel[], filterString: string): OfferModel[] {
+    return offers.filter(o => offerModelAddressContains(o, filterString))
+}
+export {getAllOffers, getOfferById, createOffer, deleteOfferById, getOffersFilteredByTitleAndDescription, getOffersFilteredByAddress}
