@@ -7,14 +7,10 @@ import {
   getOffersFilteredByString,
 } from "../services/offerService";
 import FlashMessagesContext from "../store/flash-messages-context";
-import WindowSizeContext from "../store/window-size-context";
 import { useContext, useEffect, useState } from "react";
 import { OfferModel } from "../components/Models";
 
-const widthOfFiilterBarChange = 500;
-
 function AllSEOffers() {
-  const windowSizeCtx = useContext(WindowSizeContext);
   const flashMsgCtx = useContext(FlashMessagesContext);
   const [offers, setOffers] = useState<OfferModel[]>([]);
   const [filteredOffers, setFilteredOffers] = useState<OfferModel[]>([]);
@@ -53,17 +49,10 @@ function AllSEOffers() {
   return (
     <div>
       <div className="title">All SEOffers</div>
-      {/* {windowSizeCtx.isWindowLessWiderThan(widthOfFiilterBarChange) && ( */}
       <div className="center">
         <Filterbar />
       </div>
-      {/* )} */}
       <div className="content-left flex-wrap-2">
-        {/* <div className="flex-shrink-low">
-          {windowSizeCtx.isWindowMoreWiderThan(widthOfFiilterBarChange - 1) && (
-            <Filterbar />
-          )}
-        </div> */}
         <div className="main-content flex-shrink-high">
           <SearchBar onChangeSearchBar={filterOffersToTheseWithString} />
           <SEOfferList offers={filteredOffers} />

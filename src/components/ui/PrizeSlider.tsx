@@ -1,11 +1,15 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import { useContext } from "react";
 import WindowSizeContext from "../../store/window-size-context";
 
+interface Props {
+  setSliderValue: Function;
+  sliderValue: number[];
+}
+
 function valuetext(value: number) {
-  return `${value}°C`;
+  return `${value} PLN`;
 }
 
 const maxMarks = [
@@ -38,25 +42,24 @@ const miniMarks = [
   },
 ];
 
-export default function RangeSlider() {
+export default function RangeSlider({ setSliderValue, sliderValue }: Props) {
   const windowSizeCtx = useContext(WindowSizeContext);
-  const [value, setValue] = React.useState<number[]>([2000, 5000]);
 
-  const handleChange = (event: Event, newValue: number | number[]) => {
-    console.log(newValue);
-    setValue(newValue as number[]);
+  const handleSliderChange = (_event: Event, newValue: number | number[]) => {
+    console.log(sliderValue);
+    setSliderValue(newValue as number[]);
   };
 
   return (
     <Box sx={{ width: "100%" }}>
       <Slider
-        getAriaLabel={() => "Temperature range"}
-        value={value}
+        getAriaLabel={() => "Prize range"}
+        value={sliderValue}
         min={0}
         step={10}
         max={50000}
-        marks={windowSizeCtx.isWindowLessWiderThan(500) ? miniMarks : maxMarks}
-        onChange={handleChange}
+        marks={windowSizeCtx.isWindowLessWiderThan(505) ? miniMarks : maxMarks}
+        onChange={handleSliderChange}
         valueLabelDisplay="auto"
         getAriaValueText={valuetext}
       />
