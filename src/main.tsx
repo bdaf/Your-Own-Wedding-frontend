@@ -17,6 +17,7 @@ import LoginPage from "./pages/LoginPage.tsx";
 import { AuthenticationContextProvider } from "./store/authentication-context.tsx";
 import EventsPage from "./pages/EventsPage.tsx";
 import { FlashMessagesContextProvider } from "./store/flash-messages-context.tsx";
+import SEOffersMy from "./pages/SEOffersMy.tsx";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: OFFERS,
         element: <SEOffersAll />,
+      },
+      {
+        path: `${OFFERS}_my`,
+        element: <SEOffersMy />,
       },
       {
         path: `${OFFERS}/:id`,

@@ -6,6 +6,10 @@ function getAllOffers(filters = EMPTY_FILTER_MODEL) {
     return axios.get(`${API_URL}/${OFFERS}`, { params: { filters: filters }, withCredentials: true })
 }
 
+function getMyOffers() {
+    return axios.get(`${API_URL}/${OFFERS}_my`, { withCredentials: true })
+}
+
 function getOfferById(id :string) {
     return axios.get(`${API_URL}/${OFFERS}/${id}`, { withCredentials: true })
 }
@@ -25,4 +29,4 @@ function getOffersFilteredByTitleAndDescription(offers: OfferModel[], filterStri
 function getOffersFilteredByAddress(offers: OfferModel[], filterString: string): OfferModel[] {
     return offers.filter(o => offerModelAddressContains(o, filterString))
 }
-export {getAllOffers, getOfferById, createOffer, deleteOfferById, getOffersFilteredByTitleAndDescription, getOffersFilteredByAddress}
+export {getAllOffers, getMyOffers, getOfferById, createOffer, deleteOfferById, getOffersFilteredByTitleAndDescription, getOffersFilteredByAddress}
