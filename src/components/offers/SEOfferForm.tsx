@@ -129,8 +129,8 @@ function SEOfferForm({ serviceOffer, offer_id, offer, action }: Props) {
               accept=".png,.jpg,jpeg"
             ></input>
             <span className={styles.caption}>
-              Every time set whole set of pictures you want to upload - max 10
-              pictures.
+              Every time you want to change pictures set, upload whole set of
+              pictures - max 10 pictures.
             </span>
           </div>
 
