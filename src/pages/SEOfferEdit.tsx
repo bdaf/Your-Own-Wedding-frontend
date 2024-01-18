@@ -4,7 +4,7 @@ import AuthenticationContext from "../store/authentication-context";
 import { OFFERS } from "../constants";
 import { useNavigate } from "react-router-dom";
 
-function NewSEOffer() {
+function EditSEOffer() {
   const navigate = useNavigate();
   const authCtx = useContext(AuthenticationContext);
 
@@ -22,4 +22,4 @@ function NewSEOffer() {
   );
 }
 
-export default NewSEOffer;
+export default EditSEOffer;

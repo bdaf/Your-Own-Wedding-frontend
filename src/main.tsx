@@ -18,6 +18,7 @@ import { AuthenticationContextProvider } from "./store/authentication-context.ts
 import EventsPage from "./pages/EventsPage.tsx";
 import { FlashMessagesContextProvider } from "./store/flash-messages-context.tsx";
 import SEOffersMy from "./pages/SEOffersMy.tsx";
+import SEOfferEdit from "./pages/SEOfferEdit.tsx";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: `${OFFERS}/:id`,
         element: <SEOfferDetails />,
+      },
+      {
+        path: `${OFFERS}/:id/edit`,
+        element: <SEOfferEdit />,
       },
       {
         path: `${OFFERS}/new`,
