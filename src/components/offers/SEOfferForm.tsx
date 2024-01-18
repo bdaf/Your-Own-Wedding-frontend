@@ -9,7 +9,14 @@ import FlashMessagesContext, {
   SUCCESS_FLASH_TYPE,
 } from "../../store/flash-messages-context";
 import {
+  OFFER_ADDRESS_KEY,
+  OFFER_CATEGORY_KEY,
   OFFER_CATEGORY_OPTIONS,
+  OFFER_DESCRIPTION_KEY,
+  OFFER_ID_KEY,
+  OFFER_IMAGES_KEY,
+  OFFER_PRIZE_KEY,
+  OFFER_TITLE_KEY,
   OfferApiResponse,
   OfferModel,
 } from "../Models";
@@ -17,11 +24,12 @@ import { upperCaseFirstStringCharacter } from "../../helper";
 
 interface Props {
   serviceOffer: Function;
-  formData: FormData;
+  offer_id?: string;
   offer: OfferModel;
+  action: string;
 }
 
-function SEOfferForm({ serviceOffer, formData, offer }: Props) {
+function SEOfferForm({ serviceOffer, offer_id, offer, action }: Props) {
   const navigate = useNavigate();
   const flashMsgCtx = useContext(FlashMessagesContext);
   const titleInputRef: RefObject<HTMLInputElement> = useRef(null);
@@ -32,7 +40,6 @@ function SEOfferForm({ serviceOffer, formData, offer }: Props) {
   const prizeInputRef: RefObject<HTMLInputElement> = useRef(null);
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
 
   async function submitHandler(
     event: FormEvent<HTMLFormElement>
@@ -47,36 +54,36 @@ function SEOfferForm({ serviceOffer, formData, offer }: Props) {
     const selectedCategory = categoryInputRef.current?.value!;
     const enteredPrize = prizeInputRef.current?.value!;
 
-    formData.append("offer[title]", enteredTitle);
-    formData.append("offer[address]", enteredAddress);
-    formData.append("offer[description]", enteredDescription);
-    formData.append("offer[category]", selectedCategory);
-    formData.append("offer[prize]", enteredPrize);
+    const formData = new FormData();
+    if (offer_id != null) {
+      formData.append(OFFER_ID_KEY, String(offer_id));
+    }
+    formData.append(OFFER_TITLE_KEY, enteredTitle);
+    formData.append(OFFER_ADDRESS_KEY, enteredAddress);
+    formData.append(OFFER_DESCRIPTION_KEY, enteredDescription);
+    formData.append(OFFER_CATEGORY_KEY, selectedCategory);
+    formData.append(OFFER_PRIZE_KEY, enteredPrize);
 
-    // for (let i = 0; i < uploadedImages.length; i++) {
-    //   formData.append("offer[images][]", uploadedImages[i]);
-    //   console.log(uploadedImages[i]);
-    // }
+    for (let i = 0; i < uploadedImages.length; i++) {
+      formData.append(OFFER_IMAGES_KEY, uploadedImages[i]);
+    }
 
     serviceOffer(formData)
       .then((response: OfferApiResponse) => {
-        console.log(response.data);
         flashMsgCtx.setFlashMessage(
-          "Offer has been created",
+          `Offer has been ${action}d`,
           SUCCESS_FLASH_TYPE
         );
         navigate(`/${OFFERS}/${response.data.id}`);
       })
       .catch((err: AxiosError) => {
         flashMsgCtx.handleError(err, navigate);
-        setError("Error occurred during creating offer.");
         console.log(err);
       })
       .finally(() => setLoading(false));
   }
 
   if (loading) return <div className="title">Loading...</div>;
-  if (error) return <div className="title">{error}</div>;
 
   return (
     <div className={styles.container}>
@@ -112,13 +119,21 @@ function SEOfferForm({ serviceOffer, formData, offer }: Props) {
               ref={descriptionInputRef}
             />
           </div>
-          <input
-            type="file"
-            name="image"
-            className={styles.choose_file_input}
-            multiple
-            ref={imagesInputRef}
-          ></input>
+          <div className={styles.control}>
+            <label htmlFor="images">Images</label>
+            <input
+              type="file"
+              name="images"
+              multiple
+              ref={imagesInputRef}
+              accept=".png,.jpg,jpeg"
+            ></input>
+            <span className={styles.caption}>
+              Every time set whole set of pictures you want to upload - max 10
+              pictures.
+            </span>
+          </div>
+
           <div className={styles.control}>
             <label htmlFor="category">Category</label>
             <select
@@ -144,13 +159,15 @@ function SEOfferForm({ serviceOffer, formData, offer }: Props) {
               className={styles.input}
               ref={prizeInputRef}
             />
-            <span className={styles.span}>
+            <span className={styles.caption}>
               Typing prize 0 or leaving field empty will cause not showing prize
               at all.
             </span>
           </div>
           <div className={styles.actions}>
-            <button className="btn">Create</button>
+            <button className={`btn-` + action}>
+              {upperCaseFirstStringCharacter(action)}
+            </button>
           </div>
         </form>
       </Card>

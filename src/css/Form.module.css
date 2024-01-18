@@ -36,13 +36,9 @@
   text-align: left;
 }
 
-.span {
+.caption {
   font-size: xx-small;
   width: max-content;
-}
-
-.choose_file_input {
-  margin: 1rem 0;
 }
 
 .input::placeholder {

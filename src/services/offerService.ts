@@ -1,4 +1,4 @@
-import { OfferModel, offerModelTitleContains, offerModelDescriptionContains, offerModelAddressContains, offerModelCategoryConsistsOf, FiltersModel, EMPTY_FILTER_MODEL } from "../components/Models";
+import { OfferModel, offerModelTitleContains, offerModelDescriptionContains, offerModelAddressContains, offerModelCategoryConsistsOf, FiltersModel, EMPTY_FILTER_MODEL, OFFER_ID_KEY } from "../components/Models";
 import { OFFERS, API_URL } from "../constants";
 import axios from 'axios';
 
@@ -19,7 +19,9 @@ function createOffer(formData: FormData) {
 }
 
 function updateOffer(formData: FormData) {
-    return axios.post(`${API_URL}/${OFFERS}/${formData.get("[offers][id]")}`, formData, { withCredentials: true })
+    console.log(formData)
+    console.log(formData.get(OFFER_ID_KEY))
+    return axios.put(`${API_URL}/${OFFERS}/${formData.get(OFFER_ID_KEY)}`, formData, { withCredentials: true })
 }
 
 function deleteOfferById(id: string) {

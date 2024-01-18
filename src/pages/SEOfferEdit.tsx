@@ -3,7 +3,11 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import SEOfferForm from "../components/offers/SEOfferForm";
 import { getOfferById, updateOffer } from "../services/offerService";
-import { EMPTY_OFFER_MODEL, OfferModel } from "../components/Models";
+import {
+  EMPTY_OFFER_MODEL,
+  OFFER_ID_KEY,
+  OfferModel,
+} from "../components/Models";
 import FlashMessagesContext from "../store/flash-messages-context";
 
 function SEOfferEdit() {
@@ -11,7 +15,6 @@ function SEOfferEdit() {
   const navigate = useNavigate();
   const [offer, setOffer] = useState<OfferModel>(EMPTY_OFFER_MODEL);
   const [loading, setLoading] = useState<boolean>(false);
-  const formData = new FormData();
   const offerId = useParams().id!;
 
   useEffect(() => {
@@ -19,7 +22,6 @@ function SEOfferEdit() {
     getOfferById(offerId)
       .then((res) => {
         setOffer(res.data);
-        formData.append("offers[id]", offerId);
       })
       .catch((err) => {
         flashMsgCtx.handleError(err, navigate);
@@ -35,8 +37,9 @@ function SEOfferEdit() {
       ) : (
         <SEOfferForm
           serviceOffer={updateOffer}
-          formData={formData}
+          offer_id={offerId}
           offer={offer}
+          action={"update"}
         />
       )}
     </div>

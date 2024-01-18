@@ -138,8 +138,8 @@ function NoteNewForm({
         <button className="btn" onClick={createObjectOnClick}>
           Create
         </button>
-        <button className="btn-dark-red" onClick={editObjectOnClick}>
-          Edit
+        <button className="btn-update" onClick={editObjectOnClick}>
+          Update
         </button>
         <button className="btn-red" onClick={deleteObjectOnClick}>
           Delete

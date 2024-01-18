@@ -62,6 +62,13 @@ interface OfferModel {
     data: OfferModel
     status: number
   }
+  const OFFER_ID_KEY = "offer[id]"
+  const OFFER_TITLE_KEY = "offer[title]"
+  const OFFER_ADDRESS_KEY = "offer[address]"
+  const OFFER_DESCRIPTION_KEY = "offer[description]"
+  const OFFER_CATEGORY_KEY = "offer[category]"
+  const OFFER_PRIZE_KEY = "offer[prize]"
+  const OFFER_IMAGES_KEY = "offer[images][]"
 
   const OFFER_CATEGORY_OPTIONS = ["venue", "music", "camera", "other"];
   const MIN_OFFER_PRIZE = 0;
@@ -153,7 +160,8 @@ export {
     isProperId, 
     EMPTY_EVENT_MODEL, EMPTY_NOTE_MODEL, EMPTY_OFFER_MODEL, EMPTY_FILTER_MODEL , isObjectEventModel, isObjectNoteModel,
     offerModelTitleContains, offerModelDescriptionContains, offerModelAddressContains, offerModelCategoryConsistsOf,
-    OFFER_CATEGORY_OPTIONS, MIN_OFFER_PRIZE, MAX_OFFER_PRIZE
+    OFFER_CATEGORY_OPTIONS, MIN_OFFER_PRIZE, MAX_OFFER_PRIZE, 
+    OFFER_ID_KEY, OFFER_TITLE_KEY, OFFER_DESCRIPTION_KEY, OFFER_ADDRESS_KEY, OFFER_CATEGORY_KEY, OFFER_PRIZE_KEY, OFFER_IMAGES_KEY
 };
 
 export type { 

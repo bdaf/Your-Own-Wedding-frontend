@@ -193,7 +193,7 @@ main {
 }
 
 .btn,
-.btn--alt {
+.btn-create .btn--alt {
   padding: 12px 24px;
   border-radius: 5px;
   background-color: #1eb3f8;
@@ -206,6 +206,18 @@ main {
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   cursor: pointer;
   margin: 1rem;
+}
+
+.btn:hover,
+.btn-create:hover {
+  box-shadow: 0px 0px 10px 3px #7de2f9;
+  background-color: white;
+  color: #1eb3f8;
+}
+
+.btn:active,
+.btn-create:active {
+  background-color: aliceblue;
 }
 
 .btn--alt {
@@ -227,22 +239,6 @@ main {
   margin: 4px 2px !important;
   padding: 8px 16px;
   color: white;
-}
-.active {
-  background-color: #1eb3f8;
-  margin: 4px 2px !important;
-  padding: 8px 16px;
-  color: white;
-}
-
-.btn:hover {
-  box-shadow: 0px 0px 10px 3px #7de2f9;
-  background-color: white;
-  color: #1eb3f8;
-}
-
-.btn:active {
-  background-color: aliceblue;
 }
 
 .btn-light {
@@ -277,7 +273,22 @@ main {
   background-color: rgb(255, 145, 145);
 }
 
-.btn-dark-red {
+.actions .btn_edit {
+  font: inherit;
+  cursor: pointer;
+  color: #77002e;
+  border: 1px solid #77002e;
+  background-color: transparent;
+  padding: 0.5rem 1.5rem;
+  border-radius: 4px;
+}
+
+.actions .btn_edit:hover,
+.actions .btn_edit:active {
+  background-color: #ffe2ed;
+}
+
+.btn-update {
   font: inherit;
   cursor: pointer;
   color: #77002e;
@@ -288,8 +299,8 @@ main {
   border-radius: 4px;
 }
 
-.btn-dark-red:hover,
-.btn-dark-red:active {
+.btn-update:hover,
+.btn-update:active {
   background-color: #ffe2ed;
 }
 

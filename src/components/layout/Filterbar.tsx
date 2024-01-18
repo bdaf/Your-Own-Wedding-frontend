@@ -136,7 +136,7 @@ function Filterbar({ findFilteredOffers }: Props) {
             type="button"
             className={` btn--alt ${styles.btn} ${
               filters.categories.includes(category.toLowerCase())
-                ? `active`
+                ? `${styles.active_btn}`
                 : ""
             }`}
             onClick={() => selectCategoryHandler(category)}
