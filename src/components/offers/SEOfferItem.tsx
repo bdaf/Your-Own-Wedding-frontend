@@ -3,9 +3,13 @@ import Card from "../ui/Card";
 import styles from "./SEOfferItem.module.css";
 import noImageFound from "../images/No Image Found.png";
 import { upperCaseFirstStringCharacter } from "../../helper";
+import { useContext } from "react";
+import AuthenticationContext from "../../store/authentication-context";
+import { OFFERS } from "../../constants";
 
 interface Props {
   id: number;
+  user_id: number;
   images: string[];
   title: string;
   description: string;
@@ -17,6 +21,7 @@ interface Props {
 
 function SEOfferItem({
   id,
+  user_id,
   images,
   title,
   description,
@@ -26,9 +31,17 @@ function SEOfferItem({
   created_at,
 }: Props) {
   const navigate = useNavigate();
+  const authCtx = useContext(AuthenticationContext);
   function detailsButtonHandler(): void {
-    navigate(id.toString());
+    navigate(`/${OFFERS}/${id.toString()}`);
   }
+  function editButtonHandler(): void {
+    navigate(`/${OFFERS}/${id.toString()}/edit`);
+  }
+
+  console.log(
+    authCtx.isSupportUser() && authCtx.getCurrentUser().id == user_id
+  );
 
   return (
     <li className={styles.item} key={id}>
@@ -50,9 +63,18 @@ function SEOfferItem({
           </div>
         </div>
         <div className={styles.actions}>
-          <button className="btn-light" onClick={detailsButtonHandler}>
-            Details
-          </button>
+          <div>
+            <button className="btn-light" onClick={detailsButtonHandler}>
+              Details
+            </button>
+            {authCtx.isSupportUser() &&
+              authCtx.getCurrentUser().id == user_id && (
+                <button className={styles.btn_edit} onClick={editButtonHandler}>
+                  Edit
+                </button>
+              )}
+          </div>
+
           <span className={styles.prize}>
             {prize ? `Prize ${prize} PLN` : ""}
           </span>

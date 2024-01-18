@@ -47,6 +47,7 @@ type LogoutResponse = {
 
 interface OfferModel {
     id: number;
+    user_id: number;
     title: string;
     description: string;
     address: string;
@@ -59,12 +60,13 @@ interface OfferModel {
 
   const EMPTY_OFFER_MODEL: OfferModel = {
       id: -1,
+      user_id: -1,
       title: "",
       description: "",
       address: "",
       images: [],
       category: "",
-      prize: 0
+      prize: 0,
   }
 
 function offerModelTitleContains(offer: OfferModel, stringToContain: string): boolean {

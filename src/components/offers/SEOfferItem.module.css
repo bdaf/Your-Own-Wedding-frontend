@@ -3,10 +3,6 @@
   max-width: 30rem;
 }
 
-.category,
-.prize {
-}
-
 .image {
   cursor: pointer;
   max-width: 30rem;
@@ -43,7 +39,7 @@
   margin: 0.5rem;
 }
 
-.actions .button_fav {
+.actions .btn_edit {
   font: inherit;
   cursor: pointer;
   color: #77002e;
@@ -53,7 +49,7 @@
   border-radius: 4px;
 }
 
-.actions .button_fav:hover,
-.actions .button_fav:active {
+.actions .btn_edit:hover,
+.actions .btn_edit:active {
   background-color: #ffe2ed;
 }
