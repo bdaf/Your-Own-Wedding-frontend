@@ -1,25 +1,46 @@
-import { useContext, useEffect } from "react";
-import NewSEOfferForm from "../components/offers/SEOfferNewForm";
-import AuthenticationContext from "../store/authentication-context";
-import { OFFERS } from "../constants";
-import { useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-function EditSEOffer() {
+import SEOfferForm from "../components/offers/SEOfferForm";
+import { getOfferById, updateOffer } from "../services/offerService";
+import { EMPTY_OFFER_MODEL, OfferModel } from "../components/Models";
+import FlashMessagesContext from "../store/flash-messages-context";
+
+function SEOfferEdit() {
+  const flashMsgCtx = useContext(FlashMessagesContext);
   const navigate = useNavigate();
-  const authCtx = useContext(AuthenticationContext);
+  const [offer, setOffer] = useState<OfferModel>(EMPTY_OFFER_MODEL);
+  const [loading, setLoading] = useState<boolean>(false);
+  const formData = new FormData();
+  const offerId = useParams().id!;
 
   useEffect(() => {
-    if (!authCtx.isSupportUser()) {
-      navigate(`${OFFERS}`);
-    }
+    setLoading(true);
+    getOfferById(offerId)
+      .then((res) => {
+        setOffer(res.data);
+        formData.append("offers[id]", offerId);
+      })
+      .catch((err) => {
+        flashMsgCtx.handleError(err, navigate);
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   return (
     <div>
       <div className="title">Edit SEOffer</div>
-      <NewSEOfferForm />
+      {loading ? (
+        <div className="title">Loading...</div>
+      ) : (
+        <SEOfferForm
+          serviceOffer={updateOffer}
+          formData={formData}
+          offer={offer}
+        />
+      )}
     </div>
   );
 }
 
-export default EditSEOffer;
+export default SEOfferEdit;

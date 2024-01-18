@@ -22,10 +22,6 @@ function MySEOffers() {
     try {
       const response = await getMyOffers();
       setAllOffers(response.data);
-      flashMsgCtx.setFlashMessage(
-        "Your offers have been loaded",
-        INFO_FLASH_TYPE
-      );
     } catch (e) {
       flashMsgCtx.handleError(e, useNavigate);
       setError("Error has occured, try again later.");

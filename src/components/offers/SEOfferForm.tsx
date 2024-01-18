@@ -1,17 +1,27 @@
 import { FormEvent, RefObject, useContext, useRef, useState } from "react";
+import { AxiosError } from "axios";
 import Card from "../ui/Card";
 
 import styles from "../../css/Form.module.css";
 import { useNavigate } from "react-router-dom";
-import { createOffer } from "../../services/offerService";
 import { OFFERS } from "../../constants";
 import FlashMessagesContext, {
   SUCCESS_FLASH_TYPE,
 } from "../../store/flash-messages-context";
-import { OFFER_CATEGORY_OPTIONS } from "../Models";
+import {
+  OFFER_CATEGORY_OPTIONS,
+  OfferApiResponse,
+  OfferModel,
+} from "../Models";
 import { upperCaseFirstStringCharacter } from "../../helper";
 
-function NewSEOfferForm() {
+interface Props {
+  serviceOffer: Function;
+  formData: FormData;
+  offer: OfferModel;
+}
+
+function SEOfferForm({ serviceOffer, formData, offer }: Props) {
   const navigate = useNavigate();
   const flashMsgCtx = useContext(FlashMessagesContext);
   const titleInputRef: RefObject<HTMLInputElement> = useRef(null);
@@ -37,38 +47,32 @@ function NewSEOfferForm() {
     const selectedCategory = categoryInputRef.current?.value!;
     const enteredPrize = prizeInputRef.current?.value!;
 
-    const formData = new FormData();
     formData.append("offer[title]", enteredTitle);
     formData.append("offer[address]", enteredAddress);
     formData.append("offer[description]", enteredDescription);
     formData.append("offer[category]", selectedCategory);
     formData.append("offer[prize]", enteredPrize);
 
-    for (let i = 0; i < uploadedImages.length; i++) {
-      formData.append("offer[images][]", uploadedImages[i]);
-      console.log(uploadedImages[i]);
-    }
+    // for (let i = 0; i < uploadedImages.length; i++) {
+    //   formData.append("offer[images][]", uploadedImages[i]);
+    //   console.log(uploadedImages[i]);
+    // }
 
-    try {
-      createOffer(formData)
-        .then((response) => {
-          console.log(response.data);
-          flashMsgCtx.setFlashMessage(
-            "Offer has been created",
-            SUCCESS_FLASH_TYPE
-          );
-          navigate(`/${OFFERS}/${response.data.id}`);
-        })
-        .catch((err) => {
-          flashMsgCtx.handleError(err, navigate);
-          console.log(err);
-        });
-    } catch (e) {
-      setError("Error occurred during creating offer.");
-      console.log("Error occured: ", error);
-    } finally {
-      setLoading(false);
-    }
+    serviceOffer(formData)
+      .then((response: OfferApiResponse) => {
+        console.log(response.data);
+        flashMsgCtx.setFlashMessage(
+          "Offer has been created",
+          SUCCESS_FLASH_TYPE
+        );
+        navigate(`/${OFFERS}/${response.data.id}`);
+      })
+      .catch((err: AxiosError) => {
+        flashMsgCtx.handleError(err, navigate);
+        setError("Error occurred during creating offer.");
+        console.log(err);
+      })
+      .finally(() => setLoading(false));
   }
 
   if (loading) return <div className="title">Loading...</div>;
@@ -80,17 +84,30 @@ function NewSEOfferForm() {
         <form className={styles.form} onSubmit={submitHandler}>
           <div className={styles.control}>
             <label htmlFor="title">Title</label>
-            <input id="title" type="text" required ref={titleInputRef} />
+            <input
+              id="title"
+              type="text"
+              defaultValue={offer.title}
+              required
+              ref={titleInputRef}
+            />
           </div>
           <div className={styles.control}>
             <label htmlFor="address">Address</label>
-            <input id="address" type="text" required ref={addressInputRef} />
+            <input
+              id="address"
+              type="text"
+              defaultValue={offer.address}
+              required
+              ref={addressInputRef}
+            />
           </div>
           <div className={styles.control}>
             <label htmlFor="description">Description</label>
             <textarea
               rows={15}
               id="description"
+              defaultValue={offer.description}
               required
               ref={descriptionInputRef}
             />
@@ -108,7 +125,7 @@ function NewSEOfferForm() {
               id="category"
               name="category"
               ref={categoryInputRef}
-              defaultValue={OFFER_CATEGORY_OPTIONS[0]}
+              defaultValue={offer.category}
             >
               {OFFER_CATEGORY_OPTIONS.map((category, index) => (
                 <option key={index} value={category}>
@@ -122,13 +139,14 @@ function NewSEOfferForm() {
             <input
               id="prize"
               type="text"
+              defaultValue={offer.prize}
               placeholder="0"
               className={styles.input}
               ref={prizeInputRef}
             />
             <span className={styles.span}>
-              Typing prize 0 or leaving empty will cause not showing prize at
-              all.
+              Typing prize 0 or leaving field empty will cause not showing prize
+              at all.
             </span>
           </div>
           <div className={styles.actions}>
@@ -140,4 +158,4 @@ function NewSEOfferForm() {
   );
 }
 
-export default NewSEOfferForm;
+export default SEOfferForm;

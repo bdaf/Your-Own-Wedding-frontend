@@ -1,23 +1,18 @@
-import { useContext, useEffect } from "react";
-import NewSEOfferForm from "../components/offers/SEOfferNewForm";
-import AuthenticationContext from "../store/authentication-context";
-import { OFFERS } from "../constants";
-import { useNavigate } from "react-router-dom";
+import { EMPTY_OFFER_MODEL } from "../components/Models";
+import SEOfferForm from "../components/offers/SEOfferForm";
+import { createOffer } from "../services/offerService";
 
 function NewSEOffer() {
-  const navigate = useNavigate();
-  const authCtx = useContext(AuthenticationContext);
-
-  useEffect(() => {
-    if (!authCtx.isSupportUser()) {
-      navigate(`${OFFERS}`);
-    }
-  }, []);
+  const formData = new FormData();
 
   return (
     <div>
       <div className="title">Create SEOffer</div>
-      <NewSEOfferForm />
+      <SEOfferForm
+        serviceOffer={createOffer}
+        formData={formData}
+        offer={EMPTY_OFFER_MODEL}
+      />
     </div>
   );
 }

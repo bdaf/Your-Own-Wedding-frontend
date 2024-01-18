@@ -58,6 +58,11 @@ interface OfferModel {
     updated_at?: string;
   }
 
+  interface OfferApiResponse {
+    data: OfferModel
+    status: number
+  }
+
   const OFFER_CATEGORY_OPTIONS = ["venue", "music", "camera", "other"];
   const MIN_OFFER_PRIZE = 0;
   const MAX_OFFER_PRIZE = 50000;
@@ -69,7 +74,7 @@ interface OfferModel {
       description: "",
       address: "",
       images: [],
-      category: "",
+      category: OFFER_CATEGORY_OPTIONS[0],
       prize: 0,
   }
 
@@ -153,7 +158,7 @@ export {
 
 export type { 
     User, UserRegister, UserLogin, AuthenticationResponse, LogoutResponse,
-    OfferModel,
+    OfferModel, OfferApiResponse,
     EventModel, NoteModel,
     FiltersModel 
 };

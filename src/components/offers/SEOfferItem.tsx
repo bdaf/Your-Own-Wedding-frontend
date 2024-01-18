@@ -42,10 +42,6 @@ function SEOfferItem({
     navigate(`/${OFFERS}/${id.toString()}/edit`);
   }
 
-  console.log(
-    authCtx.isSupportUser() && authCtx.getCurrentUser().id == user_id
-  );
-
   return (
     <li className={styles.item} key={id}>
       <Card>

@@ -14,8 +14,12 @@ function getOfferById(id :string) {
     return axios.get(`${API_URL}/${OFFERS}/${id}`, { withCredentials: true })
 }
 
-function createOffer(formData: any) {
+function createOffer(formData: FormData) {
     return axios.post(`${API_URL}/${OFFERS}`, formData, { withCredentials: true })
+}
+
+function updateOffer(formData: FormData) {
+    return axios.post(`${API_URL}/${OFFERS}/${formData.get("[offers][id]")}`, formData, { withCredentials: true })
 }
 
 function deleteOfferById(id: string) {
@@ -29,4 +33,4 @@ function getOffersFilteredByTitleAndDescription(offers: OfferModel[], filterStri
 function getOffersFilteredByAddress(offers: OfferModel[], filterString: string): OfferModel[] {
     return offers.filter(o => offerModelAddressContains(o, filterString))
 }
-export {getAllOffers, getMyOffers, getOfferById, createOffer, deleteOfferById, getOffersFilteredByTitleAndDescription, getOffersFilteredByAddress}
+export {getAllOffers, getMyOffers, getOfferById, createOffer, updateOffer, deleteOfferById, getOffersFilteredByTitleAndDescription, getOffersFilteredByAddress}
