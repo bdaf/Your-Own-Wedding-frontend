@@ -35,3 +35,16 @@
   margin-top: 1rem;
   text-align: left;
 }
+
+.span {
+  font-size: xx-small;
+  width: max-content;
+}
+
+.choose_file_input {
+  margin-bottom: 1rem;
+}
+
+.input::placeholder {
+  color: #d3d3d3;
+}

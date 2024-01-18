@@ -12,4 +12,10 @@ function upperCaseFirstStringCharacter( text: string): string {
     return text.charAt(0).toUpperCase() + text.slice(1)
   }
 
-  export {shortStringTo, upperCaseFirstStringCharacter}
+  function getOnlyDateAndHourFromDateInString( dateInString: string): string {
+    return dateInString
+    .split(".")[0]
+    .replace(/T/g, ` `)
+  }
+
+  export {shortStringTo, upperCaseFirstStringCharacter, getOnlyDateAndHourFromDateInString}

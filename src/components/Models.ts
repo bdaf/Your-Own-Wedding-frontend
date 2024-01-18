@@ -58,6 +58,10 @@ interface OfferModel {
     updated_at?: string;
   }
 
+  const OFFER_CATEGORY_OPTIONS = ["venue", "music", "camera", "other"];
+  const MIN_OFFER_PRIZE = 0;
+  const MAX_OFFER_PRIZE = 50000;
+
   const EMPTY_OFFER_MODEL: OfferModel = {
       id: -1,
       user_id: -1,
@@ -141,9 +145,10 @@ const EMPTY_FILTER_MODEL: FiltersModel = {
 }
 
 export {
-    isProperId, EMPTY_EVENT_MODEL, EMPTY_NOTE_MODEL, EMPTY_OFFER_MODEL, isObjectEventModel, isObjectNoteModel,
+    isProperId, 
+    EMPTY_EVENT_MODEL, EMPTY_NOTE_MODEL, EMPTY_OFFER_MODEL, EMPTY_FILTER_MODEL , isObjectEventModel, isObjectNoteModel,
     offerModelTitleContains, offerModelDescriptionContains, offerModelAddressContains, offerModelCategoryConsistsOf,
-    EMPTY_FILTER_MODEL
+    OFFER_CATEGORY_OPTIONS, MIN_OFFER_PRIZE, MAX_OFFER_PRIZE
 };
 
 export type { 

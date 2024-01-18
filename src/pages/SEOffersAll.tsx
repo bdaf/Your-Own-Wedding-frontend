@@ -5,13 +5,12 @@ import SearchBar from "../components/others/SearchBar";
 import {
   getAllOffers,
   getOffersFilteredByTitleAndDescription,
-  getOffersFilteredByAddress,
 } from "../services/offerService";
 import FlashMessagesContext, {
   INFO_FLASH_TYPE,
 } from "../store/flash-messages-context";
 import { useContext, useEffect, useState } from "react";
-import { FiltersModel, OfferModel } from "../components/Models";
+import { OfferModel } from "../components/Models";
 
 function AllSEOffers() {
   const flashMsgCtx = useContext(FlashMessagesContext);
@@ -30,7 +29,8 @@ function AllSEOffers() {
     try {
       const response = await getAllOffers(filters);
       setAllOffers(response.data);
-      flashMsgCtx.setFlashMessage("Offers have been loaded", INFO_FLASH_TYPE);
+      if (filters)
+        flashMsgCtx.setFlashMessage("Offers have been loaded", INFO_FLASH_TYPE);
     } catch (e) {
       flashMsgCtx.handleError(e, useNavigate);
       setError("Error has occured, try again later.");
@@ -38,10 +38,6 @@ function AllSEOffers() {
     } finally {
       setLoading(false);
     }
-  }
-
-  function findOffersHandler(filters: any) {
-    loadOffers(filters);
   }
 
   useEffect(() => {
@@ -67,7 +63,7 @@ function AllSEOffers() {
       <div className="content-left flex-wrap-2">
         <div className="main-content flex-shrink-high">
           {error ? (
-            <div className="title">Loading...</div>
+            <div className="title">{error}</div>
           ) : loading ? (
             <div className="title">Loading...</div>
           ) : (

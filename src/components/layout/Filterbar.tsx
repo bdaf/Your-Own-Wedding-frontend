@@ -5,7 +5,13 @@ import WindowSizeContext from "../../store/window-size-context";
 import FlashMessagesContext, {
   WARNING_FLASH_TYPE,
 } from "../../store/flash-messages-context";
-import { EMPTY_FILTER_MODEL, FiltersModel } from "../Models";
+import {
+  EMPTY_FILTER_MODEL,
+  FiltersModel,
+  MAX_OFFER_PRIZE,
+  MIN_OFFER_PRIZE,
+  OFFER_CATEGORY_OPTIONS,
+} from "../Models";
 
 interface Props {
   findFilteredOffers: Function;
@@ -15,8 +21,6 @@ function Filterbar({ findFilteredOffers }: Props) {
   const windowSizeCtx = useContext(WindowSizeContext);
   const flashMsgCtx = useContext(FlashMessagesContext);
   const [filters, setFilters] = useState<FiltersModel>(EMPTY_FILTER_MODEL);
-
-  const categoryOptions = ["Venue", "Music", "Camera", "Other"];
 
   function setFiltersAndClearFlash(filters: FiltersModel) {
     setFilters(filters);
@@ -126,7 +130,7 @@ function Filterbar({ findFilteredOffers }: Props) {
       </div>
       <div className={styles.filter}>
         <span className={styles.header}>Category</span>
-        {categoryOptions.map((category, index) => (
+        {OFFER_CATEGORY_OPTIONS.map((category, index) => (
           <button
             key={index}
             type="button"
@@ -150,7 +154,9 @@ function Filterbar({ findFilteredOffers }: Props) {
           <input
             value={filters.prize[0]}
             className={styles.prize}
-            placeholder="0"
+            placeholder={`${MIN_OFFER_PRIZE}...`}
+            min={MIN_OFFER_PRIZE}
+            max={MAX_OFFER_PRIZE}
             type="number"
             onChange={handleMinInputChange}
           />
@@ -163,7 +169,7 @@ function Filterbar({ findFilteredOffers }: Props) {
           <input
             value={filters.prize[1]}
             className={styles.prize}
-            placeholder="50000"
+            placeholder={`...${MAX_OFFER_PRIZE}`}
             type="number"
             onChange={handleMaxInputChange}
           />

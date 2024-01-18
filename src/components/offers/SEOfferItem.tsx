@@ -2,7 +2,10 @@ import { useNavigate } from "react-router-dom";
 import Card from "../ui/Card";
 import styles from "./SEOfferItem.module.css";
 import noImageFound from "../images/No Image Found.png";
-import { upperCaseFirstStringCharacter } from "../../helper";
+import {
+  getOnlyDateAndHourFromDateInString,
+  upperCaseFirstStringCharacter,
+} from "../../helper";
 import { useContext } from "react";
 import AuthenticationContext from "../../store/authentication-context";
 import { OFFERS } from "../../constants";
@@ -51,9 +54,9 @@ function SEOfferItem({
         </div>
         <div className={styles.content}>
           <h3>{title}</h3>
-          <span>{`Published date: ${created_at
-            .split(".")[0]
-            .replace(/T/g, ` `)}`}</span>
+          <span>{`Published date: ${getOnlyDateAndHourFromDateInString(
+            created_at
+          )}`}</span>
           <p>{description}</p>
           <div className={styles.actions}>
             <span

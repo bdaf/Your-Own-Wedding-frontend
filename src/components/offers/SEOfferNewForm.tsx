@@ -8,14 +8,18 @@ import { OFFERS } from "../../constants";
 import FlashMessagesContext, {
   SUCCESS_FLASH_TYPE,
 } from "../../store/flash-messages-context";
+import { OFFER_CATEGORY_OPTIONS } from "../Models";
+import { upperCaseFirstStringCharacter } from "../../helper";
 
 function NewSEOfferForm() {
   const navigate = useNavigate();
   const flashMsgCtx = useContext(FlashMessagesContext);
-  const imagesInputRef: RefObject<HTMLInputElement> = useRef(null);
   const titleInputRef: RefObject<HTMLInputElement> = useRef(null);
-  const addressInputRef: RefObject<HTMLInputElement> = useRef(null);
   const descriptionInputRef: RefObject<HTMLTextAreaElement> = useRef(null);
+  const imagesInputRef: RefObject<HTMLInputElement> = useRef(null);
+  const addressInputRef: RefObject<HTMLInputElement> = useRef(null);
+  const categoryInputRef: RefObject<HTMLSelectElement> = useRef(null);
+  const prizeInputRef: RefObject<HTMLInputElement> = useRef(null);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -30,11 +34,15 @@ function NewSEOfferForm() {
     const enteredTitle = titleInputRef.current?.value!;
     const enteredAddress = addressInputRef.current?.value!;
     const enteredDescription = descriptionInputRef.current?.value!;
+    const selectedCategory = categoryInputRef.current?.value!;
+    const enteredPrize = prizeInputRef.current?.value!;
 
     const formData = new FormData();
     formData.append("offer[title]", enteredTitle);
     formData.append("offer[address]", enteredAddress);
     formData.append("offer[description]", enteredDescription);
+    formData.append("offer[category]", selectedCategory);
+    formData.append("offer[prize]", enteredPrize);
 
     for (let i = 0; i < uploadedImages.length; i++) {
       formData.append("offer[images][]", uploadedImages[i]);
@@ -52,6 +60,7 @@ function NewSEOfferForm() {
           navigate(`/${OFFERS}/${response.data.id}`);
         })
         .catch((err) => {
+          flashMsgCtx.handleError(err, navigate);
           console.log(err);
         });
     } catch (e) {
@@ -86,7 +95,42 @@ function NewSEOfferForm() {
               ref={descriptionInputRef}
             />
           </div>
-          <input type="file" name="image" multiple ref={imagesInputRef}></input>
+          <input
+            type="file"
+            name="image"
+            className={styles.choose_file_input}
+            multiple
+            ref={imagesInputRef}
+          ></input>
+          <div className={styles.control}>
+            <label htmlFor="category">Category</label>
+            <select
+              id="category"
+              name="category"
+              ref={categoryInputRef}
+              defaultValue={OFFER_CATEGORY_OPTIONS[0]}
+            >
+              {OFFER_CATEGORY_OPTIONS.map((category, index) => (
+                <option key={index} value={category}>
+                  {upperCaseFirstStringCharacter(category)}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className={styles.control}>
+            <label htmlFor="prize">Prize</label>
+            <input
+              id="prize"
+              type="text"
+              placeholder="0"
+              className={styles.input}
+              ref={prizeInputRef}
+            />
+            <span className={styles.span}>
+              Typing prize 0 or leaving empty will cause not showing prize at
+              all.
+            </span>
+          </div>
           <div className={styles.actions}>
             <button className="btn">Create</button>
           </div>
