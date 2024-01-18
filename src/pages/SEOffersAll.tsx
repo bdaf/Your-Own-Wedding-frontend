@@ -48,7 +48,6 @@ function AllSEOffers() {
     filterString: string,
     sortFunction: Function
   ): void {
-    console.log(filterString);
     setFilteredOffers(
       sortFunction(getOffersFilteredByTitleAndDescription(offers, filterString))
     );
@@ -60,7 +59,7 @@ function AllSEOffers() {
       <div className="center">
         <Filterbar findFilteredOffers={loadOffers} />
       </div>
-      <div className="content-left flex-wrap-2">
+      <div className="content-left">
         <div className="main-content flex-shrink-high">
           {error ? (
             <div className="title">{error}</div>

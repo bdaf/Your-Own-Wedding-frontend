@@ -42,7 +42,7 @@ function MySEOffers() {
   return (
     <div>
       <div className="title">My SEOffers</div>
-      <div className="content-left flex-wrap-2">
+      <div className="center">
         <div className="main-content flex-shrink-high">
           {error ? (
             <div className="title">Loading...</div>

@@ -197,8 +197,8 @@ function EventPage() {
   if (loading) return <div className="title">Loading...</div>;
   return (
     <Card>
-      <div className="content-left flex-wrap-2">
-        <div className="width-80-center">
+      <div className="center wrap">
+        <div className="event-form">
           {showNoteInsteadOfEventForm && (
             <div className="margin-2rem">
               <Card color="rgb(150, 111, 111)" border_radius="0">
@@ -233,7 +233,7 @@ function EventPage() {
             </>
           )}
         </div>
-        <div className="width-20 events-notes-container scroll-y">
+        <div className="width-20-center events-notes-container scroll-y">
           <div className="width-100-center">
             {events.map((e) => (
               <div key={e.id}>
