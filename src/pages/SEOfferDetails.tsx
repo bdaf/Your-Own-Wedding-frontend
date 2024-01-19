@@ -5,6 +5,7 @@ import styles from "../css/pages.module.css";
 import { deleteOfferById, getOfferById } from "../services/offerService";
 import FlashMessagesContext from "../store/flash-messages-context";
 import { EMPTY_OFFER_MODEL, OfferModel } from "../components/Models";
+import noImageFound from "../components/images/No Image Found.png";
 import ImageGallery from "react-image-gallery";
 
 function SEOfferDetails() {
@@ -55,11 +56,15 @@ function SEOfferDetails() {
       <div className="text-center">
         <div>
           <div className="title">SEOffer details</div>
-          <ImageGallery
-            items={offer.images.map(function (image) {
-              return { original: image, thumbnail: "" };
-            })}
-          />
+          {!!offer.images.length ? (
+            <ImageGallery
+              items={offer.images.map(function (image) {
+                return { original: image, thumbnail: "" };
+              })}
+            />
+          ) : (
+            <img src={noImageFound} alt="PHOTO" />
+          )}
           <ul>
             <li>{offer.id}</li>
             <li>{offer.title}</li>
