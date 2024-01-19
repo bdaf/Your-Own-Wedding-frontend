@@ -134,7 +134,7 @@ function Filterbar({ findFilteredOffers }: Props) {
           <button
             key={index}
             type="button"
-            className={` btn--alt ${styles.btn} ${
+            className={`${styles.category_btn} ${
               filters.categories.includes(category.toLowerCase())
                 ? `${styles.active_btn}`
                 : ""

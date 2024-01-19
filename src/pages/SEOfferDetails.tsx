@@ -5,6 +5,7 @@ import styles from "../css/pages.module.css";
 import { deleteOfferById, getOfferById } from "../services/offerService";
 import FlashMessagesContext from "../store/flash-messages-context";
 import { EMPTY_OFFER_MODEL, OfferModel } from "../components/Models";
+import ImageGallery from "react-image-gallery";
 
 function SEOfferDetails() {
   const navigate = useNavigate();
@@ -54,9 +55,11 @@ function SEOfferDetails() {
       <div className="text-center">
         <div>
           <div className="title">SEOffer details</div>
-          {offer.images?.map((image, index) => {
-            return <img key={index} src={image} alt="PHOTO" width={"500px"} />;
-          })}
+          <ImageGallery
+            items={offer.images.map(function (image) {
+              return { original: image, thumbnail: "" };
+            })}
+          />
           <ul>
             <li>{offer.id}</li>
             <li>{offer.title}</li>
