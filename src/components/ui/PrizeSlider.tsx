@@ -14,20 +14,20 @@ function valuetext(value: number) {
 
 const maxMarks = [
   {
-    value: 10000,
-    label: "10000 PLN",
+    value: 2000,
+    label: "2000 PLN",
   },
   {
-    value: 20000,
-    label: "20000 PLN",
+    value: 4000,
+    label: "4000 PLN",
   },
   {
-    value: 30000,
-    label: "30000 PLN",
+    value: 6000,
+    label: "6000 PLN",
   },
   {
-    value: 40000,
-    label: "40000 PLN",
+    value: 8000,
+    label: "8000 PLN",
   },
 ];
 
@@ -37,8 +37,8 @@ const miniMarks = [
     label: "0 PLN",
   },
   {
-    value: 50000,
-    label: "50000 PLN",
+    value: 10000,
+    label: "10000 PLN",
   },
 ];
 
@@ -57,7 +57,7 @@ export default function RangeSlider({ setSliderValue, sliderValue }: Props) {
         value={sliderValue}
         min={0}
         step={10}
-        max={50000}
+        max={10000}
         marks={windowSizeCtx.isWindowLessWiderThan(505) ? miniMarks : maxMarks}
         onChange={handleSliderChange}
         valueLabelDisplay="auto"
