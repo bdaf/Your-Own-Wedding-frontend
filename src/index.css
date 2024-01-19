@@ -1,4 +1,4 @@
-@import "./css/reactImageGallery.css";
+@import "./node_modules/react-image-gallery/styles/css/image-gallery.css";
 * {
   box-sizing: border-box;
 }
