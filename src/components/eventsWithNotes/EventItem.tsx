@@ -32,7 +32,7 @@ function EventItem({
           className={`${styles.event} ${styles.margin_auto}`}
         >
           <span className={styles.margin_auto}>
-            {event.date.substring(0, 10)} {event.date.substring(11, 19)}
+            {event.date.substring(0, 10)} {event.date.substring(11, 19) + " "}
           </span>
           <b>{event.name}</b>
         </div>

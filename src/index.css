@@ -59,33 +59,6 @@ a:hover {
   flex-direction: column;
 }
 
-/*  */
-
-.width-20-center {
-  width: 20%;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.event-form {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  min-width: 80%;
-}
-
-.events-notes-container {
-  max-height: 585px;
-  margin: 2rem 0;
-  width: 200px;
-  /* border-style: solid;
-  border-radius: 8px;
-  border-width: 1px; */
-}
-
-/*  */
-
 .width-80-center {
   display: flex;
   justify-content: center;

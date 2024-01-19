@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import styles from "../css/Pages.module.css";
 import Card from "../components/ui/Card";
 import {
   getMyEvents,
@@ -198,7 +199,7 @@ function EventPage() {
   return (
     <Card>
       <div className="center wrap">
-        <div className="event-form">
+        <div className={`${styles.event_notes_form}`}>
           {showNoteInsteadOfEventForm && (
             <div className="margin-2rem">
               <Card color="rgb(150, 111, 111)" border_radius="0">
@@ -233,7 +234,9 @@ function EventPage() {
             </>
           )}
         </div>
-        <div className="width-20-center events-notes-container scroll-y">
+        <div
+          className={`${styles.width_20_center} ${styles.events_notes_container} scroll-y`}
+        >
           <div className="width-100-center">
             {events.map((e) => (
               <div key={e.id}>

@@ -1,9 +1,11 @@
 .event {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
+  flex-direction: column;
+  flex-wrap: nowrap;
   font-size: 0.9rem;
   padding: 1rem;
+  text-align: center;
 }
 
 .event:hover {
