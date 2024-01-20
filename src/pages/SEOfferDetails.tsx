@@ -6,7 +6,9 @@ import { deleteOfferById, getOfferById } from "../services/offerService";
 import FlashMessagesContext from "../store/flash-messages-context";
 import { EMPTY_OFFER_MODEL, OfferModel } from "../components/Models";
 import noImageFound from "../components/images/No Image Found.png";
+import _300 from "../components/images/300.jpg";
 import ImageGallery from "react-image-gallery";
+import Card from "../components/ui/Card";
 
 function SEOfferDetails() {
   const navigate = useNavigate();
@@ -53,27 +55,48 @@ function SEOfferDetails() {
     }
 
     return (
-      <div className="text-center">
-        <div>
-          <div className="title">SEOffer details</div>
-          {!!offer.images.length ? (
-            <ImageGallery
-              items={offer.images.map(function (image) {
-                return { original: image, thumbnail: "" };
-              })}
-            />
-          ) : (
-            <img src={noImageFound} alt="PHOTO" />
-          )}
-          <ul>
-            <li>{offer.id}</li>
-            <li>{offer.title}</li>
-            <li>{offer.images}</li>
-            <li>{offer.description}</li>
-            <li>{offer.address}</li>
-            <li>{offer.created_at}</li>
-          </ul>
+      <div className="width-100-center gap-1rem">
+        <div className="title">{offer.title}</div>
+        <div className={`${styles.gallery_container}`}>
+          <Card customStyle="center">
+            <div className={`${styles.gallery}`}>
+              {!!offer.images.length ? (
+                <ImageGallery
+                  showPlayButton={false}
+                  showNav={true}
+                  items={offer.images.map(function (image) {
+                    return { original: image, thumbnail: image };
+                  })}
+                />
+              ) : (
+                <img
+                  src={noImageFound}
+                  alt="PHOTO"
+                  className={`${styles.image_not_found_gallery}`}
+                />
+              )}
+            </div>
+          </Card>
+          <Card>
+            <div
+              className={`${styles.thumbs_container} ${styles.container}`}
+            ></div>
+          </Card>
         </div>
+        <Card>
+          <div className={`${styles.contact_container} ${styles.container}`}>
+            Contact
+          </div>
+        </Card>
+        <Card>
+          <div
+            className={`${styles.description_container}  ${styles.container}`}
+          >
+            {offer.address}
+            {offer.description}
+            {offer.created_at}
+          </div>
+        </Card>
         <div>
           <button className={`btn-red`} onClick={deleteOfferHandler}>
             Delete

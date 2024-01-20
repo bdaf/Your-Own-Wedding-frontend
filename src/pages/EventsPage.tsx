@@ -234,9 +234,7 @@ function EventPage() {
             </>
           )}
         </div>
-        <div
-          className={`${styles.width_20_center} ${styles.events_notes_container} scroll-y`}
-        >
+        <div className={`${styles.events_notes_container} scroll-y`}>
           <div className="width-100-center">
             {events.map((e) => (
               <div key={e.id}>

@@ -4,9 +4,10 @@ interface Props {
   children: any;
   color?: string;
   border_radius?: string;
+  customStyle?: string;
 }
 
-function Card({ children, color, border_radius }: Props) {
+function Card({ children, color, border_radius, customStyle }: Props) {
   if (!color) color = "white";
   if (!border_radius) border_radius = "6px";
   const cardConfigurableStyles = {
@@ -15,7 +16,10 @@ function Card({ children, color, border_radius }: Props) {
   };
 
   return (
-    <div className={styles.card} style={cardConfigurableStyles}>
+    <div
+      className={`${styles.card} ${customStyle}`}
+      style={cardConfigurableStyles}
+    >
       {children}
     </div>
   );
