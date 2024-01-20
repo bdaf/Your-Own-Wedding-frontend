@@ -5,7 +5,6 @@ import styles from "../css/pages.module.css";
 import { deleteOfferById, getOfferById } from "../services/offerService";
 import FlashMessagesContext from "../store/flash-messages-context";
 import { EMPTY_OFFER_MODEL, OfferModel } from "../components/Models";
-import noImageFound from "../components/images/No Image Found.png";
 import _300 from "../components/images/300.jpg";
 import ImageGallery from "react-image-gallery";
 import Card from "../components/ui/Card";
@@ -15,6 +14,7 @@ function SEOfferDetails() {
   const flashMsgCtx = useContext(FlashMessagesContext);
   const [offer, setOffer] = useState<OfferModel>(EMPTY_OFFER_MODEL);
   const [loading, setLoading] = useState(true);
+  const [loadingContact, setLoadingContact] = useState(false);
   const id = useParams().id!;
 
   useEffect(() => {
@@ -48,12 +48,14 @@ function SEOfferDetails() {
       });
   }
 
+  function backToSEOffersPageHandler(): void {
+    navigate(`/${OFFERS}`);
+  }
+
+  function showContactHandler(): void {}
+
   if (loading) return <div className="title">Loading...</div>;
   if (offer) {
-    function backToSEOffersPageHandler(): void {
-      navigate(`/${OFFERS}`);
-    }
-
     return (
       <div>
         <div className="title">{offer.title}</div>
@@ -61,21 +63,13 @@ function SEOfferDetails() {
           <div className={`${styles.gallery_container}`}>
             <Card customStyle="center">
               <div className={`${styles.gallery}`}>
-                {!!offer.images.length ? (
-                  <ImageGallery
-                    showPlayButton={false}
-                    showNav={true}
-                    items={offer.images.map(function (image) {
-                      return { original: image, thumbnail: image };
-                    })}
-                  />
-                ) : (
-                  <img
-                    src={noImageFound}
-                    alt="PHOTO"
-                    className={`${styles.image_not_found_gallery}`}
-                  />
-                )}
+                <ImageGallery
+                  showPlayButton={false}
+                  showNav={true}
+                  items={offer.images.map(function (image) {
+                    return { original: image, thumbnail: image };
+                  })}
+                />
               </div>
             </Card>
             <Card>
@@ -88,6 +82,13 @@ function SEOfferDetails() {
         <Card>
           <div className={`${styles.contact_container} ${styles.container}`}>
             Contact
+            <button
+              className={`${styles.show_contact_button} btn`}
+              onClick={showContactHandler}
+            >
+              Show contact
+            </button>
+            {loadingContact && <div className="title">Loading...</div>}
           </div>
         </Card>
         <Card>
@@ -113,11 +114,7 @@ function SEOfferDetails() {
       </div>
     );
   }
-  return (
-    <div className="title">
-      Critical error occurred, we're sorry for inconvienience.
-    </div>
-  );
+  return <div className="title">Error occurred during loading offer.</div>;
 }
 
 export default SEOfferDetails;
