@@ -10,7 +10,14 @@ import ErrorPage from "./ErrorPage.tsx";
 import "./index.css";
 import Layout from "./components/layout/Layout.tsx";
 import Home from "./pages/Home.tsx";
-import { LOGIN, REGISTER, OFFERS, EVENTS } from "./constants.ts";
+import {
+  LOGIN,
+  REGISTER,
+  OFFERS,
+  EVENTS,
+  GUESTS,
+  TASK_MONTHS,
+} from "./constants.ts";
 import { WindowSizeContextProvider } from "./store/window-size-context.tsx";
 import RegisterPage from "./pages/RegisterPage.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
@@ -19,6 +26,8 @@ import EventsPage from "./pages/EventsPage.tsx";
 import { FlashMessagesContextProvider } from "./store/flash-messages-context.tsx";
 import SEOffersMy from "./pages/SEOffersMy.tsx";
 import SEOfferEdit from "./pages/SEOfferEdit.tsx";
+import MonthTaskPage from "./pages/MonthTaskPage.tsx";
+import GuestsPage from "./pages/GuestsPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +70,14 @@ const router = createBrowserRouter([
       {
         path: EVENTS,
         element: <EventsPage />,
+      },
+      {
+        path: `${GUESTS}`,
+        element: <GuestsPage />,
+      },
+      {
+        path: `${TASK_MONTHS}`,
+        element: <MonthTaskPage />,
       },
     ],
   },

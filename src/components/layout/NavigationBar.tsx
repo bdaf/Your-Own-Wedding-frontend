@@ -1,7 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./NavigationBar.module.css";
-import { LOGIN, REGISTER, OFFERS, EVENTS } from "../../constants";
+import {
+  LOGIN,
+  REGISTER,
+  OFFERS,
+  EVENTS,
+  TASK_MONTHS,
+  GUESTS,
+} from "../../constants";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChurch } from "@fortawesome/free-solid-svg-icons";
@@ -39,6 +46,24 @@ function NavigationBar() {
           <li>
             <Link to={"/"}>Home</Link>
           </li>
+          {authCtx.isClientUser() && (
+            <>
+              <li>
+                <div className={styles.dropdown}>
+                  <Link className={styles.dropdown} to={`/${GUESTS}`}>
+                    Guests
+                  </Link>
+                </div>
+              </li>
+              <li>
+                <div className={styles.dropdown}>
+                  <Link className={styles.dropdown} to={`/${TASK_MONTHS}`}>
+                    Task Month
+                  </Link>
+                </div>
+              </li>
+            </>
+          )}
           <li>
             <div className={styles.dropdown}>
               <Link className={styles.dropdown} to={`/${OFFERS}`}>
