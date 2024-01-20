@@ -225,7 +225,8 @@ main {
 }
 
 .btn,
-.btn-create .btn--alt {
+.btn-create,
+.btn--alt {
   padding: 12px 24px;
   border-radius: 5px;
   background-color: #1eb3f8;
