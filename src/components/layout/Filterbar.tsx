@@ -107,7 +107,7 @@ function Filterbar({ findFilteredOffers }: Props) {
     });
   }
 
-  function setCityOnClickHandler(
+  function setAddressOnClickHandler(
     event: React.ChangeEvent<HTMLInputElement>
   ): void {
     console.log(filters.address);
@@ -120,12 +120,12 @@ function Filterbar({ findFilteredOffers }: Props) {
   return (
     <div className={styles.filter_container}>
       <div className={styles.filter}>
-        <span className={styles.header}>City</span>
+        <span className={styles.header}>Address</span>
         <input
           className={styles.search}
           placeholder="Search"
           type="search"
-          onChange={setCityOnClickHandler}
+          onChange={setAddressOnClickHandler}
         />
       </div>
       <div className={styles.filter}>
