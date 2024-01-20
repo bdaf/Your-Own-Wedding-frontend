@@ -19,10 +19,16 @@ import {
 import _300 from "../components/images/300.jpg";
 import ImageGallery from "react-image-gallery";
 import Card from "../components/ui/Card";
+import {
+  getOnlyDateAndHourFromDateInString,
+  upperCaseFirstStringCharacter,
+} from "../helper";
+import AuthenticationContext from "../store/authentication-context";
 
 function SEOfferDetails() {
   const navigate = useNavigate();
   const flashMsgCtx = useContext(FlashMessagesContext);
+  const authCtx = useContext(AuthenticationContext);
   const [offer, setOffer] = useState<OfferModel>(EMPTY_OFFER_MODEL);
   const [loading, setLoading] = useState(true);
   const [loadingContact, setLoadingContact] = useState(false);
@@ -60,6 +66,10 @@ function SEOfferDetails() {
       .finally(() => {
         setLoading(false);
       });
+  }
+
+  function editButtonHandler(): void {
+    navigate(`/${OFFERS}/${id.toString()}/edit`);
   }
 
   function backToSEOffersPageHandler(): void {
@@ -125,14 +135,14 @@ function SEOfferDetails() {
                     {` ${contactData.user.email}`}
                   </div>
                   <div className={`${styles.contact}`}>
-                    <b>Phone number:</b>
-                    {` ${contactData.user.phone_number}`}
+                    <b>User city:</b>
+                    {` ${contactData.user.city}`}
                   </div>
                 </div>
                 <div className={`${styles.contact_sub_container}`}>
                   <div className={`${styles.contact}`}>
-                    <b>User city:</b>
-                    {` ${contactData.user.city}`}
+                    <b>Phone number:</b>
+                    {` ${contactData.user.phone_number}`}
                   </div>
                   <div className={`${styles.contact}`}>
                     <b>Offer address:</b>
@@ -154,15 +164,37 @@ function SEOfferDetails() {
           <div
             className={`${styles.description_container}  ${styles.container}`}
           >
-            {offer.address}
-            {offer.description}
-            {offer.created_at}
+            <div className="title">{offer.title}</div>
+            <div className={`${styles.sub_container}`}>
+              <div className={`${styles.contact}`}>
+                <b>Category:</b>
+                {` ${upperCaseFirstStringCharacter(offer.category)}`}
+              </div>
+              <div className={`${styles.contact}`}>
+                <b>Prize:</b>
+                {` ${offer.prize}`} PLN
+              </div>
+            </div>
+            <div className={`${styles.description}`}>{offer.description}</div>
+            <div className="center">
+              <b>{`Published: ${getOnlyDateAndHourFromDateInString(
+                offer.created_at!
+              )}`}</b>
+            </div>
           </div>
         </Card>
-        <div>
-          <button className={`btn-red`} onClick={deleteOfferHandler}>
-            Delete
-          </button>
+        <div className="actions">
+          {authCtx.isSupportUser() &&
+            authCtx.getCurrentUser().id == offer.user_id && (
+              <>
+                <button className={`btn-red`} onClick={deleteOfferHandler}>
+                  Delete
+                </button>
+                <button className={`btn-update`} onClick={editButtonHandler}>
+                  Edit
+                </button>
+              </>
+            )}
           <button
             className={`btn-light ${styles.btn_light}`}
             onClick={backToSEOffersPageHandler}

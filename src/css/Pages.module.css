@@ -5,20 +5,30 @@
 .show_contact_button {
   display: flex;
   justify-content: center;
-  width: 100%;
+  width: 95%;
 }
 
 .contact {
   margin: 1rem;
 }
 
+.sub_container {
+  display: flex;
+  justify-content: space-between;
+}
+
 .contact_container {
   display: flex;
   justify-content: space-around;
   flex-direction: row;
+  flex-wrap: wrap;
   text-align: center;
 }
 .contact_container .contact_header {
+}
+
+.description {
+  margin: 0rem 1rem 1rem;
 }
 
 /* .contact_container {

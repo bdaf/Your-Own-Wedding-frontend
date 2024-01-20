@@ -9,22 +9,22 @@ interface Props {
 function SearchBar({ onChangeSearchBar }: Props) {
   const sortOptions = [
     {
-      value: "prize_from_low",
+      value: "less_expensive_to_expensive",
       function: sortByPrizeFromLowest,
       text: "Prize: Low to High",
     },
     {
-      value: "prize_from_high",
+      value: "expensive_to_less_expensive",
       function: sortByPrizeFromHighest,
       text: "Prize: High to Low",
     },
     {
-      value: "created_at_from_new",
+      value: "newest_to_oldest",
       function: sortByCreatedAtFromNewest,
       text: "Newest offers",
     },
     {
-      value: "created_at_from_old",
+      value: "oldest_to_newest",
       function: sortByCreatedAtFromOldest,
       text: "Oldest offers",
     },
