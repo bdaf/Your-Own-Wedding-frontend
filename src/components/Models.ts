@@ -43,6 +43,24 @@ type LogoutResponse = {
     logged_out :boolean
 }
 
+// Guests
+
+interface GuestModel {
+    id: number;
+    user_id: number;
+    name: string;
+    surname: string;
+    created_at?: string;
+    updated_at?: string;
+  }
+
+  const EMPTY_GUEST_MODEL: GuestModel = {
+    id: -1,
+    user_id: -1,
+    name: "Marek",
+    surname: "Kowalski",
+}
+
 // Offer
 
 interface OfferModel {
@@ -182,14 +200,15 @@ const EMPTY_FILTER_MODEL: FiltersModel = {
 
 export {
     isProperId, 
-    EMPTY_EVENT_MODEL, EMPTY_NOTE_MODEL, EMPTY_OFFER_MODEL, EMPTY_FILTER_MODEL , isObjectEventModel, isObjectNoteModel,
+    EMPTY_EVENT_MODEL, EMPTY_GUEST_MODEL, EMPTY_NOTE_MODEL, EMPTY_OFFER_MODEL, EMPTY_FILTER_MODEL , isObjectEventModel, isObjectNoteModel,
     offerModelTitleContains, offerModelDescriptionContains, offerModelAddressContains, offerModelCategoryConsistsOf,
     OFFER_CATEGORY_OPTIONS, MIN_OFFER_PRIZE, MAX_OFFER_PRIZE, OFFER_EMPTY_CONTACT_DATA,
-    OFFER_ID_KEY, OFFER_TITLE_KEY, OFFER_DESCRIPTION_KEY, OFFER_ADDRESS_KEY, OFFER_CATEGORY_KEY, OFFER_PRIZE_KEY, OFFER_IMAGES_KEY
+    OFFER_ID_KEY, OFFER_TITLE_KEY, OFFER_DESCRIPTION_KEY, OFFER_ADDRESS_KEY, OFFER_CATEGORY_KEY, OFFER_PRIZE_KEY, OFFER_IMAGES_KEY,
 };
 
 export type { 
     User, UserRegister, UserLogin, AuthenticationResponse, LogoutResponse,
+    GuestModel,
     OfferModel, OfferApiResponse, OfferContactModel,
     EventModel, NoteModel,
     FiltersModel 
