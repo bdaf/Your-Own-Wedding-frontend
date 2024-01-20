@@ -85,6 +85,30 @@ interface OfferModel {
       prize: 0,
   }
 
+  interface OfferContactModel {
+    user: {
+        email: string,
+        city?: string,
+        phone_number?: string,
+    },
+    offer: {
+        address: string,
+        addition_contact_data?: Text
+    }
+  }
+
+  const OFFER_EMPTY_CONTACT_DATA: OfferContactModel = {
+      user: {
+          email: "",
+          city: undefined,
+          phone_number: undefined
+      },
+      offer: {
+          address: "",
+          addition_contact_data: undefined
+      }
+  }
+
 function offerModelTitleContains(offer: OfferModel, stringToContain: string): boolean {
     return offer.title.toLowerCase().includes(stringToContain.toLowerCase())
 }
@@ -160,13 +184,13 @@ export {
     isProperId, 
     EMPTY_EVENT_MODEL, EMPTY_NOTE_MODEL, EMPTY_OFFER_MODEL, EMPTY_FILTER_MODEL , isObjectEventModel, isObjectNoteModel,
     offerModelTitleContains, offerModelDescriptionContains, offerModelAddressContains, offerModelCategoryConsistsOf,
-    OFFER_CATEGORY_OPTIONS, MIN_OFFER_PRIZE, MAX_OFFER_PRIZE, 
+    OFFER_CATEGORY_OPTIONS, MIN_OFFER_PRIZE, MAX_OFFER_PRIZE, OFFER_EMPTY_CONTACT_DATA,
     OFFER_ID_KEY, OFFER_TITLE_KEY, OFFER_DESCRIPTION_KEY, OFFER_ADDRESS_KEY, OFFER_CATEGORY_KEY, OFFER_PRIZE_KEY, OFFER_IMAGES_KEY
 };
 
 export type { 
     User, UserRegister, UserLogin, AuthenticationResponse, LogoutResponse,
-    OfferModel, OfferApiResponse,
+    OfferModel, OfferApiResponse, OfferContactModel,
     EventModel, NoteModel,
     FiltersModel 
 };

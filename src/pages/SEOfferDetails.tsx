@@ -2,9 +2,20 @@ import { useNavigate, useParams } from "react-router-dom";
 import { OFFERS } from "../constants";
 import { useContext, useEffect, useState } from "react";
 import styles from "../css/pages.module.css";
-import { deleteOfferById, getOfferById } from "../services/offerService";
-import FlashMessagesContext from "../store/flash-messages-context";
-import { EMPTY_OFFER_MODEL, OfferModel } from "../components/Models";
+import {
+  deleteOfferById,
+  getOfferById,
+  getOfferContactByOfferId,
+} from "../services/offerService";
+import FlashMessagesContext, {
+  SUCCESS_FLASH_TYPE,
+} from "../store/flash-messages-context";
+import {
+  EMPTY_OFFER_MODEL,
+  OFFER_EMPTY_CONTACT_DATA,
+  OfferContactModel,
+  OfferModel,
+} from "../components/Models";
 import _300 from "../components/images/300.jpg";
 import ImageGallery from "react-image-gallery";
 import Card from "../components/ui/Card";
@@ -15,6 +26,9 @@ function SEOfferDetails() {
   const [offer, setOffer] = useState<OfferModel>(EMPTY_OFFER_MODEL);
   const [loading, setLoading] = useState(true);
   const [loadingContact, setLoadingContact] = useState(false);
+  const [contactData, setContactData] = useState<OfferContactModel>(
+    OFFER_EMPTY_CONTACT_DATA
+  );
   const id = useParams().id!;
 
   useEffect(() => {
@@ -52,7 +66,24 @@ function SEOfferDetails() {
     navigate(`/${OFFERS}`);
   }
 
-  function showContactHandler(): void {}
+  function showContactHandler(): void {
+    setLoadingContact(true);
+    getOfferContactByOfferId(id)
+      .then((res) => {
+        console.log(res);
+        setContactData(res.data);
+        flashMsgCtx.setFlashMessage(
+          "Contact has been shown",
+          SUCCESS_FLASH_TYPE
+        );
+      })
+      .catch((e) => {
+        flashMsgCtx.handleError(e, navigate);
+      })
+      .finally(() => {
+        setLoadingContact(false);
+      });
+  }
 
   if (loading) return <div className="title">Loading...</div>;
   if (offer) {
@@ -80,15 +111,43 @@ function SEOfferDetails() {
           </div>
         )}
         <Card>
-          <div className={`${styles.contact_container} ${styles.container}`}>
-            Contact
-            <button
-              className={`${styles.show_contact_button} btn`}
-              onClick={showContactHandler}
-            >
-              Show contact
-            </button>
-            {loadingContact && <div className="title">Loading...</div>}
+          <div className={`${styles.container}`}>
+            <div className="center">
+              <b>Contact</b>
+            </div>
+            {loadingContact ? (
+              <div className="title">Loading...</div>
+            ) : !!contactData.user.email ? (
+              <div className={`${styles.contact_container}`}>
+                <div className={`${styles.contact_sub_container}`}>
+                  <div className={`${styles.contact}`}>
+                    <b>Email address: </b>
+                    {` ${contactData.user.email}`}
+                  </div>
+                  <div className={`${styles.contact}`}>
+                    <b>Phone number:</b>
+                    {` ${contactData.user.phone_number}`}
+                  </div>
+                </div>
+                <div className={`${styles.contact_sub_container}`}>
+                  <div className={`${styles.contact}`}>
+                    <b>User city:</b>
+                    {` ${contactData.user.city}`}
+                  </div>
+                  <div className={`${styles.contact}`}>
+                    <b>Offer address:</b>
+                    {` ${contactData.offer.address}`}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <button
+                className={`${styles.show_contact_button} btn`}
+                onClick={showContactHandler}
+              >
+                Show contact
+              </button>
+            )}
           </div>
         </Card>
         <Card>

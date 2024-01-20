@@ -1,5 +1,5 @@
 import { OfferModel, offerModelTitleContains, offerModelDescriptionContains, offerModelAddressContains, offerModelCategoryConsistsOf, FiltersModel, EMPTY_FILTER_MODEL, OFFER_ID_KEY } from "../components/Models";
-import { OFFERS, API_URL } from "../constants";
+import { OFFERS, API_URL, CONTACT, _MY } from "../constants";
 import axios from 'axios';
 
 function getAllOffers(filters = EMPTY_FILTER_MODEL) {
@@ -7,11 +7,15 @@ function getAllOffers(filters = EMPTY_FILTER_MODEL) {
 }
 
 function getMyOffers() {
-    return axios.get(`${API_URL}/${OFFERS}_my`, { withCredentials: true })
+    return axios.get(`${API_URL}/${OFFERS}${_MY}`, { withCredentials: true })
 }
 
 function getOfferById(id :string) {
     return axios.get(`${API_URL}/${OFFERS}/${id}`, { withCredentials: true })
+}
+
+function getOfferContactByOfferId(id :string) {
+    return axios.get(`${API_URL}/${OFFERS}/${id}/${CONTACT}`, { withCredentials: true })
 }
 
 function createOffer(formData: FormData) {
@@ -35,4 +39,5 @@ function getOffersFilteredByTitleAndDescription(offers: OfferModel[], filterStri
 function getOffersFilteredByAddress(offers: OfferModel[], filterString: string): OfferModel[] {
     return offers.filter(o => offerModelAddressContains(o, filterString))
 }
-export {getAllOffers, getMyOffers, getOfferById, createOffer, updateOffer, deleteOfferById, getOffersFilteredByTitleAndDescription, getOffersFilteredByAddress}
+export {getAllOffers, getMyOffers, getOfferById, getOfferContactByOfferId, createOffer, updateOffer, deleteOfferById, 
+    getOffersFilteredByTitleAndDescription, getOffersFilteredByAddress}
