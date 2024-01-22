@@ -15,7 +15,7 @@ type UserRegister = {
     name? :string,
     surname? :string,
     celebration_date? :string
-    city? :string
+    address? :string
     phone_number? :string
     password: string,
     password_confirmation: string

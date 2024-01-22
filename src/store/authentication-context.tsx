@@ -79,10 +79,12 @@ export function AuthenticationContextProvider({ children }: Props) {
     return authentication.user ? { ...authentication.user } : defaultEmptyUser;
   }
   function isClientUserHandler(): boolean {
-    return authentication.isLoggedIn && authentication.user.role === "client";
+    return (
+      authentication.isLoggedIn && authentication.user.role === "organizer"
+    );
   }
   function isSupportUserHandler(): boolean {
-    return authentication.isLoggedIn && authentication.user.role === "support";
+    return authentication.isLoggedIn && authentication.user.role === "provider";
   }
   function isAdminHandler(): boolean {
     return authentication.isLoggedIn && authentication.user.role === "admin";

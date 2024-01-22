@@ -6,15 +6,24 @@ function isProperId(id: number):boolean {
 
 // User
 
+type ProviderModel = {
+    city? :string,
+    phone_number?: string,
+}
+
+type OrganizerModel = {
+    address? :string,
+    phone_number?: string,
+}
+
 type User = {
     id: number
     email :string,
     role :string,
     name? :string,
     surname? :string,
-    city? :string,
-    phone_number?: string,
-    celebration_date?: Date
+    provider :ProviderModel,
+    organizer :OrganizerModel
 }
 
 type UserRegister = {
@@ -23,7 +32,7 @@ type UserRegister = {
     name? :string,
     surname? :string,
     celebration_date? :string
-    city? :string
+    address? :string
     phone_number? :string
     password: string,
     password_confirmation: string

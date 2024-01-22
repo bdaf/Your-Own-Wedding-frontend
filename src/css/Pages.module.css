@@ -16,9 +16,7 @@ tr:nth-child(even) {
 }
 
 .show_contact_button {
-  display: flex;
-  justify-content: center;
-  width: 95%;
+  width: 100%;
 }
 
 .contact {

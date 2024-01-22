@@ -23,14 +23,14 @@ function RegisterForm() {
   const flashMsgCtx = useContext(FlashMessagesContext);
 
   const [loading, setLoading] = useState(false);
-  const [role, setRole] = useState("client");
+  const [role, setRole] = useState("organizer");
 
   const emailInputRef: RefObject<HTMLInputElement> = useRef(null);
   const passwordInputRef: RefObject<HTMLInputElement> = useRef(null);
   const passwordConfirmationInputRef: RefObject<HTMLInputElement> =
     useRef(null);
   const celebrationDateInputRef: RefObject<HTMLInputElement> = useRef(null);
-  const cityInputRef: RefObject<HTMLInputElement> = useRef(null);
+  const addressInputRef: RefObject<HTMLInputElement> = useRef(null);
   const phoneNumberInputRef: RefObject<HTMLInputElement> = useRef(null);
 
   async function submitHandler(
@@ -41,7 +41,7 @@ function RegisterForm() {
 
     const enteredEmail = emailInputRef.current!.value;
     const enteredCelebrationDate = celebrationDateInputRef.current?.value;
-    const enteredCity = cityInputRef.current?.value;
+    const enteredAddress = addressInputRef.current?.value;
     const enteredPhoneNumber = phoneNumberInputRef.current?.value;
     const enteredPassword = passwordInputRef.current!.value;
     const enteredPasswordConfirmation =
@@ -51,7 +51,7 @@ function RegisterForm() {
       email: enteredEmail,
       role: role,
       celebration_date: enteredCelebrationDate,
-      city: enteredCity,
+      address: enteredAddress,
       phone_number: enteredPhoneNumber,
       password: enteredPassword,
       password_confirmation: enteredPasswordConfirmation,
@@ -113,11 +113,11 @@ function RegisterForm() {
           <div className={styles.control}>
             <label htmlFor="role">Role</label>
             <select id="role" name="role" onChange={roleChangeHandler}>
-              <option value="client">Wedding organiser</option>
-              <option value="support">Wedding service provider</option>
+              <option value="organizer">Wedding organizer</option>
+              <option value="provider">Wedding service provider</option>
             </select>
           </div>
-          {role == "client" && (
+          {role == "organizer" && (
             <div className={styles.control}>
               <label htmlFor="celebraion_date">Celebration date</label>
               <input
@@ -129,11 +129,16 @@ function RegisterForm() {
             </div>
           )}
 
-          {role == "support" && (
+          {role == "provider" && (
             <>
               <div className={styles.control}>
-                <label htmlFor="city">City</label>
-                <input id="city" type="text" required ref={cityInputRef} />
+                <label htmlFor="address">Address</label>
+                <input
+                  id="address"
+                  type="text"
+                  required
+                  ref={addressInputRef}
+                />
               </div>
               <div className={styles.control}>
                 <label htmlFor="phone_number">Phone number</label>

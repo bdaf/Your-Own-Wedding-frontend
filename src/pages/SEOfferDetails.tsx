@@ -151,12 +151,15 @@ function SEOfferDetails() {
                 </div>
               </div>
             ) : (
-              <button
-                className={`${styles.show_contact_button} btn`}
-                onClick={showContactHandler}
-              >
-                Show contact
-              </button>
+              <div className="center">
+                {" "}
+                <button
+                  className={`${styles.show_contact_button} btn`}
+                  onClick={showContactHandler}
+                >
+                  Show contact
+                </button>
+              </div>
             )}
           </div>
         </Card>
