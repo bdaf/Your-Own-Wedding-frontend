@@ -1,18 +1,22 @@
-import { User } from "../Models";
-
 interface Props {
-  user: User;
+  daysToCeremony: number;
 }
 
-function OrganizerHomeContent({ user }: Props) {
+function OrganizerHomeContent({ daysToCeremony }: Props) {
   return (
     <div>
       <div className="title">Hello Wedding Maker!</div>
       <div className="center">
         It's pleasure to meet you. To wedding you are going to organize is left
       </div>
-      <h1>{user.organizer!.days_to_ceremony} days!</h1>
-      {user.organizer!.days_to_ceremony > 0 && (
+      <h1>{daysToCeremony >= 0 ? daysToCeremony : "NO"} days!</h1>
+      {daysToCeremony <= 0 && (
+        <div>
+          <h1>CONGRATULATIONS!!!</h1>
+          You can rest now and enjoy this big day!
+        </div>
+      )}
+      {daysToCeremony > 0 && (
         <div>
           <h3>
             Be aware then and check features which will help you in that whole

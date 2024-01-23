@@ -4,6 +4,7 @@ import { EventModel, NoteModel } from "../Models";
 import FlashMessagesContext, {
   WARNING_FLASH_TYPE,
 } from "../../store/flash-messages-context";
+import { convertStringDateToProperForDateInput } from "../../helper";
 interface Props {
   currentObject: NoteModel | EventModel;
 
@@ -95,7 +96,7 @@ function NoteNewForm({
         </div>
         {showNoteInsteadOfEventForm ? (
           <div className={styles.control}>
-            <label htmlFor="name">Body</label>
+            <label htmlFor="body">Body</label>
             <textarea
               rows={15}
               id="body"
@@ -107,14 +108,16 @@ function NoteNewForm({
           </div>
         ) : (
           <div className={styles.control}>
-            <label htmlFor="name">Date</label>
+            <label htmlFor="date">Date</label>
             <input
               id="date"
               type="datetime-local"
               required
               ref={secondAttribiiuteInputRef}
               onChange={onChangeSecondAttribiuteHandler}
-              value={(currentObject as EventModel).date.split(".")[0]}
+              value={convertStringDateToProperForDateInput(
+                (currentObject as EventModel).date
+              )}
             />
           </div>
         )}

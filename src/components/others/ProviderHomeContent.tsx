@@ -9,7 +9,7 @@ function ProviderHomeContent({ user }: Props) {
     <div>
       <div className="title">Hello Wedding Service Provider!</div>
       <div className="center">
-        It's pleasure to meet you. Remember - your wedding services have to
+        It's pleasure to meet you. Remember - your wedding services have to be
         best!
       </div>
       {user.provider!.address && (

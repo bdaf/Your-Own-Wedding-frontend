@@ -7,11 +7,13 @@ function isProperId(id: number):boolean {
 // User
 
 type ProviderModel = {
+    id: number
     address? :string,
     phone_number?: string,
 }
 
 type OrganizerModel = {
+    id: number
     celebration_date? :string,
     days_to_ceremony: number
 }
@@ -31,10 +33,12 @@ const defaultEmptyUser: User = {
     email: "",
     role: "",
     provider: {
+        id: -1,
       address: "",
       phone_number: "",
     },
     organizer: {
+        id: -1,
       celebration_date: "",
       days_to_ceremony: 0
     },
@@ -56,6 +60,21 @@ type UserLogin = {
     email :string,
     password: string
 }
+
+interface Authentication {
+    user: User;
+    logged_in: boolean;
+  }
+  
+  const emptyAuthentication: Authentication = {
+    user: defaultEmptyUser,
+    logged_in: false,
+  };
+  
+  const initAuthentication: Authentication = {
+    user: defaultEmptyUser,
+    logged_in: true,
+  };
 
 type AuthenticationResponse = {
     logged_in :boolean,
@@ -228,11 +247,11 @@ export {
     offerModelTitleContains, offerModelDescriptionContains, offerModelAddressContains, offerModelCategoryConsistsOf,
     OFFER_CATEGORY_OPTIONS, MIN_OFFER_PRIZE, MAX_OFFER_PRIZE, OFFER_EMPTY_CONTACT_DATA,
     OFFER_ID_KEY, OFFER_TITLE_KEY, OFFER_DESCRIPTION_KEY, OFFER_ADDRESS_KEY, OFFER_CATEGORY_KEY, OFFER_PRIZE_KEY, OFFER_IMAGES_KEY,
-    defaultEmptyUser
+    defaultEmptyUser, emptyAuthentication, initAuthentication
 };
 
 export type { 
-    User, UserRegister, UserLogin, AuthenticationResponse, LogoutResponse,
+    User, UserRegister, UserLogin, AuthenticationResponse, Authentication, LogoutResponse,
     GuestModel,
     OfferModel, OfferApiResponse, OfferContactModel,
     EventModel, NoteModel,

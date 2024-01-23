@@ -18,4 +18,13 @@ function upperCaseFirstStringCharacter( text: string): string {
     .replace(/T/g, ` `)
   }
 
-  export {shortStringTo, upperCaseFirstStringCharacter, getOnlyDateAndHourFromDateInString}
+   
+  function convertStringDateToProperForDateInput( dateInString: string | null): string {
+    console.log(dateInString)
+    if (dateInString == null) dateInString = new Date().toLocaleDateString()
+    console.log(dateInString
+      .split(".")[0])
+    return dateInString.split(".")[0];
+  }
+
+  export {shortStringTo, upperCaseFirstStringCharacter, getOnlyDateAndHourFromDateInString, convertStringDateToProperForDateInput}

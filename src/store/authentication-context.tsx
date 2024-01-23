@@ -1,32 +1,18 @@
 import { createContext, useEffect, useState } from "react";
 import { logged_in, logout } from "../services/userService";
 import {
+  Authentication,
   AuthenticationResponse,
   User,
   defaultEmptyUser,
+  emptyAuthentication,
+  initAuthentication,
 } from "../components/Models";
-import FlashMessagesContext, {
-  ERROR_FLASH_TYPE,
-} from "./flash-messages-context";
+import { ERROR_FLASH_TYPE } from "./flash-messages-context";
 
 interface Props {
   children: any;
 }
-
-interface Authentication {
-  user: User;
-  isLoggedIn: boolean;
-}
-
-const emptyAuthentication: Authentication = {
-  user: defaultEmptyUser,
-  isLoggedIn: false,
-};
-
-const initAuthentication: Authentication = {
-  user: defaultEmptyUser,
-  isLoggedIn: true,
-};
 
 const AuthenticationContext = createContext({
   isLoggedIn: (): boolean => {
@@ -48,6 +34,13 @@ const AuthenticationContext = createContext({
   logout: (): any => {},
 });
 
+function isUserOrganizer(authentication: Authentication): boolean {
+  return authentication.logged_in && authentication.user.role === "organizer";
+}
+function isUserProvider(authentication: Authentication): boolean {
+  return authentication.logged_in && authentication.user.role === "provider";
+}
+
 export function AuthenticationContextProvider({ children }: Props) {
   const [authentication, setAuthentication] =
     useState<Authentication>(initAuthentication);
@@ -55,23 +48,17 @@ export function AuthenticationContextProvider({ children }: Props) {
   function checkAndSetIfLoggedIn(flashMsgCtx: any): any {
     return logged_in()
       .then((response) => {
-        // console.log("Login response (checkAndSetIfLoggedIn): ", response);
         const isLoggedInResponse: AuthenticationResponse = response.data;
         console.log(isLoggedInResponse);
-        const user = isLoggedInResponse.user;
-        if (isLoggedInResponse?.days_to_ceremony) {
-          user!.organizer!.days_to_ceremony =
-            isLoggedInResponse?.days_to_ceremony;
-        }
         setAuthentication({
-          user: user || defaultEmptyUser,
-          isLoggedIn: isLoggedInResponse.logged_in,
+          user: isLoggedInResponse.user || defaultEmptyUser,
+          logged_in: isLoggedInResponse.logged_in,
         });
         if (isLoggedInResponse.logged_in && flashMsgCtx != null) {
           flashMsgCtx.setFlashMessage("You have been logged in succesfully");
         } else if (flashMsgCtx != null) {
           flashMsgCtx.setFlashMessage(
-            "You are not logged in",
+            "You are not logged in, error occured",
             ERROR_FLASH_TYPE
           );
         }
@@ -87,21 +74,19 @@ export function AuthenticationContextProvider({ children }: Props) {
   }, []);
 
   function isLoggedInHandler(): boolean {
-    return authentication.isLoggedIn;
+    return authentication.logged_in;
   }
   function getCurrentUserHandler(): User {
     return authentication.user ? { ...authentication.user } : defaultEmptyUser;
   }
   function isClientUserHandler(): boolean {
-    return (
-      authentication.isLoggedIn && authentication.user.role === "organizer"
-    );
+    return isUserOrganizer(authentication);
   }
   function isSupportUserHandler(): boolean {
-    return authentication.isLoggedIn && authentication.user.role === "provider";
+    return authentication.logged_in && authentication.user.role === "provider";
   }
   function isAdminHandler(): boolean {
-    return authentication.isLoggedIn && authentication.user.role === "admin";
+    return authentication.logged_in && authentication.user.role === "admin";
   }
   function updateAuthenticationHandler(flashMsgCtx: any): any {
     checkAndSetIfLoggedIn(flashMsgCtx);
@@ -139,3 +124,4 @@ export function AuthenticationContextProvider({ children }: Props) {
 }
 
 export default AuthenticationContext;
+export { isUserOrganizer, isUserProvider };
