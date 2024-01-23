@@ -1,13 +1,14 @@
-import {EMPTY_GUEST_MODEL, GuestModel } from "../components/Models";
-import { EVENTS, API_URL, NOTES } from "../constants";
+
+import { GuestModel } from "../components/Models";
+import { API_URL, GUESTS, _MY } from "../constants";
 import axios from 'axios';
 
-function getMockGuests() {
-
-
-    return [EMPTY_GUEST_MODEL, EMPTY_GUEST_MODEL, EMPTY_GUEST_MODEL, EMPTY_GUEST_MODEL, EMPTY_GUEST_MODEL, EMPTY_GUEST_MODEL, EMPTY_GUEST_MODEL, EMPTY_GUEST_MODEL, EMPTY_GUEST_MODEL]
-    // console.log(`${API_URL}/${EVENTS}/${event_id}/${NOTES}.json`)
-    // return axios.post(`${API_URL}/${EVENTS}/${event_id}/${NOTES}.json`, { note: {...note} }, { withCredentials: true })
+function getMyGuests() {
+    return axios.get(`${API_URL}/${GUESTS}${_MY}.json`, { withCredentials: true })
 }
 
-export {}
+function createGuest(guest: GuestModel) {
+    return axios.post(`${API_URL}/${GUESTS}.json`, {guest: {...guest}} , { withCredentials: true })
+}
+
+export {getMyGuests, createGuest}

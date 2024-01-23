@@ -61,7 +61,6 @@ function ProfileForm({ submitProfileForm, setUser, authentication }: Props) {
             <input
               id="name"
               type="text"
-              required
               value={authentication.user.name || ""}
               onChange={setUserAttribiuteHandler}
             />
@@ -72,7 +71,6 @@ function ProfileForm({ submitProfileForm, setUser, authentication }: Props) {
             <input
               id="surname"
               type="text"
-              required
               value={authentication.user.surname || ""}
               onChange={setUserAttribiuteHandler}
             />
@@ -84,7 +82,6 @@ function ProfileForm({ submitProfileForm, setUser, authentication }: Props) {
               <input
                 id="celebration_date"
                 type="datetime-local"
-                // required
                 value={
                   authentication.user.organizer?.celebration_date?.split(".")[0]
                 }
@@ -100,7 +97,6 @@ function ProfileForm({ submitProfileForm, setUser, authentication }: Props) {
                 <input
                   id="address"
                   type="text"
-                  required
                   value={authentication.user.provider?.address!}
                   onChange={setUserProviderAttribiuteHandler}
                 />
@@ -110,7 +106,6 @@ function ProfileForm({ submitProfileForm, setUser, authentication }: Props) {
                 <input
                   id="phone_number"
                   type="tel"
-                  required
                   value={authentication.user.provider?.phone_number!}
                   onChange={setUserProviderAttribiuteHandler}
                 />

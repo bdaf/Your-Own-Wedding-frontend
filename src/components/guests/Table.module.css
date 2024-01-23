@@ -3,6 +3,7 @@
   border-collapse: collapse;
 }
 
-.cell {
+th,
+td {
   border: 1px solid black;
 }

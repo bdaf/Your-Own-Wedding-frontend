@@ -2,7 +2,19 @@
   margin: 0rem 1rem;
 }
 
+.guest_container {
+  margin: 0;
+}
+
+.guest_container .control {
+  max-width: 9rem;
+  margin: 0.5rem;
+}
+
 .form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   padding: 1rem;
 }
 
