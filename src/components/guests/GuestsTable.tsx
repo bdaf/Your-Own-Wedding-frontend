@@ -1,26 +1,35 @@
 import styles from "./Table.module.css";
-import { GuestModel } from "../Models";
+import { GuestModel, NameModel } from "../Models";
 
 interface Props {
   guests: GuestModel[];
-  setCurrentGuestHandler: Function;
+  names: NameModel[];
+  setCurrentGuest: Function;
+  setCurrentName: Function;
   setAction: Function;
   setIsGuestForm: Function;
 }
 
 function GuestsTable({
   guests,
-  setCurrentGuestHandler,
+  names,
+  setCurrentGuest,
+  setCurrentName,
   setAction,
   setIsGuestForm,
 }: Props) {
   function onEditGuestHandler(guest: GuestModel): void {
-    setCurrentGuestHandler(guest);
+    setCurrentGuest(guest);
     setAction("update");
   }
 
   function onDeleteGuestHandler(guest: GuestModel): void {
-    setCurrentGuestHandler(guest);
+    setCurrentGuest(guest);
+    setAction("delete");
+  }
+
+  function onShowAdditionAttrNameHandler(addition_attr_name: NameModel): void {
+    setCurrentName(addition_attr_name);
     setAction("delete");
   }
 
@@ -31,6 +40,18 @@ function GuestsTable({
           <tr>
             <th>Name</th>
             <th>Surname</th>
+            {names.map((addition_attr_name) => {
+              return (
+                <th
+                  key={addition_attr_name.id}
+                  onClick={() =>
+                    onShowAdditionAttrNameHandler(addition_attr_name)
+                  }
+                >
+                  {addition_attr_name.name}
+                </th>
+              );
+            })}
             <th
               onClick={() => {
                 setAction("create");
@@ -52,6 +73,11 @@ function GuestsTable({
             <tr key={guest.id}>
               <td>{guest.name}</td>
               <td>{guest.surname}</td>
+              {names.map((addition_attr_name) => {
+                return (
+                  <th key={addition_attr_name.id}>{addition_attr_name.name}</th>
+                );
+              })}
               <td onClick={() => onEditGuestHandler(guest)}>edit</td>
               <td onClick={() => onDeleteGuestHandler(guest)}>delete</td>
             </tr>

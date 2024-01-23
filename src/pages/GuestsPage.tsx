@@ -21,16 +21,17 @@ import AdditionAttribiuteForm from "../components/guests/NameForm";
 import {
   getMyNames,
   createName,
+  deleteName,
 } from "../services/AdditionAttribiuteNameService";
 
 function GuestsPage() {
   const navigate = useNavigate();
   const flashMsgCtx = useContext(FlashMessagesContext);
-  const [name, setCurrentName] = useState<NameModel>(EMPTY_NAME_MODEL);
   const [isGuestForm, setIsGuestForm] = useState<boolean>(true);
   const [action, setAction] = useState<string>("create");
   const [guests, setGuests] = useState<GuestModel[]>([]);
   const [names, setNames] = useState<NameModel[]>([]);
+  const [name, setCurrentName] = useState<NameModel>(EMPTY_NAME_MODEL);
   const [currentGuest, setCurrentGuest] =
     useState<GuestModel>(EMPTY_GUEST_MODEL);
 
@@ -81,7 +82,7 @@ function GuestsPage() {
         const newlyCreatedName: NameModel = res.data;
         setNames([...names, newlyCreatedName]);
         flashMsgCtx.setFlashMessage(
-          "Addition Attribiute Name has been created",
+          "Addition Attribiute name has been created",
           SUCCESS_FLASH_TYPE
         );
       })
@@ -92,10 +93,10 @@ function GuestsPage() {
 
   function deleteNameHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    deleteGuest(currentGuest)
+    deleteName(name)
       .then((res) => {
         flashMsgCtx.handleSuccess(res);
-        setGuests(guests.filter((guest) => guest.id != currentGuest.id));
+        setNames(names.filter((n) => n.id != name.id));
       })
       .catch((error) => {
         flashMsgCtx.handleError(error, navigate);
@@ -171,9 +172,11 @@ function GuestsPage() {
       )}
       <GuestsTable
         guests={guests}
-        setCurrentGuestHandler={setCurrentGuestHandler}
+        names={names}
+        setCurrentGuest={setCurrentGuestHandler}
         setAction={setAction}
         setIsGuestForm={setIsGuestForm}
+        setCurrentName={setCurrentNameHandler}
       />
     </div>
   );

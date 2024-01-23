@@ -18,6 +18,7 @@ function createName(name: NameModel) {
 // }
 
 function deleteName(name: NameModel) {
+    console.log(`${API_URL}/${NAMES}/${name.id}.json`)
     return axios.delete(`${API_URL}/${NAMES}/${name.id}.json`, { withCredentials: true })
 }
 
