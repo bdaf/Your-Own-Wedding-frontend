@@ -7,13 +7,13 @@ function isProperId(id: number):boolean {
 // User
 
 type ProviderModel = {
-    city? :string,
+    address? :string,
     phone_number?: string,
 }
 
 type OrganizerModel = {
-    address? :string,
-    phone_number?: string,
+    celebration_date? :string,
+    days_to_ceremony: number
 }
 
 type User = {
@@ -22,9 +22,23 @@ type User = {
     role :string,
     name? :string,
     surname? :string,
-    provider :ProviderModel,
-    organizer :OrganizerModel
+    provider? :ProviderModel,
+    organizer? :OrganizerModel,
 }
+
+const defaultEmptyUser: User = {
+    id: -1,
+    email: "",
+    role: "",
+    provider: {
+      address: "",
+      phone_number: "",
+    },
+    organizer: {
+      celebration_date: "",
+      days_to_ceremony: 0
+    },
+};
 
 type UserRegister = {
     email :string,
@@ -45,7 +59,8 @@ type UserLogin = {
 
 type AuthenticationResponse = {
     logged_in :boolean,
-    user? :User
+    user? :User,
+    days_to_ceremony? :number
 }
 
 type LogoutResponse = {
@@ -115,7 +130,7 @@ interface OfferModel {
   interface OfferContactModel {
     user: {
         email: string,
-        city?: string,
+        address?: string,
         phone_number?: string,
     },
     offer: {
@@ -127,7 +142,7 @@ interface OfferModel {
   const OFFER_EMPTY_CONTACT_DATA: OfferContactModel = {
       user: {
           email: "",
-          city: undefined,
+          address: undefined,
           phone_number: undefined
       },
       offer: {
@@ -213,6 +228,7 @@ export {
     offerModelTitleContains, offerModelDescriptionContains, offerModelAddressContains, offerModelCategoryConsistsOf,
     OFFER_CATEGORY_OPTIONS, MIN_OFFER_PRIZE, MAX_OFFER_PRIZE, OFFER_EMPTY_CONTACT_DATA,
     OFFER_ID_KEY, OFFER_TITLE_KEY, OFFER_DESCRIPTION_KEY, OFFER_ADDRESS_KEY, OFFER_CATEGORY_KEY, OFFER_PRIZE_KEY, OFFER_IMAGES_KEY,
+    defaultEmptyUser
 };
 
 export type { 

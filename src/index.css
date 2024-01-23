@@ -52,6 +52,11 @@
 
 /* overwriting - above */
 
+.home_div li {
+  margin: 2rem;
+  font-size: large;
+}
+
 * {
   box-sizing: border-box;
 }

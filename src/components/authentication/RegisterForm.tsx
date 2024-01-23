@@ -10,12 +10,12 @@ import Card from "../ui/Card";
 
 import styles from "../../css/Form.module.css";
 import { useNavigate } from "react-router-dom";
-import { UserRegister } from "../../models/User";
 import { register } from "../../services/userService";
 import AuthenticationContext from "../../store/authentication-context";
 import FlashMessagesContext, {
   SUCCESS_FLASH_TYPE,
 } from "../../store/flash-messages-context";
+import { UserRegister } from "../Models";
 
 function RegisterForm() {
   const navigate = useNavigate();

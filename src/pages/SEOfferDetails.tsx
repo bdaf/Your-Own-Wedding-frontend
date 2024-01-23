@@ -135,8 +135,8 @@ function SEOfferDetails() {
                     {` ${contactData.user.email}`}
                   </div>
                   <div className={`${styles.contact}`}>
-                    <b>User city:</b>
-                    {` ${contactData.user.city}`}
+                    <b>User address:</b>
+                    {` ${contactData.user.address}`}
                   </div>
                 </div>
                 <div className={`${styles.contact_sub_container}`}>

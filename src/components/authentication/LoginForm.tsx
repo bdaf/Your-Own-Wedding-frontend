@@ -3,10 +3,10 @@ import Card from "../ui/Card";
 
 import styles from "../../css/Form.module.css";
 import { useNavigate } from "react-router-dom";
-import { UserLogin } from "../../models/User";
 import { login } from "../../services/userService";
 import AuthenticationContext from "../../store/authentication-context";
 import FlashMessagesContext from "../../store/flash-messages-context";
+import { UserLogin } from "../Models";
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -34,8 +34,7 @@ function LoginForm() {
     login(userToLogin)
       .then((response) => {
         console.log("Login response: ", response);
-        authCtx.updateAuthentication();
-        flashMsgCtx.setFlashMessage("You have been logged in succesfully");
+        authCtx.updateAuthentication(flashMsgCtx);
         navigate(`/`);
       })
       .catch((error) => {

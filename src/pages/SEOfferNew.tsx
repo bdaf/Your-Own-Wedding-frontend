@@ -12,7 +12,7 @@ function NewSEOffer() {
     if (authCtx.isSupportUser()) {
       setOffer({
         ...offer,
-        address: authCtx.getCurrentUser().city!,
+        address: authCtx.getCurrentUser().provider.address!,
       });
     }
   }, []);
