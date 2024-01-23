@@ -97,11 +97,42 @@ interface GuestModel {
     updated_at?: string;
   }
 
-  const EMPTY_GUEST_MODEL: GuestModel = {
+const EMPTY_GUEST_MODEL: GuestModel = {
     id: -1,
     user_id: -1,
     name: "Marek",
     surname: "Kowalski",
+}
+
+interface NameModel {
+    id: number;
+    organizer_id: number;
+    name: string;
+    default_value: string;
+    created_at?: string;
+    updated_at?: string;
+}
+interface AdditionAttribiuteModel {
+    id: number;
+    addition_attribiute_name_id: number;
+    guest_id: number;
+    value: string;
+    created_at?: string;
+    updated_at?: string;
+}
+
+const EMPTY_NAME_MODEL: NameModel = {
+    id: 0,
+    organizer_id: 0,
+    name: "",
+    default_value: ""
+}
+
+const EMPTY_ADDITION_ATTRIBIUTE_MODEL: AdditionAttribiuteModel = {
+    id: 0,
+    addition_attribiute_name_id: 0,
+    guest_id: 0,
+    value: ""
 }
 
 // Offer
@@ -243,7 +274,8 @@ const EMPTY_FILTER_MODEL: FiltersModel = {
 
 export {
     isProperId, 
-    EMPTY_EVENT_MODEL, EMPTY_GUEST_MODEL, EMPTY_NOTE_MODEL, EMPTY_OFFER_MODEL, EMPTY_FILTER_MODEL , isObjectEventModel, isObjectNoteModel,
+    EMPTY_EVENT_MODEL, EMPTY_GUEST_MODEL, EMPTY_NOTE_MODEL, EMPTY_OFFER_MODEL, EMPTY_FILTER_MODEL, EMPTY_NAME_MODEL, EMPTY_ADDITION_ATTRIBIUTE_MODEL,
+    isObjectEventModel, isObjectNoteModel,
     offerModelTitleContains, offerModelDescriptionContains, offerModelAddressContains, offerModelCategoryConsistsOf,
     OFFER_CATEGORY_OPTIONS, MIN_OFFER_PRIZE, MAX_OFFER_PRIZE, OFFER_EMPTY_CONTACT_DATA,
     OFFER_ID_KEY, OFFER_TITLE_KEY, OFFER_DESCRIPTION_KEY, OFFER_ADDRESS_KEY, OFFER_CATEGORY_KEY, OFFER_PRIZE_KEY, OFFER_IMAGES_KEY,
@@ -252,7 +284,7 @@ export {
 
 export type { 
     User, UserRegister, UserLogin, AuthenticationResponse, Authentication, LogoutResponse,
-    GuestModel,
+    GuestModel, NameModel, AdditionAttribiuteModel,
     OfferModel, OfferApiResponse, OfferContactModel,
     EventModel, NoteModel,
     FiltersModel 

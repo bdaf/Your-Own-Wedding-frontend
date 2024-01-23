@@ -6,18 +6,31 @@ import {
   getMyGuests,
   updateGuest,
 } from "../services/guestService";
-import { EMPTY_GUEST_MODEL, GuestModel } from "../components/Models";
+import {
+  EMPTY_GUEST_MODEL,
+  EMPTY_NAME_MODEL,
+  GuestModel,
+  NameModel,
+} from "../components/Models";
 import { useNavigate } from "react-router-dom";
 import FlashMessagesContext, {
   SUCCESS_FLASH_TYPE,
 } from "../store/flash-messages-context";
 import GuestForm from "../components/guests/GuestForm";
+import AdditionAttribiuteForm from "../components/guests/NameForm";
+import {
+  getMyNames,
+  createName,
+} from "../services/AdditionAttribiuteNameService";
 
 function GuestsPage() {
   const navigate = useNavigate();
   const flashMsgCtx = useContext(FlashMessagesContext);
+  const [name, setCurrentName] = useState<NameModel>(EMPTY_NAME_MODEL);
+  const [isGuestForm, setIsGuestForm] = useState<boolean>(true);
   const [action, setAction] = useState<string>("create");
   const [guests, setGuests] = useState<GuestModel[]>([]);
+  const [names, setNames] = useState<NameModel[]>([]);
   const [currentGuest, setCurrentGuest] =
     useState<GuestModel>(EMPTY_GUEST_MODEL);
 
@@ -29,16 +42,64 @@ function GuestsPage() {
       .catch((error) => {
         flashMsgCtx.handleError(error, navigate);
       });
+    console.log("lol");
+    getMyNames()
+      .then((res) => {
+        setNames(res.data);
+      })
+      .catch((error) => {
+        flashMsgCtx.handleError(error, navigate);
+      });
   }, []);
 
   function setCurrentGuestHandler(guest: GuestModel) {
     setCurrentGuest(guest);
+    setIsGuestForm(true);
+  }
+
+  function setCurrentNameHandler(name: NameModel) {
+    setCurrentName(name);
+    setIsGuestForm(false);
   }
 
   function executeAction(event: FormEvent<HTMLFormElement>) {
-    if (action == "create") createGuestHandler(event);
-    else if (action == "update") editGuestHandler(event);
-    else if (action == "delete") deleteGuestHandler(event);
+    if (isGuestForm) {
+      if (action == "create") createGuestHandler(event);
+      else if (action == "update") editGuestHandler(event);
+      else if (action == "delete") deleteGuestHandler(event);
+    } else {
+      if (action == "create") createNameHandler(event);
+      // else if (action == "update") editGuestHandler(event);
+      else if (action == "delete") deleteNameHandler(event);
+    }
+  }
+
+  function createNameHandler(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    createName(name)
+      .then((res) => {
+        const newlyCreatedName: NameModel = res.data;
+        setNames([...names, newlyCreatedName]);
+        flashMsgCtx.setFlashMessage(
+          "Addition Attribiute Name has been created",
+          SUCCESS_FLASH_TYPE
+        );
+      })
+      .catch((error) => {
+        flashMsgCtx.handleError(error, navigate);
+      });
+  }
+
+  function deleteNameHandler(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    deleteGuest(currentGuest)
+      .then((res) => {
+        flashMsgCtx.handleSuccess(res);
+        setGuests(guests.filter((guest) => guest.id != currentGuest.id));
+      })
+      .catch((error) => {
+        flashMsgCtx.handleError(error, navigate);
+      });
   }
 
   function createGuestHandler(event: FormEvent<HTMLFormElement>) {
@@ -93,19 +154,32 @@ function GuestsPage() {
   return (
     <div className="width-100-center ">
       <span className="title">Wedding Guests</span>
-      <GuestForm
-        guest={currentGuest}
-        action={action}
-        onGuestChange={setCurrentGuestHandler}
-        submitAction={executeAction}
-      />
+      {isGuestForm ? (
+        <GuestForm
+          guest={currentGuest}
+          action={action}
+          onGuestChange={setCurrentGuestHandler}
+          submitAction={executeAction}
+        />
+      ) : (
+        <AdditionAttribiuteForm
+          action={action}
+          name={name}
+          setCurrentAttribiuteName={setCurrentNameHandler}
+          submitAction={executeAction}
+        />
+      )}
       <GuestsTable
         guests={guests}
         setCurrentGuestHandler={setCurrentGuestHandler}
         setAction={setAction}
+        setIsGuestForm={setIsGuestForm}
       />
     </div>
   );
 }
 
 export default GuestsPage;
+function getMyNotes() {
+  throw new Error("Function not implemented.");
+}

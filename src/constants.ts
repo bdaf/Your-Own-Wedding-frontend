@@ -8,6 +8,7 @@ export const OFFERS = import.meta.env.VITE_OFFERS;
 export const EVENTS = import.meta.env.VITE_EVENTS;
 export const NOTES = import.meta.env.VITE_NOTES;
 export const GUESTS = import.meta.env.VITE_GUESTS;
+export const NAMES = import.meta.env.VITE_NAMES;
 export const TASK_MONTHS = import.meta.env.VITE_TASK_MONTHS;
 
 export const _MY = import.meta.env.VITE__MY;

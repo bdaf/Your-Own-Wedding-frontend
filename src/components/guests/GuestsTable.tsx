@@ -5,9 +5,15 @@ interface Props {
   guests: GuestModel[];
   setCurrentGuestHandler: Function;
   setAction: Function;
+  setIsGuestForm: Function;
 }
 
-function GuestsTable({ guests, setCurrentGuestHandler, setAction }: Props) {
+function GuestsTable({
+  guests,
+  setCurrentGuestHandler,
+  setAction,
+  setIsGuestForm,
+}: Props) {
   function onEditGuestHandler(guest: GuestModel): void {
     setCurrentGuestHandler(guest);
     setAction("update");
@@ -25,8 +31,22 @@ function GuestsTable({ guests, setCurrentGuestHandler, setAction }: Props) {
           <tr>
             <th>Name</th>
             <th>Surname</th>
-            <th onClick={() => setAction("create")}>create</th>
-            <th></th>
+            <th
+              onClick={() => {
+                setAction("create");
+                setIsGuestForm(true);
+              }}
+            >
+              Create guest
+            </th>
+            <th
+              onClick={() => {
+                setAction("create");
+                setIsGuestForm(false);
+              }}
+            >
+              Create attribiute
+            </th>
           </tr>
           {guests.map((guest) => (
             <tr key={guest.id}>
