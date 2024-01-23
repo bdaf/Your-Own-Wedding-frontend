@@ -8,17 +8,12 @@ interface Props {
   guest: GuestModel;
   action: string;
   onGuestChange: Function;
-  submitActionHandler: Function;
+  submitAction: Function;
 }
 
-function GuestForm({
-  guest,
-  action,
-  onGuestChange,
-  submitActionHandler,
-}: Props) {
+function GuestForm({ guest, action, onGuestChange, submitAction }: Props) {
   function submitHandler(event: FormEvent<HTMLFormElement>): void {
-    submitActionHandler(event);
+    submitAction(event);
   }
 
   function onChangeHandler(event: ChangeEvent<HTMLInputElement>): void {

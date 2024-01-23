@@ -3,9 +3,21 @@ import { GuestModel } from "../Models";
 
 interface Props {
   guests: GuestModel[];
+  setCurrentGuestHandler: Function;
+  setAction: Function;
 }
 
-function GuestsTable({ guests }: Props) {
+function GuestsTable({ guests, setCurrentGuestHandler, setAction }: Props) {
+  function onEditGuestHandler(guest: GuestModel): void {
+    setCurrentGuestHandler(guest);
+    setAction("update");
+  }
+
+  function onDeleteGuestHandler(guest: GuestModel): void {
+    setCurrentGuestHandler(guest);
+    setAction("delete");
+  }
+
   return (
     <div>
       <table className={styles.table}>
@@ -13,11 +25,15 @@ function GuestsTable({ guests }: Props) {
           <tr>
             <th>Name</th>
             <th>Surname</th>
+            <th onClick={() => setAction("create")}>create</th>
+            <th></th>
           </tr>
-          {guests.map(({ id, name, surname }) => (
-            <tr key={id}>
-              <td>{name}</td>
-              <td>{surname}</td>
+          {guests.map((guest) => (
+            <tr key={guest.id}>
+              <td>{guest.name}</td>
+              <td>{guest.surname}</td>
+              <td onClick={() => onEditGuestHandler(guest)}>edit</td>
+              <td onClick={() => onDeleteGuestHandler(guest)}>delete</td>
             </tr>
           ))}
         </tbody>

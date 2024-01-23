@@ -11,4 +11,12 @@ function createGuest(guest: GuestModel) {
     return axios.post(`${API_URL}/${GUESTS}.json`, {guest: {...guest}} , { withCredentials: true })
 }
 
-export {getMyGuests, createGuest}
+function updateGuest(guest: GuestModel) {
+    return axios.put(`${API_URL}/${GUESTS}/${guest.id}.json`, {guest: {...guest}} , { withCredentials: true })
+}
+
+function deleteGuest(guest: GuestModel) {
+    return axios.delete(`${API_URL}/${GUESTS}/${guest.id}.json`, { withCredentials: true })
+}
+
+export {getMyGuests, createGuest, updateGuest, deleteGuest}

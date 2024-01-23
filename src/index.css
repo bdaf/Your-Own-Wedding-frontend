@@ -295,7 +295,8 @@ main {
   background-color: #c0e7f0;
 }
 
-.btn-red {
+.btn-red,
+.btn-delete {
   font: inherit;
   cursor: pointer;
   color: rgb(204, 0, 0);
@@ -307,7 +308,9 @@ main {
 }
 
 .btn-red:hover,
-.btn-red:active {
+.btn-delete:hover,
+.btn-red:active,
+.btn-delete:active {
   background-color: rgb(255, 145, 145);
 }
 
