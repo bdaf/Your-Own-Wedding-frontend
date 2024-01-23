@@ -17,6 +17,7 @@ import {
   EVENTS,
   GUESTS,
   TASK_MONTHS,
+  PROFILE,
 } from "./constants.ts";
 import { WindowSizeContextProvider } from "./store/window-size-context.tsx";
 import RegisterPage from "./pages/RegisterPage.tsx";
@@ -28,6 +29,7 @@ import SEOffersMy from "./pages/SEOffersMy.tsx";
 import SEOfferEdit from "./pages/SEOfferEdit.tsx";
 import MonthTaskPage from "./pages/MonthTaskPage.tsx";
 import GuestsPage from "./pages/GuestsPage.tsx";
+import ProfilePage from "./pages/ProfilePage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: `/${PROFILE}`,
+        element: <ProfilePage />,
       },
       {
         path: `/${REGISTER}`,

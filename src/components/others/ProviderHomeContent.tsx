@@ -22,7 +22,6 @@ function ProviderHomeContent({ user }: Props) {
         Remember that you can always change your profile data in profile
         settings.
       </h3>
-
       <div>
         <h3>
           Check features which will help you in that great wedding service!
@@ -34,12 +33,15 @@ function ProviderHomeContent({ user }: Props) {
           </li>
           <li>
             Events page - plan special days and hour (just events!) and attach
-            notes to these! You can plan every service or product you plan to
-            sell.
+            notes to these!
           </li>
         </ul>
-        Don't waste time because you have so many services to serve!
       </div>
+      <h3>
+        You can plan every service or product you plan to give. And of course
+        publish this offers.
+      </h3>
+      <h3>Don't waste time because you have so many services to serve!</h3>
     </div>
   );
 }

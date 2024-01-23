@@ -60,7 +60,7 @@ function RegisterForm() {
     register(userToRegister)
       .then((response) => {
         console.log("Registration response: ", response);
-        authCtx.updateAuthentication();
+        authCtx.updateAuthentication(null);
         flashMsgCtx.setFlashMessage(
           "You have been registered succesfully",
           SUCCESS_FLASH_TYPE

@@ -8,6 +8,7 @@ import {
   EVENTS,
   TASK_MONTHS,
   GUESTS,
+  PROFILE,
 } from "../../constants";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -112,13 +113,16 @@ function NavigationBar() {
 
           <li>
             <div className={styles.dropdown}>
-              <Link className={styles.dropdown} to={`/${LOGIN}`}>
+              <Link
+                className={styles.dropdown}
+                to={authCtx.isLoggedIn() ? `/${PROFILE}` : `/${LOGIN}`}
+              >
                 User
               </Link>
               <div className={styles.dropdown_content}>
                 {authCtx.isLoggedIn() ? (
                   <>
-                    <Link className={styles.link} to={`/`}>
+                    <Link className={styles.link} to={`/${PROFILE}`}>
                       Settings
                     </Link>
                     <span className={styles.link} onClick={logoutHandler}>
