@@ -93,6 +93,7 @@ interface GuestModel {
     user_id: number;
     name: string;
     surname: string;
+    addition_attribiutes: AdditionAttribiuteModel[];
     created_at?: string;
     updated_at?: string;
   }
@@ -102,6 +103,7 @@ const EMPTY_GUEST_MODEL: GuestModel = {
     user_id: -1,
     name: "Marek",
     surname: "Kowalski",
+    addition_attribiutes: []
 }
 
 interface NameModel {

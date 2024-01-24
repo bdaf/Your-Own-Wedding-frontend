@@ -1,5 +1,5 @@
 import styles from "./Table.module.css";
-import { GuestModel, NameModel } from "../Models";
+import { AdditionAttribiuteModel, GuestModel, NameModel } from "../Models";
 
 interface Props {
   guests: GuestModel[];
@@ -33,6 +33,18 @@ function GuestsTable({
     setAction("delete");
   }
 
+  function getAdditionAttribiuteValue(guest: GuestModel, name: NameModel) {
+    const addition_attribiute: AdditionAttribiuteModel =
+      guest.addition_attribiutes.find((attr) => {
+        return attr.addition_attribiute_name_id == name.id;
+      })!;
+    return addition_attribiute ? (
+      <th key={addition_attribiute.id}>{addition_attribiute.value}</th>
+    ) : (
+      <th key={name.id}>{name.default_value}</th>
+    );
+  }
+  console.log(guests);
   return (
     <div>
       <table className={styles.table}>
@@ -73,11 +85,9 @@ function GuestsTable({
             <tr key={guest.id}>
               <td>{guest.name}</td>
               <td>{guest.surname}</td>
-              {names.map((addition_attr_name) => {
-                return (
-                  <th key={addition_attr_name.id}>{addition_attr_name.name}</th>
-                );
-              })}
+              {names.map((addition_attr_name) =>
+                getAdditionAttribiuteValue(guest, addition_attr_name)
+              )}
               <td onClick={() => onEditGuestHandler(guest)}>edit</td>
               <td onClick={() => onDeleteGuestHandler(guest)}>delete</td>
             </tr>

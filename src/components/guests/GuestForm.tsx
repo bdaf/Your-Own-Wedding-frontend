@@ -2,16 +2,23 @@ import { Card } from "@mui/material";
 import styles from "../../css/Form.module.css";
 import { upperCaseFirstStringCharacter } from "../../helper";
 import { ChangeEvent, FormEvent } from "react";
-import { GuestModel } from "../Models";
+import { GuestModel, NameModel } from "../Models";
 
 interface Props {
   guest: GuestModel;
+  additionAttrNames: NameModel[];
   action: string;
   onGuestChange: Function;
   submitAction: Function;
 }
 
-function GuestForm({ guest, action, onGuestChange, submitAction }: Props) {
+function GuestForm({
+  guest,
+  additionAttrNames,
+  action,
+  onGuestChange,
+  submitAction,
+}: Props) {
   function submitHandler(event: FormEvent<HTMLFormElement>): void {
     submitAction(event);
   }
@@ -46,6 +53,36 @@ function GuestForm({ guest, action, onGuestChange, submitAction }: Props) {
               value={guest.surname}
             />
           </div>
+          {additionAttrNames.map((name) => {
+            function onChangeAdditionAttribiuteHandler(
+              event: ChangeEvent<HTMLInputElement>
+            ): void {
+              console.log(guest);
+              onGuestChange({
+                ...guest,
+                addition_attribiutes: [
+                  {
+                    addition_attribiute_name_id: name.id,
+                    guest_id: guest.id,
+                    value: event.target.value,
+                  },
+                  ...guest.addition_attribiutes,
+                ],
+              });
+            }
+
+            return (
+              <div key={name.id} className={styles.control}>
+                <label htmlFor={name.name}>{name.name}</label>
+                <input
+                  id={name.name}
+                  type="text"
+                  placeholder={name.default_value}
+                  onChange={onChangeAdditionAttribiuteHandler}
+                />
+              </div>
+            );
+          })}
           <div className={styles.actions}>
             <button className={`btn-` + action}>
               {upperCaseFirstStringCharacter(action)}

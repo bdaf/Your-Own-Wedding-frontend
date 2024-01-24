@@ -158,6 +158,7 @@ function GuestsPage() {
       {isGuestForm ? (
         <GuestForm
           guest={currentGuest}
+          additionAttrNames={names}
           action={action}
           onGuestChange={setCurrentGuestHandler}
           submitAction={executeAction}
