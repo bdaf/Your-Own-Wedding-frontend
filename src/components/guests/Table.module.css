@@ -7,3 +7,19 @@ th,
 td {
   border: 1px solid black;
 }
+
+.delete:hover {
+  background-color: rgb(204, 0, 0);
+}
+
+.edit:hover {
+  background-color: #77002ea9;
+}
+
+.create:hover {
+  background-color: #1eb3f8;
+}
+
+.addition_attribiute_name:hover {
+  background-color: rgb(255, 145, 145);
+}

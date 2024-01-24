@@ -246,6 +246,11 @@ main {
   margin: 1rem;
 }
 
+.guest_action .btn-create {
+  padding: 10.3px 24px;
+  border-radius: 0;
+}
+
 .btn:hover,
 .btn-create:hover {
   box-shadow: 0px 0px 10px 3px #7de2f9;
@@ -443,4 +448,8 @@ main {
 .scroll-y {
   overflow-x: hidden;
   overflow-y: auto;
+}
+
+.pointer {
+  cursor: pointer;
 }

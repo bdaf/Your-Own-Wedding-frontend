@@ -79,11 +79,16 @@ function GuestForm({
                   type="text"
                   placeholder={name.default_value}
                   onChange={onChangeAdditionAttribiuteHandler}
+                  value={
+                    guest.addition_attribiutes.find(
+                      (attr) => attr.addition_attribiute_name_id == name.id
+                    )?.value || name.default_value
+                  }
                 />
               </div>
             );
           })}
-          <div className={styles.actions}>
+          <div className={`${styles.actions} guest_action`}>
             <button className={`btn-` + action}>
               {upperCaseFirstStringCharacter(action)}
             </button>

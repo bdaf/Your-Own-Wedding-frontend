@@ -51,7 +51,7 @@ function AdditionAttribiuteForm({
               value={name.default_value}
             />
           </div>
-          <div className={styles.actions}>
+          <div className={`${styles.actions} guest_action`}>
             <button className={`btn-` + action}>
               {upperCaseFirstStringCharacter(action)}
             </button>

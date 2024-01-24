@@ -55,6 +55,7 @@ function GuestsTable({
             {names.map((addition_attr_name) => {
               return (
                 <th
+                  className={`${styles.addition_attribiute_name} pointer`}
                   key={addition_attr_name.id}
                   onClick={() =>
                     onShowAdditionAttrNameHandler(addition_attr_name)
@@ -65,6 +66,7 @@ function GuestsTable({
               );
             })}
             <th
+              className={`${styles.create} pointer`}
               onClick={() => {
                 setAction("create");
                 setIsGuestForm(true);
@@ -73,6 +75,7 @@ function GuestsTable({
               Create guest
             </th>
             <th
+              className={`${styles.create} pointer`}
               onClick={() => {
                 setAction("create");
                 setIsGuestForm(false);
@@ -88,8 +91,18 @@ function GuestsTable({
               {names.map((addition_attr_name) =>
                 getAdditionAttribiuteValue(guest, addition_attr_name)
               )}
-              <td onClick={() => onEditGuestHandler(guest)}>edit</td>
-              <td onClick={() => onDeleteGuestHandler(guest)}>delete</td>
+              <td
+                className={`${styles.edit} pointer`}
+                onClick={() => onEditGuestHandler(guest)}
+              >
+                edit
+              </td>
+              <td
+                className={`${styles.delete} pointer`}
+                onClick={() => onDeleteGuestHandler(guest)}
+              >
+                delete
+              </td>
             </tr>
           ))}
         </tbody>
