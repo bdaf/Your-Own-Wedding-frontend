@@ -162,6 +162,7 @@ function EventPage() {
         const editedNote: NoteModel = res.data;
         editedNote.event_id = note.event_id;
         setCurrentNote(editedNote);
+        console.log("editNoteHandler", editedNote);
         setEvents(
           events.map((e) =>
             e.id == note.event_id ? returnEventWithEditedNote(e, editedNote) : e

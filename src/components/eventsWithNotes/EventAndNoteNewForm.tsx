@@ -1,5 +1,5 @@
 import styles from "../../css/Form.module.css";
-import { ChangeEvent, RefObject, useContext, useEffect, useRef } from "react";
+import { ChangeEvent, useContext, useEffect } from "react";
 import { EventModel, NoteModel } from "../Models";
 import FlashMessagesContext, {
   WARNING_FLASH_TYPE,
@@ -25,8 +25,6 @@ function NoteNewForm({
   setShowNoteInsteadOfEventForm,
 }: Props) {
   const flashMsgCtx = useContext(FlashMessagesContext);
-  const nameInputRef: RefObject<HTMLInputElement> = useRef(null);
-  const secondAttribiiuteInputRef: RefObject<any> = useRef(null);
 
   function submitHandler(e: any): void {
     e.preventDefault();
@@ -51,6 +49,15 @@ function NoteNewForm({
     setObject({
       ...currentObject,
       [secondPropertiesName]: e.target.value,
+    });
+  }
+
+  function onChangeStatusHandler(e: ChangeEvent<HTMLInputElement>): void {
+    let status = "undone";
+    if (e.target.checked) status = "done";
+    setObject({
+      ...currentObject,
+      [e.target.name]: status,
     });
   }
 
@@ -89,7 +96,6 @@ function NoteNewForm({
             id="name"
             type="text"
             required
-            ref={nameInputRef}
             onChange={onChangeNameHandler}
             value={currentObject.name}
           />
@@ -101,10 +107,22 @@ function NoteNewForm({
               rows={15}
               id="body"
               required
-              ref={secondAttribiiuteInputRef}
               onChange={onChangeSecondAttribiuteHandler}
               value={(currentObject as NoteModel).body}
             />
+            <div>
+              <div className={styles.control}>
+                <label htmlFor="status">Done</label>
+                <input
+                  type="checkbox"
+                  id="status"
+                  name="status"
+                  onChange={onChangeStatusHandler}
+                  checked={(currentObject as NoteModel).status == "done"}
+                  // value={(currentObject as NoteModel).status == "done" ? true : false}
+                />
+              </div>
+            </div>
           </div>
         ) : (
           <div className={styles.control}>
@@ -113,7 +131,6 @@ function NoteNewForm({
               id="date"
               type="datetime-local"
               required
-              ref={secondAttribiiuteInputRef}
               onChange={onChangeSecondAttribiuteHandler}
               value={convertStringDateToProperForDateInput(
                 (currentObject as EventModel).date

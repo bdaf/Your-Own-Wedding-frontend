@@ -243,7 +243,8 @@ function isObjectEventModel(event:any):boolean {
 type NoteModel = {
     id: number,
     name: string,
-    body: string
+    body: string,
+    status: string
     event_id?: number,
     created_at?: string;
     updated_at?: string;
@@ -254,6 +255,7 @@ const EMPTY_NOTE_MODEL: NoteModel = {
     event_id: -1,
     name: "",
     body: "",
+    status: "undone"
 }
 
 function isObjectNoteModel(note:any):boolean {

@@ -17,6 +17,23 @@ function EventItem({
   setCurrentNote,
   setCurrentEvent,
 }: Props) {
+  function getNoteColorBasedOnStatus(note: NoteModel) {
+    const status = note.status;
+    let color = "";
+    switch (status) {
+      case "overdue":
+        color = "#d32f2f";
+        break;
+      case "done":
+        color = "#43a047";
+        break;
+      case "undone":
+        color = "rgb(190, 140, 140)";
+        break;
+    }
+    return color;
+  }
+
   return (
     <div className="pointer">
       <Card
@@ -44,7 +61,7 @@ function EventItem({
               color={
                 note.id == currentNote.id
                   ? "rgb(150, 111, 111)"
-                  : "rgb(190, 140, 140)"
+                  : getNoteColorBasedOnStatus(note)
               }
               border_radius="0"
             >

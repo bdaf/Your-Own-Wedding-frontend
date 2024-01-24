@@ -30,6 +30,7 @@ function returnEventWithAddedNote(event: EventModel, note: NoteModel): EventMode
 }
 
 function returnEventWithEditedNote(event: EventModel, note: NoteModel): EventModel {
+    console.log("service", note)
     const notes = event.notes.map(n => n.id == note.id ? note : n);
     const resultEvent: EventModel = {
         id: event.id,
