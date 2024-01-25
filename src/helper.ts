@@ -27,4 +27,11 @@ function upperCaseFirstStringCharacter( text: string): string {
     return dateInString.split(".")[0];
   }
 
-  export {shortStringTo, upperCaseFirstStringCharacter, getOnlyDateAndHourFromDateInString, convertStringDateToProperForDateInput}
+  function convertDateToPlusOneTimeZone( dateInString: string | null): string {
+    console.log(dateInString)
+    if (dateInString == null) dateInString = new Date().toLocaleDateString()
+    console.log(dateInString.split(".")[0])
+    return dateInString.split(".")[0] + ".978Z";
+  }
+
+  export {shortStringTo, upperCaseFirstStringCharacter, getOnlyDateAndHourFromDateInString, convertStringDateToProperForDateInput, convertDateToPlusOneTimeZone}

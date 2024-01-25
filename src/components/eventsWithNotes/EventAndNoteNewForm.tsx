@@ -112,15 +112,21 @@ function NoteNewForm({
             />
             <div>
               <div className={styles.control}>
-                <label htmlFor="status">Done</label>
-                <input
-                  type="checkbox"
-                  id="status"
-                  name="status"
-                  onChange={onChangeStatusHandler}
-                  checked={(currentObject as NoteModel).status == "done"}
-                  // value={(currentObject as NoteModel).status == "done" ? true : false}
-                />
+                <label
+                  className={`${styles.container_chekbox}`}
+                  htmlFor="status"
+                >
+                  <div className={`${styles.chekbox_text}`}>Done</div>
+                  <input
+                    type="checkbox"
+                    id="status"
+                    name="status"
+                    onChange={onChangeStatusHandler}
+                    checked={(currentObject as NoteModel).status == "done"}
+                    // value={(currentObject as NoteModel).status == "done" ? true : false}
+                  />{" "}
+                  <span className={`${styles.checkmark}`}></span>
+                </label>
               </div>
             </div>
           </div>
@@ -155,7 +161,7 @@ function NoteNewForm({
             Event Form
           </button>
         </div>
-        <button className="btn" onClick={createObjectOnClick}>
+        <button className="btn-light-blue" onClick={createObjectOnClick}>
           Create
         </button>
         <button className="btn-update" onClick={editObjectOnClick}>

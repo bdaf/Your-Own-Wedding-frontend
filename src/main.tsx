@@ -16,7 +16,6 @@ import {
   OFFERS,
   EVENTS,
   GUESTS,
-  TASK_MONTHS,
   PROFILE,
 } from "./constants.ts";
 import { WindowSizeContextProvider } from "./store/window-size-context.tsx";
@@ -27,7 +26,6 @@ import EventsPage from "./pages/EventsPage.tsx";
 import { FlashMessagesContextProvider } from "./store/flash-messages-context.tsx";
 import SEOffersMy from "./pages/SEOffersMy.tsx";
 import SEOfferEdit from "./pages/SEOfferEdit.tsx";
-import MonthTaskPage from "./pages/MonthTaskPage.tsx";
 import GuestsPage from "./pages/GuestsPage.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
 
@@ -80,10 +78,6 @@ const router = createBrowserRouter([
       {
         path: `${GUESTS}`,
         element: <GuestsPage />,
-      },
-      {
-        path: `${TASK_MONTHS}`,
-        element: <MonthTaskPage />,
       },
     ],
   },

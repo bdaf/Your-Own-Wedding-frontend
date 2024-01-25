@@ -43,7 +43,7 @@ function EventPage() {
     useState<EventModel>(EMPTY_EVENT_MODEL);
 
   function setCurrentEventHandler(event: EventModel): void {
-    console.log(currentNote);
+    console.log(currentEvent);
     setCurrentEvent(event);
     if (!isProperId(currentNote.event_id!)) {
       setCurrentNote({

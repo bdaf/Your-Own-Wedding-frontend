@@ -18,16 +18,9 @@ interface Flash {
 }
 
 const FlashMessagesContext = createContext({
-  setFlashMessage: (message: string, type?: string): void => {
-    message + type;
-  },
-  handleSuccess: (res: any): void => {
-    res;
-  },
-  handleError: (error: any, navigate: NavigateFunction): void => {
-    error;
-    navigate;
-  },
+  setFlashMessage: (message: string, type?: string): void => {},
+  handleSuccess: (res: any): void => {},
+  handleError: (error: any, navigate: NavigateFunction): void => {},
   handleNotAuthenticatedAlert: (): void => {},
   clearFlashMessage: (): void => {},
   getFlashMessage: (): string => {
