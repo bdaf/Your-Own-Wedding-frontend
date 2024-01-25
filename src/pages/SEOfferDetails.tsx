@@ -95,6 +95,20 @@ function SEOfferDetails() {
       });
   }
 
+  function returnContactDataIfNotBlank(
+    contactData: any,
+    dataName: string
+  ): any {
+    if (contactData != null && contactData?.length > 0) {
+      return (
+        <div className={`${styles.contact}`}>
+          <b>{dataName}:</b>
+          {` ${contactData}`}
+        </div>
+      );
+    }
+  }
+
   if (loading) return <div className="title">Loading...</div>;
   if (offer) {
     return (
@@ -130,24 +144,30 @@ function SEOfferDetails() {
             ) : !!contactData.user.email ? (
               <div className={`${styles.contact_container}`}>
                 <div className={`${styles.contact_sub_container}`}>
-                  <div className={`${styles.contact}`}>
-                    <b>Email address: </b>
-                    {` ${contactData.user.email}`}
-                  </div>
-                  <div className={`${styles.contact}`}>
-                    <b>User address:</b>
-                    {` ${contactData.user.address}`}
-                  </div>
+                  {returnContactDataIfNotBlank(
+                    contactData.user.email,
+                    "Email address"
+                  )}
+                  {returnContactDataIfNotBlank(
+                    contactData.user.address,
+                    "User address"
+                  )}
                 </div>
                 <div className={`${styles.contact_sub_container}`}>
-                  <div className={`${styles.contact}`}>
-                    <b>Phone number:</b>
-                    {` ${contactData.user.phone_number}`}
-                  </div>
-                  <div className={`${styles.contact}`}>
-                    <b>Offer address:</b>
-                    {` ${contactData.offer.address}`}
-                  </div>
+                  {returnContactDataIfNotBlank(
+                    contactData.user.phone_number,
+                    "Phone number"
+                  )}
+                  {returnContactDataIfNotBlank(
+                    contactData.offer.address,
+                    "Offer address"
+                  )}
+                </div>
+                <div className={`${styles.contact_sub_container}`}>
+                  {returnContactDataIfNotBlank(
+                    contactData.offer.addition_contact_data,
+                    "Addition contact data"
+                  )}
                 </div>
               </div>
             ) : (
@@ -188,7 +208,7 @@ function SEOfferDetails() {
         </Card>
         <div className="actions">
           {authCtx.isSupportUser() &&
-            authCtx.getCurrentUser().id == offer.user_id && (
+            authCtx.getCurrentUser().provider?.id == offer.provider_id && (
               <>
                 <button className={`btn-red`} onClick={deleteOfferHandler}>
                   Delete

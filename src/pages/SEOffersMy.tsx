@@ -37,7 +37,7 @@ function MySEOffers() {
 
   return (
     <div>
-      <div className="title">My SEOffers</div>
+      <div className="title">My Offers</div>
       <div className="center">
         <div className="main-content flex-shrink-high">
           {error ? (

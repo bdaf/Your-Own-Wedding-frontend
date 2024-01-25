@@ -12,7 +12,7 @@ import { OFFERS } from "../../constants";
 
 interface Props {
   id: number;
-  user_id: number;
+  provider_id: number;
   images: string[];
   title: string;
   description: string;
@@ -24,7 +24,7 @@ interface Props {
 
 function SEOfferItem({
   id,
-  user_id,
+  provider_id,
   images,
   title,
   description,
@@ -67,7 +67,7 @@ function SEOfferItem({
               Details
             </button>
             {authCtx.isSupportUser() &&
-              authCtx.getCurrentUser().id == user_id && (
+              authCtx.getCurrentUser().provider?.id == provider_id && (
                 <button className={styles.btn_edit} onClick={editButtonHandler}>
                   Edit
                 </button>

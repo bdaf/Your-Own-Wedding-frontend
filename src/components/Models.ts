@@ -141,10 +141,11 @@ const EMPTY_ADDITION_ATTRIBIUTE_MODEL: AdditionAttribiuteModel = {
 
 interface OfferModel {
     id: number;
-    user_id: number;
+    provider_id: number;
     title: string;
     description: string;
     address: string;
+    addition_contact_data: string;
     category: string;
     prize: number;
     images: [];
@@ -159,6 +160,7 @@ interface OfferModel {
   const OFFER_ID_KEY = "offer[id]"
   const OFFER_TITLE_KEY = "offer[title]"
   const OFFER_ADDRESS_KEY = "offer[address]"
+  const OFFER_ADDITION_CONTACT_DATA_KEY = "offer[addition_contact_data]"
   const OFFER_DESCRIPTION_KEY = "offer[description]"
   const OFFER_CATEGORY_KEY = "offer[category]"
   const OFFER_PRIZE_KEY = "offer[prize]"
@@ -170,10 +172,11 @@ interface OfferModel {
 
   const EMPTY_OFFER_MODEL: OfferModel = {
       id: -1,
-      user_id: -1,
+      provider_id: -1,
       title: "",
       description: "",
       address: "",
+      addition_contact_data: "",
       images: [],
       category: OFFER_CATEGORY_OPTIONS[0],
       prize: 0,
@@ -187,7 +190,7 @@ interface OfferModel {
     },
     offer: {
         address: string,
-        addition_contact_data?: Text
+        addition_contact_data?: string
     }
   }
 
@@ -282,7 +285,7 @@ export {
     isObjectEventModel, isObjectNoteModel,
     offerModelTitleContains, offerModelDescriptionContains, offerModelAddressContains, offerModelCategoryConsistsOf,
     OFFER_CATEGORY_OPTIONS, MIN_OFFER_PRIZE, MAX_OFFER_PRIZE, OFFER_EMPTY_CONTACT_DATA,
-    OFFER_ID_KEY, OFFER_TITLE_KEY, OFFER_DESCRIPTION_KEY, OFFER_ADDRESS_KEY, OFFER_CATEGORY_KEY, OFFER_PRIZE_KEY, OFFER_IMAGES_KEY,
+    OFFER_ID_KEY, OFFER_TITLE_KEY, OFFER_DESCRIPTION_KEY, OFFER_ADDRESS_KEY, OFFER_CATEGORY_KEY, OFFER_PRIZE_KEY, OFFER_IMAGES_KEY, OFFER_ADDITION_CONTACT_DATA_KEY,
     defaultEmptyUser, emptyAuthentication, initAuthentication
 };
 

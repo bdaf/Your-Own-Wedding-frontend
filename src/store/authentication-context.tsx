@@ -83,6 +83,7 @@ export function AuthenticationContextProvider({ children }: Props) {
     return isUserOrganizer(authentication);
   }
   function isSupportUserHandler(): boolean {
+    console.log(authentication);
     return authentication.logged_in && authentication.user.role === "provider";
   }
   function isAdminHandler(): boolean {

@@ -20,6 +20,10 @@ td {
   background-color: #1eb3f8;
 }
 
+.addition_attribiute_name {
+  background-color: rgb(178 117 218);
+}
+
 .addition_attribiute_name:hover {
   background-color: rgb(255, 145, 145);
 }

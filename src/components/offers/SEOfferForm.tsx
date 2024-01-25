@@ -9,6 +9,7 @@ import FlashMessagesContext, {
   SUCCESS_FLASH_TYPE,
 } from "../../store/flash-messages-context";
 import {
+  OFFER_ADDITION_CONTACT_DATA_KEY,
   OFFER_ADDRESS_KEY,
   OFFER_CATEGORY_KEY,
   OFFER_CATEGORY_OPTIONS,
@@ -21,6 +22,7 @@ import {
   OfferModel,
 } from "../Models";
 import { upperCaseFirstStringCharacter } from "../../helper";
+import { TextField } from "@mui/material";
 
 interface Props {
   serviceOffer: Function;
@@ -36,6 +38,8 @@ function SEOfferForm({ serviceOffer, offer_id, offer, action }: Props) {
   const descriptionInputRef: RefObject<HTMLTextAreaElement> = useRef(null);
   const imagesInputRef: RefObject<HTMLInputElement> = useRef(null);
   const addressInputRef: RefObject<HTMLInputElement> = useRef(null);
+  const additionContactDataInputRef: RefObject<HTMLTextAreaElement> =
+    useRef(null);
   const categoryInputRef: RefObject<HTMLSelectElement> = useRef(null);
   const prizeInputRef: RefObject<HTMLInputElement> = useRef(null);
 
@@ -50,6 +54,8 @@ function SEOfferForm({ serviceOffer, offer_id, offer, action }: Props) {
     const uploadedImages = imagesInputRef.current?.files!;
     const enteredTitle = titleInputRef.current?.value!;
     const enteredAddress = addressInputRef.current?.value!;
+    const enteredAdditionContactData =
+      additionContactDataInputRef.current?.value!;
     const enteredDescription = descriptionInputRef.current?.value!;
     const selectedCategory = categoryInputRef.current?.value!;
     const enteredPrize = prizeInputRef.current?.value!;
@@ -60,6 +66,10 @@ function SEOfferForm({ serviceOffer, offer_id, offer, action }: Props) {
     }
     formData.append(OFFER_TITLE_KEY, enteredTitle);
     formData.append(OFFER_ADDRESS_KEY, enteredAddress);
+    formData.append(
+      OFFER_ADDITION_CONTACT_DATA_KEY,
+      enteredAdditionContactData
+    );
     formData.append(OFFER_DESCRIPTION_KEY, enteredDescription);
     formData.append(OFFER_CATEGORY_KEY, selectedCategory);
     formData.append(OFFER_PRIZE_KEY, enteredPrize);
@@ -107,6 +117,15 @@ function SEOfferForm({ serviceOffer, offer_id, offer, action }: Props) {
               defaultValue={offer.address}
               required
               ref={addressInputRef}
+            />
+          </div>
+          <div className={styles.control}>
+            <label htmlFor="addition_contact_data">Addition Contact Data</label>
+            <textarea
+              id="addition_contact_data"
+              defaultValue={offer.addition_contact_data}
+              required
+              ref={additionContactDataInputRef}
             />
           </div>
           <div className={styles.control}>
