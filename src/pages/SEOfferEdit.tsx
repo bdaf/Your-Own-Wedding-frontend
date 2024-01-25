@@ -2,13 +2,18 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import SEOfferForm from "../components/offers/SEOfferForm";
-import { getOfferById, updateOffer } from "../services/offerService";
+import {
+  deleteOfferById,
+  getOfferById,
+  updateOffer,
+} from "../services/offerService";
 import {
   EMPTY_OFFER_MODEL,
   OFFER_ID_KEY,
   OfferModel,
 } from "../components/Models";
 import FlashMessagesContext from "../store/flash-messages-context";
+import { OFFERS } from "../constants";
 
 function SEOfferEdit() {
   const flashMsgCtx = useContext(FlashMessagesContext);
@@ -29,6 +34,21 @@ function SEOfferEdit() {
       .finally(() => setLoading(false));
   }, []);
 
+  function deleteOfferHandler(): void {
+    setLoading(true);
+    deleteOfferById(offerId)
+      .then((res) => {
+        navigate(`/${OFFERS}`);
+        flashMsgCtx.handleSuccess(res);
+      })
+      .catch((e) => {
+        flashMsgCtx.handleError(e, navigate);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }
+
   return (
     <div>
       <div className="title">Edit SEOffer</div>
@@ -40,6 +60,7 @@ function SEOfferEdit() {
           offer_id={offerId}
           offer={offer}
           action={"update"}
+          deleteOffer={deleteOfferHandler}
         />
       )}
     </div>

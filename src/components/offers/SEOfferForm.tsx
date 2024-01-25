@@ -29,9 +29,16 @@ interface Props {
   offer_id?: string;
   offer: OfferModel;
   action: string;
+  deleteOffer?: Function;
 }
 
-function SEOfferForm({ serviceOffer, offer_id, offer, action }: Props) {
+function SEOfferForm({
+  serviceOffer,
+  offer_id,
+  offer,
+  action,
+  deleteOffer,
+}: Props) {
   const navigate = useNavigate();
   const flashMsgCtx = useContext(FlashMessagesContext);
   const titleInputRef: RefObject<HTMLInputElement> = useRef(null);
@@ -124,7 +131,6 @@ function SEOfferForm({ serviceOffer, offer_id, offer, action }: Props) {
             <textarea
               id="addition_contact_data"
               defaultValue={offer.addition_contact_data}
-              required
               ref={additionContactDataInputRef}
             />
           </div>
@@ -184,6 +190,11 @@ function SEOfferForm({ serviceOffer, offer_id, offer, action }: Props) {
             </span>
           </div>
           <div className={styles.actions}>
+            {offer_id && offer_id != "-1" && (
+              <button className={`btn-red`} onClick={() => deleteOffer!()}>
+                Delete
+              </button>
+            )}
             <button className={`btn-` + action}>
               {upperCaseFirstStringCharacter(action)}
             </button>
