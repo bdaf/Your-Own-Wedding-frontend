@@ -42,6 +42,7 @@ function SEOfferDetails() {
     async function loadOffer() {
       try {
         const response = await getOfferById(id);
+        console.log(response.data);
         setOffer(response.data);
       } catch (e) {
         flashMsgCtx.handleError(e, navigate);
@@ -163,16 +164,17 @@ function SEOfferDetails() {
                     "Offer address"
                   )}
                 </div>
-                <div className={`${styles.contact_sub_container}`}>
-                  {returnContactDataIfNotBlank(
-                    contactData.offer.addition_contact_data,
-                    "Addition contact data"
-                  )}
-                </div>
+                {!!contactData.offer.addition_contact_data && (
+                  <div className={`${styles.contact_sub_container}`}>
+                    {returnContactDataIfNotBlank(
+                      contactData.offer.addition_contact_data,
+                      "Addition contact data"
+                    )}
+                  </div>
+                )}
               </div>
             ) : (
               <div className="center">
-                {" "}
                 <button
                   className={`${styles.show_contact_button} btn`}
                   onClick={showContactHandler}

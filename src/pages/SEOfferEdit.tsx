@@ -51,7 +51,7 @@ function SEOfferEdit() {
 
   return (
     <div>
-      <div className="title">Edit SEOffer</div>
+      <div className="title">Edit Offer</div>
       {loading ? (
         <div className="title">Loading...</div>
       ) : (

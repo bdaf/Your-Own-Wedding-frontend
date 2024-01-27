@@ -204,7 +204,11 @@ function EventPage() {
           {showNoteInsteadOfEventForm && (
             <div className="margin-2rem">
               <Card color="rgb(150, 111, 111)" border_radius="0">
-                <NoteDetails note={currentNote} permCharsNumber={undefined} />
+                <NoteDetails
+                  note={currentNote}
+                  permCharsNumber={undefined}
+                  timestamps
+                />
               </Card>
             </div>
           )}

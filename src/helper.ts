@@ -13,6 +13,9 @@ function upperCaseFirstStringCharacter( text: string): string {
   }
 
   function getOnlyDateAndHourFromDateInString( dateInString: string): string {
+    if (dateInString == null) dateInString = getPolandZoneNowDate().toISOString()
+    console.log(dateInString)
+    console.log(dateInString.split(".")[0].replace(/T/g, ` `))
     return dateInString
     .split(".")[0]
     .replace(/T/g, ` `)
@@ -21,7 +24,7 @@ function upperCaseFirstStringCharacter( text: string): string {
    
   function convertStringDateToProperForDateInput( dateInString: string | null): string {
     console.log(dateInString)
-    if (dateInString == null) dateInString = new Date().toLocaleDateString()
+    if (dateInString == null) dateInString = getPolandZoneNowDate().toISOString()
     console.log(dateInString
       .split(".")[0])
     return dateInString.split(".")[0];
@@ -29,9 +32,20 @@ function upperCaseFirstStringCharacter( text: string): string {
 
   function convertDateToPlusOneTimeZone( dateInString: string | null): string {
     console.log(dateInString)
-    if (dateInString == null) dateInString = new Date().toLocaleDateString()
+    if (dateInString == null) dateInString = getPolandZoneNowDate().toISOString()
     console.log(dateInString.split(".")[0])
     return dateInString.split(".")[0] + ".978Z";
   }
 
-  export {shortStringTo, upperCaseFirstStringCharacter, getOnlyDateAndHourFromDateInString, convertStringDateToProperForDateInput, convertDateToPlusOneTimeZone}
+  function getPolandZoneNowDate(): Date {
+    const date = new Date();
+    const localTime = date.getTime();
+    const localOffset = date.getTimezoneOffset() * 60 * 1000;
+    const utc = localTime + localOffset;
+    const offset = 2;//in hours
+    const poland = utc + (3600 * 1000 * offset);
+    const resultDate = new Date(poland);
+    return resultDate;
+  }
+
+  export {shortStringTo, upperCaseFirstStringCharacter, getOnlyDateAndHourFromDateInString, convertStringDateToProperForDateInput, convertDateToPlusOneTimeZone, getPolandZoneNowDate}

@@ -34,7 +34,6 @@ const FlashMessagesContext = createContext({
 const defaultFlashMessage = {
   message: "",
   type: DEFAULT_FLASH_TYPE,
-  redirects_to_reset: 0,
 };
 
 export function FlashMessagesContextProvider({ children }: Props) {

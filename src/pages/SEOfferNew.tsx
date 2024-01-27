@@ -18,7 +18,7 @@ function NewSEOffer() {
   }, []);
   return (
     <div>
-      <div className="title">Create SEOffer</div>
+      <div className="title">Create Offer</div>
       <SEOfferForm serviceOffer={createOffer} offer={offer} action={"create"} />
     </div>
   );

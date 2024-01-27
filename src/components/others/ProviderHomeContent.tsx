@@ -28,20 +28,20 @@ function ProviderHomeContent({ user }: Props) {
         </h3>
         <ul>
           <li>
-            Offers - post your offers and take people a chance to find your
+            Offers - post your offers and give people a chance to find your
             services.
           </li>
           <li>
-            Events page - plan special days and hour (just events!) and attach
-            notes to these!
+            Events page - plan special events in dates with precision to seconds
+            and attach notes to these!
           </li>
         </ul>
       </div>
       <h3>
         You can plan every service or product you plan to give. And of course
-        publish this offers.
+        publish these offers.
       </h3>
-      <h3>Don't waste time because you have so many services to serve!</h3>
+      <h3>Don't waste time because you have so many chance to serve!</h3>
     </div>
   );
 }

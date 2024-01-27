@@ -52,9 +52,9 @@ function Home() {
           <div className="margin-2rem">
             <h1 className="title">Your Own Wedding</h1>
             <h3>Create Offers, plan your Events, attach Notes to these.</h3> If
-            you want to create a Wedding, create Guest list! And add your own
-            guest attribiutes as many as you want! And share it easly with your
-            family and friends.
+            you want to create a Wedding, create Guests list! And add your own
+            addition guest attribiutes as you want! Try how easy and simple it
+            it!
             <h2>Don't hesitate, create account now!</h2>
           </div>
         )}

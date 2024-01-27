@@ -55,7 +55,7 @@ function AllSEOffers() {
 
   return (
     <div>
-      <div className="title">All SEOffers</div>
+      <div className="title">All Offers</div>
       <div className="center">
         <Filterbar findFilteredOffers={loadOffers} />
       </div>
