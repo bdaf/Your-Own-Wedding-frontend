@@ -32,17 +32,6 @@ function SearchBar({ onChangeSearchBar }: Props) {
   const [sortOption, setSortOption] = useState(sortOptions[0]);
   const [searchText, setSearchText] = useState("");
 
-  function sortObjectsByField(
-    objects: any[],
-    fieldName: string,
-    isFirstGrater: boolean
-  ): any[] {
-    return objects.sort((a: any, b: any) => {
-      if (a[fieldName] > b[fieldName]) return isFirstGrater ? 1 : 0;
-      else if (a[fieldName] < b[fieldName]) return isFirstGrater ? 0 : 1;
-      else return 0;
-    });
-  }
   function sortByCreatedAtFromNewest(offers: OfferModel[]): OfferModel[] {
     return offers.sort((a, b) => {
       if (a.created_at! < b.created_at!) return 1;

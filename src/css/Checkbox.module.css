@@ -1,4 +1,3 @@
-/* CHEKBOX  START */
 .container_chekbox {
   display: block;
   position: relative;
@@ -70,4 +69,3 @@
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
-/* END */

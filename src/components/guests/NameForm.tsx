@@ -27,7 +27,7 @@ function AdditionAttribiuteForm({
       [event.target.id]: event.target.value,
     });
   }
-  console.log(name);
+
   return (
     <div className={`${styles.guest_container}`}>
       <Card>

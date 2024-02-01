@@ -91,7 +91,6 @@ main {
   margin: 0rem auto;
   display: flex;
   justify-content: flex-start;
-  /* align-items: flex-start; */
   flex-flow: column wrap;
   width: 100%;
 }
@@ -312,7 +311,6 @@ main {
 .btn-dark-brown:hover,
 .btn-dark-brown:active {
   background-color: rgb(190, 140, 140);
-  /* color: rgb(0, 0, 0); */
 }
 
 .btn-light-blue {
@@ -329,7 +327,6 @@ main {
 .btn-light-blue:hover,
 .btn-light-blue:active {
   background-color: rgb(179, 233, 250);
-  /* color: rgb(0, 0, 0); */
 }
 
 .alert {

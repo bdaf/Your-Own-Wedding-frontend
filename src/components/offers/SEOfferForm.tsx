@@ -22,7 +22,6 @@ import {
   OfferModel,
 } from "../Models";
 import { upperCaseFirstStringCharacter } from "../../helper";
-import { TextField } from "@mui/material";
 
 interface Props {
   serviceOffer: Function;

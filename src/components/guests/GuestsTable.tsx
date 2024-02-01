@@ -44,7 +44,7 @@ function GuestsTable({
       <th key={name.id}>{name.default_value}</th>
     );
   }
-  console.log(guests);
+
   return (
     <div>
       <table className={styles.table}>

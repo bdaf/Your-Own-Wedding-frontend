@@ -1,12 +1,11 @@
-import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent } from "react";
 import styles from "../../css/Form.module.css";
 import Card from "../ui/Card";
-import { Authentication, UserModel } from "../Models";
+import { Authentication } from "../Models";
 import {
   isUserOrganizerByAuthentication,
   isUserProviderByAuthentication,
 } from "../../store/authentication-context";
-import { convertStringDateToFromDayToSeconds } from "../../helper";
 
 interface Props {
   submitProfileForm: Function;

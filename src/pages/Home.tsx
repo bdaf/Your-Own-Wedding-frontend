@@ -2,12 +2,7 @@ import { useEffect, useState } from "react";
 import OrganizerHomeContent from "../components/others/OrganizerHomeContent";
 import ProviderHomeContent from "../components/others/ProviderHomeContent";
 import { homePageUserData } from "../services/userService";
-import {
-  AuthenticationResponse,
-  HomePageDataResponse,
-  emptyAuthentication,
-  emptyHomePageData,
-} from "../components/Models";
+import { HomePageDataResponse, emptyHomePageData } from "../components/Models";
 import {
   isUserOrganizer,
   isUserProvider,

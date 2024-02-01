@@ -48,24 +48,6 @@ function Filterbar({ findFilteredOffers }: Props) {
     }
   }
 
-  function setMessageifValueOutsideLimit(
-    value: number[],
-    limit: number[]
-  ): void {
-    console.log(value);
-    console.log(limit);
-    if (value[1] > limit[1] || value[0] < limit[0]) {
-      flashMsgCtx.setFlashMessage(
-        `Value cannot be outside range ${limit[0]} to ${limit[1]}`,
-        WARNING_FLASH_TYPE
-      );
-    } else if (
-      flashMsgCtx.getFlashMessage().includes("Value cannot be outside range")
-    ) {
-      flashMsgCtx.clearFlashMessage();
-    }
-  }
-
   const handleMinInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log(filters.prize);
     setMessageifFromHigherThanTo(Number(event.target.value), filters.prize[1]);
@@ -90,7 +72,7 @@ function Filterbar({ findFilteredOffers }: Props) {
     });
   };
 
-  function selectCategoryHandler(category: string): void {
+  function handleSelectCategory(category: string): void {
     const lowerCaseCategory = category.toLowerCase();
     const newCategoryFiltersArray = [...filters.categories];
     if (newCategoryFiltersArray.includes(lowerCaseCategory)) {
@@ -139,7 +121,7 @@ function Filterbar({ findFilteredOffers }: Props) {
                 ? `${styles.active_btn}`
                 : ""
             }`}
-            onClick={() => selectCategoryHandler(category)}
+            onClick={() => handleSelectCategory(category)}
           >
             {category}
           </button>

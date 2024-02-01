@@ -1,4 +1,4 @@
-import { OfferModel, offerModelTitleContains, offerModelDescriptionContains, offerModelAddressContains, offerModelCategoryConsistsOf, FiltersModel, EMPTY_FILTER_MODEL, OFFER_ID_KEY } from "../components/Models";
+import { OfferModel, offerModelTitleContains, offerModelDescriptionContains, offerModelAddressContains, EMPTY_FILTER_MODEL, OFFER_ID_KEY } from "../components/Models";
 import { OFFERS, API_URL, CONTACT, _MY } from "../constants";
 import axios from 'axios';
 

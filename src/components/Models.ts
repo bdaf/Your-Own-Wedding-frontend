@@ -176,6 +176,7 @@ interface OfferModel {
     data: OfferModel
     status: number
   }
+  
   const OFFER_ID_KEY = "offer[id]"
   const OFFER_TITLE_KEY = "offer[title]"
   const OFFER_ADDRESS_KEY = "offer[address]"
