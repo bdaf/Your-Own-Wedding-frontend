@@ -30,7 +30,9 @@ const AuthenticationContext = createContext({
   isAdmin: (): boolean => {
     return false;
   },
-  updateAuthentication: (flashMsgCtx: any): any => {},
+  updateAuthentication: (flashMsgCtx: any): any => {
+    flashMsgCtx;
+  },
   logout: (): any => {},
 });
 
