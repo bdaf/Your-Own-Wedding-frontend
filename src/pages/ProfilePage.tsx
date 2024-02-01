@@ -3,7 +3,7 @@ import ProfileForm from "../components/authentication/ProfileForm";
 import {
   Authentication,
   AuthenticationResponse,
-  User,
+  UserModel,
   emptyAuthentication,
 } from "../components/Models";
 import { logged_in, updateProfile } from "../services/userService";
@@ -19,7 +19,7 @@ function ProfilePage() {
   const [authentication, setAuthentication] =
     useState<Authentication>(emptyAuthentication);
 
-  function setUserHandler(a_user: User) {
+  function setUserHandler(a_user: UserModel) {
     console.log(a_user);
     setAuthentication({
       logged_in: authentication.logged_in,
@@ -44,7 +44,7 @@ function ProfilePage() {
 
   function submitProfileHandler(
     event: FormEvent<HTMLFormElement>,
-    user: User
+    user: UserModel
   ): void {
     event.preventDefault();
     updateProfile(user)

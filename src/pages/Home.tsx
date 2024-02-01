@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import OrganizerHomeContent from "../components/others/OrganizerHomeContent";
 import ProviderHomeContent from "../components/others/ProviderHomeContent";
-import { logged_in } from "../services/userService";
+import { homePageUserData } from "../services/userService";
 import {
   AuthenticationResponse,
+  HomePageDataResponse,
   emptyAuthentication,
+  emptyHomePageData,
 } from "../components/Models";
 import {
   isUserOrganizer,
@@ -12,18 +14,16 @@ import {
 } from "../store/authentication-context";
 
 function Home() {
-  const [loggedInResponse, setIsLoggedInResponse] =
-    useState(emptyAuthentication);
-  const [daysToCeremony, setDaysToCeremony] = useState(0);
+  const [homePageData, setIsHomePageData] = useState(emptyHomePageData);
 
   useEffect(() => {
-    logged_in().then((response) => {
-      const isLoggedInResponse: AuthenticationResponse = response.data;
-      if (isLoggedInResponse?.logged_in) {
-        setDaysToCeremony(isLoggedInResponse?.days_to_ceremony!);
-        setIsLoggedInResponse({
-          logged_in: isLoggedInResponse.logged_in,
-          user: isLoggedInResponse.user!,
+    homePageUserData().then((response) => {
+      console.log(response);
+      const homePageData: HomePageDataResponse = response.data;
+      if (homePageData?.user) {
+        setIsHomePageData({
+          user: homePageData.user,
+          addition_data: homePageData.addition_data,
         });
       }
     });
@@ -32,23 +32,25 @@ function Home() {
   return (
     <div>
       <div className="center text-center home_div">
-        {loggedInResponse.logged_in && (
+        {homePageData.user && (
           <div>
-            {isUserOrganizer(loggedInResponse) && (
-              <OrganizerHomeContent daysToCeremony={daysToCeremony} />
+            {isUserOrganizer(homePageData.user) && (
+              <OrganizerHomeContent
+                celebrationDaysAmount={homePageData.addition_data}
+              />
             )}
-            {isUserProvider(loggedInResponse) && (
-              <ProviderHomeContent user={loggedInResponse.user} />
+            {isUserProvider(homePageData.user) && (
+              <ProviderHomeContent contact={homePageData.addition_data} />
             )}
             <div className="center margin-2rem">
               <i>
-                Listen {loggedInResponse.user.email}, your current role is{" "}
-                {loggedInResponse.user.role}.
+                Listen {homePageData.user.email}, your current role is{" "}
+                {homePageData.user.role}.
               </i>
             </div>
           </div>
         )}
-        {!loggedInResponse.logged_in && (
+        {!homePageData.user && (
           <div className="margin-2rem">
             <h1 className="title">Your Own Wedding</h1>
             <h3>Create Offers, plan your Events, attach Notes to these.</h3> If

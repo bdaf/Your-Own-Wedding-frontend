@@ -1,10 +1,11 @@
 import styles from "../../css/Form.module.css";
+import checkbox_styles from "../../css/Checkbox.module.css";
 import { ChangeEvent, useContext, useEffect } from "react";
 import { EventModel, NoteModel } from "../Models";
 import FlashMessagesContext, {
   WARNING_FLASH_TYPE,
 } from "../../store/flash-messages-context";
-import { convertStringDateToProperForDateInput } from "../../helper";
+import { getOnlyDateAndHourFromDateInString } from "../../helper";
 interface Props {
   currentObject: NoteModel | EventModel;
 
@@ -113,19 +114,18 @@ function NoteNewForm({
             <div>
               <div className={styles.control}>
                 <label
-                  className={`${styles.container_chekbox}`}
+                  className={`${checkbox_styles.container_chekbox}`}
                   htmlFor="status"
                 >
-                  <div className={`${styles.chekbox_text}`}>Done</div>
+                  <div className={`${checkbox_styles.chekbox_text}`}>Done</div>
                   <input
                     type="checkbox"
                     id="status"
                     name="status"
                     onChange={onChangeStatusHandler}
                     checked={(currentObject as NoteModel).status == "done"}
-                    // value={(currentObject as NoteModel).status == "done" ? true : false}
                   />{" "}
-                  <span className={`${styles.checkmark}`}></span>
+                  <span className={`${checkbox_styles.checkmark}`}></span>
                 </label>
               </div>
             </div>
@@ -138,7 +138,7 @@ function NoteNewForm({
               type="datetime-local"
               required
               onChange={onChangeSecondAttribiuteHandler}
-              value={convertStringDateToProperForDateInput(
+              value={getOnlyDateAndHourFromDateInString(
                 (currentObject as EventModel).date
               )}
             />

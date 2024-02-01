@@ -1,10 +1,10 @@
-import { User } from "../Models";
+import { ProviderUserContact } from "../Models";
 
 interface Props {
-  user: User;
+  contact: ProviderUserContact;
 }
 
-function ProviderHomeContent({ user }: Props) {
+function ProviderHomeContent({ contact }: Props) {
   return (
     <div>
       <div className="title">Hello Wedding Service Provider!</div>
@@ -12,11 +12,9 @@ function ProviderHomeContent({ user }: Props) {
         It's pleasure to meet you. Remember - your wedding services have to be
         best!
       </div>
-      {user.provider!.address && (
-        <h1>Your address is {user.provider!.address}</h1>
-      )}
-      {user.provider!.phone_number && (
-        <h1>Your phone number is {user.provider!.phone_number}</h1>
+      {contact.address && <h1>Your address is {contact.address}</h1>}
+      {contact.phone_number && (
+        <h1>Your phone number is {contact.phone_number}</h1>
       )}
       <h3>
         Remember that you can always change your profile data in profile

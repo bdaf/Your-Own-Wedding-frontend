@@ -23,8 +23,6 @@ function createOffer(formData: FormData) {
 }
 
 function updateOffer(formData: FormData) {
-    console.log(formData)
-    console.log(formData.get(OFFER_ID_KEY))
     return axios.put(`${API_URL}/${OFFERS}/${formData.get(OFFER_ID_KEY)}`, formData, { withCredentials: true })
 }
 

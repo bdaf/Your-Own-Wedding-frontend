@@ -40,13 +40,6 @@ tr:nth-child(even) {
   margin: 0rem 1rem 1rem;
 }
 
-/* .contact_container {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center;
-} */
-
 @media (max-width: 768px) {
   .thumbs_container {
     height: 150px !important;

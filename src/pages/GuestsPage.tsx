@@ -18,11 +18,7 @@ import FlashMessagesContext, {
 } from "../store/flash-messages-context";
 import GuestForm from "../components/guests/GuestForm";
 import AdditionAttribiuteForm from "../components/guests/NameForm";
-import {
-  getMyNames,
-  createName,
-  deleteName,
-} from "../services/AdditionAttribiuteNameService";
+import * as AdditionAttribiuteNameService from "../services/additionAttribiuteNameService";
 
 function GuestsPage() {
   const navigate = useNavigate();
@@ -43,8 +39,7 @@ function GuestsPage() {
       .catch((error) => {
         flashMsgCtx.handleError(error, navigate);
       });
-    console.log("lol");
-    getMyNames()
+    AdditionAttribiuteNameService.getMyNames()
       .then((res) => {
         setNames(res.data);
       })
@@ -70,14 +65,13 @@ function GuestsPage() {
       else if (action == "delete") deleteGuestHandler(event);
     } else {
       if (action == "create") createNameHandler(event);
-      // else if (action == "update") editGuestHandler(event);
       else if (action == "delete") deleteNameHandler(event);
     }
   }
 
   function createNameHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    createName(name)
+    AdditionAttribiuteNameService.createName(name)
       .then((res) => {
         const newlyCreatedName: NameModel = res.data;
         setNames([...names, newlyCreatedName]);
@@ -93,7 +87,7 @@ function GuestsPage() {
 
   function deleteNameHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    deleteName(name)
+    AdditionAttribiuteNameService.deleteName(name)
       .then((res) => {
         flashMsgCtx.handleSuccess(res);
         setNames(names.filter((n) => n.id != name.id));
@@ -184,6 +178,3 @@ function GuestsPage() {
 }
 
 export default GuestsPage;
-function getMyNotes() {
-  throw new Error("Function not implemented.");
-}

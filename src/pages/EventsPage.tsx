@@ -220,7 +220,7 @@ function EventPage() {
                 onCreateHandler={createNoteHandler}
                 onDeleteHandler={deleteNoteHandler}
                 onEditHandler={editNoteHandler}
-                showNoteInsteadOfEventForm={showNoteInsteadOfEventForm}
+                showNoteInsteadOfEventForm={true}
                 setShowNoteInsteadOfEventForm={setShowNoteInsteadOfEventForm}
               />
             </>
@@ -233,7 +233,7 @@ function EventPage() {
                 onCreateHandler={createEventHandler}
                 onDeleteHandler={deleteEventHandler}
                 onEditHandler={editEventHandler}
-                showNoteInsteadOfEventForm={showNoteInsteadOfEventForm}
+                showNoteInsteadOfEventForm={false}
                 setShowNoteInsteadOfEventForm={setShowNoteInsteadOfEventForm}
               />
             </>

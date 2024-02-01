@@ -1,12 +1,12 @@
 import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
 import styles from "../../css/Form.module.css";
 import Card from "../ui/Card";
-import { Authentication, User } from "../Models";
+import { Authentication, UserModel } from "../Models";
 import {
-  isUserOrganizer,
-  isUserProvider,
+  isUserOrganizerByAuthentication,
+  isUserProviderByAuthentication,
 } from "../../store/authentication-context";
-import { convertStringDateToProperForDateInput } from "../../helper";
+import { convertStringDateToFromDayToSeconds } from "../../helper";
 
 interface Props {
   submitProfileForm: Function;
@@ -76,7 +76,7 @@ function ProfileForm({ submitProfileForm, setUser, authentication }: Props) {
             />
           </div>
 
-          {isUserOrganizer(authentication) && (
+          {isUserOrganizerByAuthentication(authentication) && (
             <div className={styles.control}>
               <label htmlFor="celebration_date">Celebration date</label>
               <input
@@ -90,7 +90,7 @@ function ProfileForm({ submitProfileForm, setUser, authentication }: Props) {
             </div>
           )}
 
-          {isUserProvider(authentication) && (
+          {isUserProviderByAuthentication(authentication) && (
             <>
               <div className={styles.control}>
                 <label htmlFor="address">Address</label>

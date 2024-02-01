@@ -18,7 +18,7 @@ type OrganizerModel = {
     days_to_ceremony: number
 }
 
-type User = {
+type UserModel = {
     id: number
     email :string,
     role :string,
@@ -28,7 +28,7 @@ type User = {
     organizer? :OrganizerModel,
 }
 
-const defaultEmptyUser: User = {
+const defaultEmptyUser: UserModel = {
     id: -1,
     email: "",
     role: "",
@@ -62,7 +62,7 @@ type UserLogin = {
 }
 
 interface Authentication {
-    user: User;
+    user: UserModel;
     logged_in: boolean;
   }
   
@@ -78,12 +78,31 @@ interface Authentication {
 
 type AuthenticationResponse = {
     logged_in :boolean,
-    user? :User,
-    days_to_ceremony? :number
+    user? :UserModel,
+    addition_data? :any
 }
 
 type LogoutResponse = {
     logged_out :boolean
+}
+
+type HomePageDataResponse = {
+    user :UserModel | null,
+    addition_data :any
+}
+
+const emptyHomePageData : HomePageDataResponse = {
+    user: null,
+    addition_data: undefined
+}
+
+type ProviderUserContact = {
+    address :string
+    phone_number :string
+}
+
+type OrganizerUserCelebrationDays = {
+    days_to_ceremony :string
 }
 
 // Guests
@@ -286,11 +305,12 @@ export {
     offerModelTitleContains, offerModelDescriptionContains, offerModelAddressContains, offerModelCategoryConsistsOf,
     OFFER_CATEGORY_OPTIONS, MIN_OFFER_PRIZE, MAX_OFFER_PRIZE, OFFER_EMPTY_CONTACT_DATA,
     OFFER_ID_KEY, OFFER_TITLE_KEY, OFFER_DESCRIPTION_KEY, OFFER_ADDRESS_KEY, OFFER_CATEGORY_KEY, OFFER_PRIZE_KEY, OFFER_IMAGES_KEY, OFFER_ADDITION_CONTACT_DATA_KEY,
-    defaultEmptyUser, emptyAuthentication, initAuthentication
+    defaultEmptyUser, emptyAuthentication, initAuthentication, emptyHomePageData
 };
 
 export type { 
-    User, UserRegister, UserLogin, AuthenticationResponse, Authentication, LogoutResponse,
+    UserModel, UserRegister, UserLogin, AuthenticationResponse, Authentication, LogoutResponse, HomePageDataResponse,
+    ProviderUserContact, OrganizerUserCelebrationDays,
     GuestModel, NameModel, AdditionAttribiuteModel,
     OfferModel, OfferApiResponse, OfferContactModel,
     EventModel, NoteModel,

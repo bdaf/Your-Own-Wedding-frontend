@@ -3,7 +3,7 @@ import { logged_in, logout } from "../services/userService";
 import {
   Authentication,
   AuthenticationResponse,
-  User,
+  UserModel,
   defaultEmptyUser,
   emptyAuthentication,
   initAuthentication,
@@ -18,7 +18,7 @@ const AuthenticationContext = createContext({
   isLoggedIn: (): boolean => {
     return false;
   },
-  getCurrentUser: (): User => {
+  getCurrentUser: (): UserModel => {
     return defaultEmptyUser;
   },
   isSupportUser: (): boolean => {
@@ -34,11 +34,21 @@ const AuthenticationContext = createContext({
   logout: (): any => {},
 });
 
-function isUserOrganizer(authentication: Authentication): boolean {
+function isUserOrganizerByAuthentication(
+  authentication: Authentication
+): boolean {
   return authentication.logged_in && authentication.user.role === "organizer";
 }
-function isUserProvider(authentication: Authentication): boolean {
+function isUserProviderByAuthentication(
+  authentication: Authentication
+): boolean {
   return authentication.logged_in && authentication.user.role === "provider";
+}
+function isUserOrganizer(user: UserModel): boolean {
+  return user && user.role === "organizer";
+}
+function isUserProvider(user: UserModel): boolean {
+  return user && user.role === "provider";
 }
 
 export function AuthenticationContextProvider({ children }: Props) {
@@ -76,11 +86,11 @@ export function AuthenticationContextProvider({ children }: Props) {
   function isLoggedInHandler(): boolean {
     return authentication.logged_in;
   }
-  function getCurrentUserHandler(): User {
+  function getCurrentUserHandler(): UserModel {
     return authentication.user ? { ...authentication.user } : defaultEmptyUser;
   }
   function isClientUserHandler(): boolean {
-    return isUserOrganizer(authentication);
+    return isUserOrganizerByAuthentication(authentication);
   }
   function isSupportUserHandler(): boolean {
     console.log(authentication);
@@ -125,4 +135,9 @@ export function AuthenticationContextProvider({ children }: Props) {
 }
 
 export default AuthenticationContext;
-export { isUserOrganizer, isUserProvider };
+export {
+  isUserOrganizerByAuthentication,
+  isUserProviderByAuthentication,
+  isUserProvider,
+  isUserOrganizer,
+};

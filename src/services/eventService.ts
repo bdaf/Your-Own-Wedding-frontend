@@ -1,11 +1,11 @@
 import { EVENTS, API_URL } from "../constants";
 import axios from 'axios';
-import { convertDateToPlusOneTimeZone } from "../helper";
+import { getOnlyDateAndHourFromDateInString } from "../helper";
 import { EventModel } from "../components/Models";
 
 function beforeProvideDataAction(event: EventModel | null){
     if(event != null) {
-        event.date = convertDateToPlusOneTimeZone(event.date)
+        event.date = getOnlyDateAndHourFromDateInString(event.date)
     }
     console.log(event)
 }

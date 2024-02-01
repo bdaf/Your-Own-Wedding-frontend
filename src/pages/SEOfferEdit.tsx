@@ -7,11 +7,7 @@ import {
   getOfferById,
   updateOffer,
 } from "../services/offerService";
-import {
-  EMPTY_OFFER_MODEL,
-  OFFER_ID_KEY,
-  OfferModel,
-} from "../components/Models";
+import { EMPTY_OFFER_MODEL, OfferModel } from "../components/Models";
 import FlashMessagesContext from "../store/flash-messages-context";
 import { OFFERS } from "../constants";
 

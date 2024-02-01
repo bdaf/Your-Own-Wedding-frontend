@@ -1,9 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import SEOfferList from "../components/offers/SEOfferList";
 import { getMyOffers } from "../services/offerService";
-import FlashMessagesContext, {
-  INFO_FLASH_TYPE,
-} from "../store/flash-messages-context";
+import FlashMessagesContext from "../store/flash-messages-context";
 import { useContext, useEffect, useState } from "react";
 import { OfferModel } from "../components/Models";
 
@@ -41,7 +39,7 @@ function MySEOffers() {
       <div className="center">
         <div className="main-content flex-shrink-high">
           {error ? (
-            <div className="title">Loading...</div>
+            <div className="title">{error}</div>
           ) : loading ? (
             <div className="title">Loading...</div>
           ) : (

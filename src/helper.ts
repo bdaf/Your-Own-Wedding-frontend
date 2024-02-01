@@ -12,29 +12,11 @@ function upperCaseFirstStringCharacter( text: string): string {
     return text.charAt(0).toUpperCase() + text.slice(1)
   }
 
-  function getOnlyDateAndHourFromDateInString( dateInString: string): string {
+  function getOnlyDateAndHourFromDateInString( dateInString: string | null): string {
     if (dateInString == null) dateInString = getPolandZoneNowDate().toISOString()
-    console.log(dateInString)
-    console.log(dateInString.split(".")[0].replace(/T/g, ` `))
     return dateInString
     .split(".")[0]
     .replace(/T/g, ` `)
-  }
-
-   
-  function convertStringDateToProperForDateInput( dateInString: string | null): string {
-    console.log(dateInString)
-    if (dateInString == null) dateInString = getPolandZoneNowDate().toISOString()
-    console.log(dateInString
-      .split(".")[0])
-    return dateInString.split(".")[0];
-  }
-
-  function convertDateToPlusOneTimeZone( dateInString: string | null): string {
-    console.log(dateInString)
-    if (dateInString == null) dateInString = getPolandZoneNowDate().toISOString()
-    console.log(dateInString.split(".")[0])
-    return dateInString.split(".")[0] + ".978Z";
   }
 
   function getPolandZoneNowDate(): Date {
@@ -48,4 +30,4 @@ function upperCaseFirstStringCharacter( text: string): string {
     return resultDate;
   }
 
-  export {shortStringTo, upperCaseFirstStringCharacter, getOnlyDateAndHourFromDateInString, convertStringDateToProperForDateInput, convertDateToPlusOneTimeZone, getPolandZoneNowDate}
+  export {shortStringTo, upperCaseFirstStringCharacter, getOnlyDateAndHourFromDateInString, getPolandZoneNowDate}

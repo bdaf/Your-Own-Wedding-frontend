@@ -24,7 +24,7 @@ function NotesFromEvent({ note, permCharsNumber, timestamps }: Props) {
         {shortStringTo(permCharsNumber, note.body)}
       </div>
       {timestamps && (
-        <div className="space-between margin-2rem">
+        <div className={`${styles.note_timestamps} space-between`}>
           <div>
             <b>Updated at:</b>{" "}
             {getOnlyDateAndHourFromDateInString(note.updated_at!)}

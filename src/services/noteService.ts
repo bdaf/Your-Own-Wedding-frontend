@@ -3,17 +3,17 @@ import { EVENTS, API_URL, NOTES } from "../constants";
 import axios from 'axios';
 
 function createNote(event_id: string, note: NoteModel) {
-    console.log(`${API_URL}/${EVENTS}/${event_id}/${NOTES}.json`)
+    const result = axios.post(`${API_URL}/${EVENTS}/${event_id}/${NOTES}.json`, { note: {...note} }, { withCredentials: true })
+    console.log(result)
     return axios.post(`${API_URL}/${EVENTS}/${event_id}/${NOTES}.json`, { note: {...note} }, { withCredentials: true })
 }
 
 function editNote(note: NoteModel) {
-    console.log(`${API_URL}/${EVENTS}/${note.event_id}/${NOTES}/${note.id}.json`)
-    return axios.put(`${API_URL}/${EVENTS}/${note.event_id}/${NOTES}/${note.id}.json`, { note: {...note} }, { withCredentials: true })
+    const result = axios.put(`${API_URL}/${EVENTS}/${note.event_id}/${NOTES}/${note.id}.json`, { note: {...note} }, { withCredentials: true })
+    return result
 }
 
 function deleteNote(note: NoteModel) {
-    console.log(`${API_URL}/${EVENTS}/${note.event_id}/${NOTES}/${note.id}.json`)
     return axios.delete(`${API_URL}/${EVENTS}/${note.event_id}/${NOTES}/${note.id}.json`, { withCredentials: true })
 }
 
@@ -30,7 +30,6 @@ function returnEventWithAddedNote(event: EventModel, note: NoteModel): EventMode
 }
 
 function returnEventWithEditedNote(event: EventModel, note: NoteModel): EventModel {
-    console.log("service", note)
     const notes = event.notes.map(n => n.id == note.id ? note : n);
     const resultEvent: EventModel = {
         id: event.id,
