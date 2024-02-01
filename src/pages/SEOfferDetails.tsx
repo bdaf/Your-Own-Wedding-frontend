@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { OFFERS } from "../constants";
 import { useContext, useEffect, useState } from "react";
-import styles from "../css/pages.module.css";
+import styles from "../css/Pages.module.css";
 import {
   deleteOfferById,
   getOfferById,
