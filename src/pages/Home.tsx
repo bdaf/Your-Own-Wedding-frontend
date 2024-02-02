@@ -25,7 +25,7 @@ function Home() {
         }
       })
       .catch((error) => {
-        if (error.status != 401) {
+        if (error.response.status != 401) {
           flashMsgCtx.handleError(error, useNavigate);
         }
         setIsHomePageData(emptyHomePageData);
