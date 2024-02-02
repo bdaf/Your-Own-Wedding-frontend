@@ -94,7 +94,6 @@ function SEOfferForm({
       })
       .catch((err: AxiosError) => {
         flashMsgCtx.handleError(err, navigate);
-        console.log(err);
       })
       .finally(() => setLoading(false));
   }

@@ -43,7 +43,6 @@ function EventPage() {
     useState<EventModel>(EMPTY_EVENT_MODEL);
 
   function setCurrentEventHandler(event: EventModel): void {
-    console.log(currentEvent);
     setCurrentEvent(event);
     if (!isProperId(currentNote.event_id!)) {
       setCurrentNote({
@@ -56,8 +55,6 @@ function EventPage() {
   }
 
   function setCurrentNoteHandler(note: NoteModel): void {
-    console.log(currentNote);
-    console.log(note);
     setCurrentNote(note);
     setShowNoteInsteadOfEventForm(true);
   }
@@ -78,7 +75,6 @@ function EventPage() {
   }, []);
 
   function createEventHandler(event: EventModel): void {
-    console.log("createEventHandler");
     createEvent(event)
       .then((res) => {
         const newlyCreatedEvent: EventModel = res.data;
@@ -95,7 +91,6 @@ function EventPage() {
   }
 
   function editEventHandler(event: EventModel): void {
-    console.log("editEventHandler");
     editEvent(event)
       .then((res) => {
         const editedEvent: EventModel = res.data;
@@ -114,7 +109,6 @@ function EventPage() {
   }
 
   function deleteEventHandler(event: EventModel): void {
-    console.log("deleteEventHandler");
     deleteEventById(String(event.id))
       .then((res) => {
         flashMsgCtx.handleSuccess(res);
@@ -126,7 +120,6 @@ function EventPage() {
   }
 
   function createNoteHandler(note: NoteModel): void {
-    console.log("createNoteHandler");
     if (!isProperId(currentEvent.id)) {
       flashMsgCtx.setFlashMessage(
         "You have to select event from list or create one to attach note to it",
@@ -162,7 +155,6 @@ function EventPage() {
         const editedNote: NoteModel = res.data;
         editedNote.event_id = note.event_id;
         setCurrentNote(editedNote);
-        console.log("editNoteHandler", editedNote);
         setEvents(
           events.map((e) =>
             e.id == note.event_id ? returnEventWithEditedNote(e, editedNote) : e

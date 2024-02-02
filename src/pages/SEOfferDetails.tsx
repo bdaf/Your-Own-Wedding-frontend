@@ -42,7 +42,6 @@ function SEOfferDetails() {
     async function loadOffer() {
       try {
         const response = await getOfferById(id);
-        console.log(response.data);
         setOffer(response.data);
       } catch (e) {
         flashMsgCtx.handleError(e, navigate);

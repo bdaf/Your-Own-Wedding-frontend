@@ -61,7 +61,6 @@ export function AuthenticationContextProvider({ children }: Props) {
     return logged_in()
       .then((response) => {
         const isLoggedInResponse: AuthenticationResponse = response.data;
-        console.log(isLoggedInResponse);
         setAuthentication({
           user: isLoggedInResponse.user || defaultEmptyUser,
           logged_in: isLoggedInResponse.logged_in,
@@ -95,7 +94,6 @@ export function AuthenticationContextProvider({ children }: Props) {
     return isUserOrganizerByAuthentication(authentication);
   }
   function isSupportUserHandler(): boolean {
-    console.log(authentication);
     return authentication.logged_in && authentication.user.role === "provider";
   }
   function isAdminHandler(): boolean {
@@ -115,7 +113,6 @@ export function AuthenticationContextProvider({ children }: Props) {
       .finally(() => {
         setAuthentication(emptyAuthentication);
         checkAndSetIfLoggedIn(null);
-        console.log("Local session has been cleaned.");
       });
   }
 

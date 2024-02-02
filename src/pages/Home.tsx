@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import OrganizerHomeContent from "../components/others/OrganizerHomeContent";
 import ProviderHomeContent from "../components/others/ProviderHomeContent";
 import { homePageUserData } from "../services/userService";
@@ -7,21 +7,29 @@ import {
   isUserOrganizer,
   isUserProvider,
 } from "../store/authentication-context";
+import FlashMessagesContext from "../store/flash-messages-context";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [homePageData, setIsHomePageData] = useState(emptyHomePageData);
-
+  const flashMsgCtx = useContext(FlashMessagesContext);
   useEffect(() => {
-    homePageUserData().then((response) => {
-      console.log(response);
-      const homePageData: HomePageDataResponse = response.data;
-      if (homePageData?.user) {
-        setIsHomePageData({
-          user: homePageData.user,
-          addition_data: homePageData.addition_data,
-        });
-      }
-    });
+    homePageUserData()
+      .then((response) => {
+        const homePageData: HomePageDataResponse = response.data;
+        if (homePageData?.user) {
+          setIsHomePageData({
+            user: homePageData.user,
+            addition_data: homePageData.addition_data,
+          });
+        }
+      })
+      .catch((error) => {
+        if (error.status != 401) {
+          flashMsgCtx.handleError(error, useNavigate);
+        }
+        setIsHomePageData(emptyHomePageData);
+      });
   }, []);
 
   return (

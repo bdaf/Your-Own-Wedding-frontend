@@ -3,14 +3,11 @@ import { EVENTS, API_URL, NOTES } from "../constants";
 import axios from 'axios';
 
 function createNote(event_id: string, note: NoteModel) {
-    const result = axios.post(`${API_URL}/${EVENTS}/${event_id}/${NOTES}.json`, { note: {...note} }, { withCredentials: true })
-    console.log(result)
     return axios.post(`${API_URL}/${EVENTS}/${event_id}/${NOTES}.json`, { note: {...note} }, { withCredentials: true })
 }
 
 function editNote(note: NoteModel) {
-    const result = axios.put(`${API_URL}/${EVENTS}/${note.event_id}/${NOTES}/${note.id}.json`, { note: {...note} }, { withCredentials: true })
-    return result
+    return axios.put(`${API_URL}/${EVENTS}/${note.event_id}/${NOTES}/${note.id}.json`, { note: {...note} }, { withCredentials: true })
 }
 
 function deleteNote(note: NoteModel) {

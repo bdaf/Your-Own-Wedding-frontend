@@ -60,7 +60,6 @@ function ProfilePage() {
       })
       .catch((error) => {
         flashMsgCtx.handleError(error, useNavigate);
-        console.log("ERROR", error);
       });
   }
 

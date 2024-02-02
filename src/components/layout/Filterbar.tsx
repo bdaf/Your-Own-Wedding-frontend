@@ -49,7 +49,6 @@ function Filterbar({ findFilteredOffers }: Props) {
   }
 
   const handleMinInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(filters.prize);
     setMessageifFromHigherThanTo(Number(event.target.value), filters.prize[1]);
     setFiltersAndClearFlash({
       ...filters,
@@ -61,7 +60,6 @@ function Filterbar({ findFilteredOffers }: Props) {
   };
 
   const handleMaxInputChange = (event: React.ChangeEvent<any>) => {
-    console.log(filters.prize);
     setMessageifFromHigherThanTo(filters.prize[0], Number(event.target.value));
     setFiltersAndClearFlash({
       ...filters,
@@ -92,7 +90,6 @@ function Filterbar({ findFilteredOffers }: Props) {
   function setAddressOnClickHandler(
     event: React.ChangeEvent<HTMLInputElement>
   ): void {
-    console.log(filters.address);
     setFiltersAndClearFlash({
       ...filters,
       address: event.target.value,

@@ -67,7 +67,6 @@ export function FlashMessagesContextProvider({ children }: Props) {
   function handleErrorHandler(error: any, navigate: NavigateFunction): void {
     console.log("ERROR", error);
     let message = "";
-    console.log(error);
     if (error?.response?.status == 422) {
       message = JSON.stringify(error.response.data)
         .replace(/\[|\]|:|{|}|\\|"/g, " ")

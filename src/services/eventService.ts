@@ -7,7 +7,6 @@ function beforeProvideDataAction(event: EventModel | null){
     if(event != null) {
         event.date = getOnlyDateAndHourFromDateInString(event.date)
     }
-    console.log(event)
 }
 
 function getMyEvents() {

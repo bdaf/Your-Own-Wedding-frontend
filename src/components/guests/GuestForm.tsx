@@ -57,7 +57,6 @@ function GuestForm({
             function onChangeAdditionAttribiuteHandler(
               event: ChangeEvent<HTMLInputElement>
             ): void {
-              console.log(guest);
               onGuestChange({
                 ...guest,
                 addition_attribiutes: [

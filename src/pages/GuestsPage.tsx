@@ -115,7 +115,6 @@ function GuestsPage() {
 
   function editGuestHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    console.log("jestem");
     updateGuest(currentGuest)
       .then((res) => {
         const newlyUpdatedGuest: GuestModel = res.data;

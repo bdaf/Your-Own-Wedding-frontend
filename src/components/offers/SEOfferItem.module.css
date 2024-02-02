@@ -6,7 +6,7 @@
 .image {
   cursor: pointer;
   max-width: 30rem;
-  max-height: 20rem;
+  height: 20rem;
   overflow: hidden;
   border-top-right-radius: 6px;
   border-top-left-radius: 6px;

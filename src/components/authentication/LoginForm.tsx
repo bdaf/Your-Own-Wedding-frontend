@@ -32,8 +32,7 @@ function LoginForm() {
     };
 
     login(userToLogin)
-      .then((response) => {
-        console.log("Login response: ", response);
+      .then(() => {
         authCtx.updateAuthentication(flashMsgCtx);
         navigate(`/`);
       })
