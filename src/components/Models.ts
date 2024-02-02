@@ -294,7 +294,7 @@ type FiltersModel = {
 }
 
 const EMPTY_FILTER_MODEL: FiltersModel = {
-    prize: [2000, 5000],
+    prize: [0, 10000],
     categories: [],
     address: "",
 }
