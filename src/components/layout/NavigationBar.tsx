@@ -35,7 +35,7 @@ function NavigationBar() {
       <Link to={"/"}>
         <div className={styles.logo}>
           <FontAwesomeIcon icon={faChurch} />
-          {windowSizeCtx.isWindowMoreWiderThan(550) &&
+          {windowSizeCtx.isWindowMoreWiderThan(300) &&
             (windowSizeCtx.isWindowLessWiderThan(1000)
               ? " YOW!"
               : " Your Own Wedding")}
