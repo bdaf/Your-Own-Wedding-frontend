@@ -70,7 +70,7 @@ export function FlashMessagesContextProvider({ children }: Props) {
         .replace(/\[|\]|:|{|}|\\|"/g, " ")
         .replace(/,/g, `|`);
     } else if (error?.response?.status == (401 || 403)) {
-      message = `You don't have access to that page`;
+      message = `Looks like you don't have permission to do that. Try to log in`;
       navigate(`/${LOGIN}`);
     } else if (error?.response?.status == 500) {
       message = `It's server inner error. Please try again later`;
