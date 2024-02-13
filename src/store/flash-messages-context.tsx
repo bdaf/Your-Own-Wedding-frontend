@@ -54,7 +54,6 @@ export function FlashMessagesContextProvider({ children }: Props) {
   }
 
   function handleSuccessHandler(res: any): void {
-    console.log("SUCCESS", res);
     if (res?.data?.message) {
       setFlashMessageHandler(res.data.message, SUCCESS_FLASH_TYPE);
     } else if (res?.data) {
@@ -65,7 +64,6 @@ export function FlashMessagesContextProvider({ children }: Props) {
   }
 
   function handleErrorHandler(error: any, navigate: NavigateFunction): void {
-    console.log("ERROR", error);
     let message = "";
     if (error?.response?.status == 422) {
       message = JSON.stringify(error.response.data)

@@ -45,7 +45,6 @@ function SEOfferDetails() {
         setOffer(response.data);
       } catch (e) {
         flashMsgCtx.handleError(e, navigate);
-        console.log("Error occurred during loading offer.", e);
       } finally {
         setLoading(false);
       }
@@ -80,7 +79,6 @@ function SEOfferDetails() {
     setLoadingContact(true);
     getOfferContactByOfferId(id)
       .then((res) => {
-        console.log(res);
         setContactData(res.data);
         flashMsgCtx.setFlashMessage(
           "Contact has been shown",

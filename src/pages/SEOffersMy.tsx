@@ -23,7 +23,6 @@ function MySEOffers() {
     } catch (e) {
       flashMsgCtx.handleError(e, useNavigate);
       setError("Error has occured, try again later.");
-      console.log("An error occurred: ", e);
     } finally {
       setLoading(false);
     }

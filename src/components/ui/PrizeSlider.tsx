@@ -46,7 +46,6 @@ export default function RangeSlider({ setSliderValue, sliderValue }: Props) {
   const windowSizeCtx = useContext(WindowSizeContext);
 
   const handleSliderChange = (_event: Event, newValue: number | number[]) => {
-    console.log(sliderValue);
     setSliderValue(newValue as number[]);
   };
 

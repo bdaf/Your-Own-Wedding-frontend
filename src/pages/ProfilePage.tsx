@@ -20,7 +20,6 @@ function ProfilePage() {
     useState<Authentication>(emptyAuthentication);
 
   function setUserHandler(a_user: UserModel) {
-    console.log(a_user);
     setAuthentication({
       logged_in: authentication.logged_in,
       user: a_user,
