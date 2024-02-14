@@ -74,8 +74,7 @@ export function AuthenticationContextProvider({ children }: Props) {
           );
         }
       })
-      .catch((error) => {
-        console.log("Error while checking if currently logged in: ", error);
+      .catch((_error) => {
         setAuthentication(emptyAuthentication);
       });
   }
@@ -102,18 +101,13 @@ export function AuthenticationContextProvider({ children }: Props) {
   function updateAuthenticationHandler(flashMsgCtx: any): any {
     checkAndSetIfLoggedIn(flashMsgCtx);
   }
-  function logoutHandler() {
-    return logout()
-      .then((response) => {
-        console.log("Session has been cleaned.", response);
-      })
-      .catch((error) => {
-        console.log("Error during logout:", error);
-      })
-      .finally(() => {
-        setAuthentication(emptyAuthentication);
-        checkAndSetIfLoggedIn(null);
-      });
+  async function logoutHandler() {
+    try {
+      return await logout();
+    } finally {
+      setAuthentication(emptyAuthentication);
+      checkAndSetIfLoggedIn(null);
+    }
   }
 
   const context = {

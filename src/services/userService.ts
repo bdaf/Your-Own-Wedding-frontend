@@ -15,7 +15,6 @@ function updateProfile(user :UserModel) {
 }
 
 function login(user_to_login :UserLogin) {
-    console.log(`${API_URL}/${LOGIN}`)
     return axios.post(`${API_URL}/${LOGIN}.json`, {
         user: { ...user_to_login }
     }, { withCredentials: true })

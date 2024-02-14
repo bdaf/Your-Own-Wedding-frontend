@@ -54,7 +54,6 @@ export function FlashMessagesContextProvider({ children }: Props) {
   }
 
   function handleSuccessHandler(res: any): void {
-    console.log("SUCCESS", res);
     if (res?.data?.message) {
       setFlashMessageHandler(res.data.message, SUCCESS_FLASH_TYPE);
     } else if (res?.data) {
@@ -65,14 +64,13 @@ export function FlashMessagesContextProvider({ children }: Props) {
   }
 
   function handleErrorHandler(error: any, navigate: NavigateFunction): void {
-    console.log("ERROR", error);
     let message = "";
     if (error?.response?.status == 422) {
       message = JSON.stringify(error.response.data)
         .replace(/\[|\]|:|{|}|\\|"/g, " ")
         .replace(/,/g, `|`);
     } else if (error?.response?.status == (401 || 403)) {
-      message = `You don't have access to that page`;
+      message = `Looks like you don't have permission to do that. Try to log in`;
       navigate(`/${LOGIN}`);
     } else if (error?.response?.status == 500) {
       message = `It's server inner error. Please try again later`;

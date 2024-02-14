@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Card from "../ui/Card";
 import styles from "./SEOfferItem.module.css";
-import noImageFound from "../images/No Image Found.png";
 import {
   getOnlyDateAndHourFromDateInString,
   upperCaseFirstStringCharacter,
@@ -46,7 +45,12 @@ function SEOfferItem({
     <li className={styles.item} key={id}>
       <Card>
         <div className={styles.image} onClick={detailsButtonHandler}>
-          {<img src={!!images.length ? images[0] : noImageFound} alt="PHOTO" />}
+          {
+            <img
+              src={!!images.length ? images[0] : "/No Image Found.png"}
+              alt="PHOTO"
+            />
+          }
         </div>
         <div className={styles.content}>
           <h3>{title}</h3>

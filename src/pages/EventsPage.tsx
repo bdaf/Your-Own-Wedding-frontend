@@ -66,7 +66,6 @@ function EventPage() {
         setEvents(res.data);
       })
       .catch((e) => {
-        console.log(e);
         flashMsgCtx.handleError(e, navigate);
       })
       .finally(() => {
