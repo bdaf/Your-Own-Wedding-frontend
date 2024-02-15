@@ -1,30 +1,37 @@
 # Your Own Wedding (frontend side)
 
 ## Table of contents
-* [What is it?](#what-this-is-about)
-* [Functionality](#functionality-on-application-with-modern-simple-and-intuitive-view)
-* [Navigating in app](#how-to-navigate-through-application)
-* [Self-esteem](#self-esteem)
-* [Used technologies](#main-technologies-used-in-this-project)
-* [Images](#images-from-application)
+
+- [What is it?](#what-this-is-about)
+- [Functionality](#functionality-on-application-with-modern-simple-and-intuitive-view)
+- [Navigating in app](#how-to-navigate-through-application)
+- [Self-esteem](#self-esteem)
+- [Used technologies](#main-technologies-used-in-this-project)
+- [Images](#images-from-application)
 
 ## What this is about?
+
 This is a target application of the engeneering work with following topic: Web Application supporting organization of weddings. Organization of wedding is hard isn't it? Try our app which allows you to easily make an guest list, plan events and add notes to it, treating them also as a todo tasks. You can also (even without logging in) find proper wedding service using special filters and sorting found offers. If you are a wedding service provider, publish offer with your services and manage them to encourage clients to use your services.
 
 Try it out!
 
 https://your-own-wedding.onrender.com/
 You will possibly wait a moment (to 30s) until froze server will wake up.
+
+Backend layer of this application: https://github.com/bdaf/Your-Own-Wedding-backend
+
 <hr>
 
 ## Functionality on application with modern, simple and intuitive view!
 
 1. As a not logged in user:
+
 - Register
 - Log in
 - See existing offers with optional filters and sorting
 
 2. As a logged in user:
+
 - See events with attached notes
 - Create events / notes to it!
 - Edit events / notes within it (mark them as done or undone for example)!
@@ -32,6 +39,7 @@ You will possibly wait a moment (to 30s) until froze server will wake up.
 - Edit your profile!
 
 3. As a logged in as organizer:
+
 - See list of guests
 - Add guest to list
 - Add addition attribiute to the list
@@ -40,25 +48,31 @@ You will possibly wait a moment (to 30s) until froze server will wake up.
 - Delete addition attribiute to the list
 
 4. As a logged in as provider:
+
 - See published offers of my
 - Add an offer
 - Edit an offer
 - Delete an offer
 
 ## How to navigate through application
+
 Navigate between views in application using navbar at the top of every view and log in and register using views under "User" menu item in navbar.
 
 <img width="846" alt="image" src="https://github.com/bdaf/your-own-wedding-backend/assets/39047457/0361d21d-d75b-4926-a49a-bd3ec699647b">
 
 ## Self-esteem
+
 From my point of view application is very simple and intuitive for the users. Allows to comfy manage list of guests and plan events regarding wedding ceremony. Finding proper wedding service offers is also very friendly for the users. Publishing offers for service providers is easy and simple. They also can use planning events with notes feature. Using these notes as a todo tasks is very handy.
 
 ## Main technologies used in this project:
+
 - Ruby version 3.2.2
 - Rails version 7.1.2
 - React 18.2.0
 
 ## Images from application
+
+Application represents in a following way:
 
 ![image](https://github.com/bdaf/your-own-wedding-backend/assets/39047457/702707ce-dbbd-4c54-b984-0695cf0044ff)
 
@@ -85,4 +99,3 @@ From my point of view application is very simple and intuitive for the users. Al
 ![image](https://github.com/bdaf/your-own-wedding-backend/assets/39047457/abb11fb6-7b80-4a04-a316-146c2a9d42e1)
 
 ![image](https://github.com/bdaf/your-own-wedding-backend/assets/39047457/9f52bf81-b97e-4353-a677-4ed5a89efdf9)
-
