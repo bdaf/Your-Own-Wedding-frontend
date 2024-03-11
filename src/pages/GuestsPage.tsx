@@ -172,6 +172,7 @@ function GuestsPage() {
         setIsGuestForm={setIsGuestForm}
         setCurrentName={setCurrentNameHandler}
       />
+      <div>Total guests: {guests.length}</div>
     </div>
   );
 }

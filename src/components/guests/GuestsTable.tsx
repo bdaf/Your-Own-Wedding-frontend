@@ -50,6 +50,7 @@ function GuestsTable({
       <table className={styles.table}>
         <tbody>
           <tr>
+            <th>Nr.</th>
             <th>Name</th>
             <th>Surname</th>
             {names.map((addition_attr_name) => {
@@ -84,8 +85,9 @@ function GuestsTable({
               Create attribiute
             </th>
           </tr>
-          {guests.map((guest) => (
+          {guests.map((guest, index) => (
             <tr key={guest.id}>
+              <td>{index + 1}</td>
               <td>{guest.name}</td>
               <td>{guest.surname}</td>
               {names.map((addition_attr_name) =>
